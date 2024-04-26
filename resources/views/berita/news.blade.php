@@ -11,7 +11,7 @@
                     <h2>Informasi Kenukliran</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
-                        <li>Berita</li>
+                        <li>Informasi</li>
                     </ol>
                 </div>
 
@@ -27,246 +27,53 @@
                     <div class="col-lg-8">
 
                         <div class="row gy-4 posts-list">
+                            @foreach ($lot_news as $news)
+                                <div class="col-lg-6">
+                                    <article class="d-flex flex-column">
 
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
+                                        <div class="post-img">
+                                            <img src="{{ asset('images/' . $news->image) }}" alt=""
+                                                class="img-fluid">
+                                        </div>
 
-                                    <div class="post-img">
-                                        <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
-                                    </div>
+                                        <h2 class="title">
+                                            <a href="blog-details.html">{{ $news->title }}</a>
+                                        </h2>
+                                        <div>
+                                            Kategori: ({{ $news->category }})
+                                            </>
+                                        </div>
 
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos cumque fuga
-                                            qui quibusdam quia</a>
-                                    </h2>
+                                        <div class="meta-top">
+                                            <ul>
+                                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
+                                                        href="blog-details.html">{{ $news->author }}</a></li>
+                                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                                                        href="blog-details.html"><time
+                                                            datetime="2022-01-01">{{ $news->created }}</time></a></li>
+                                            </ul>
+                                            <li class="d-flex align-items-center mt-2"><i class="bi bi-chat-dots"></i>
+                                                <a href="blog-details.html">12 Comments</a>
+                                            </li>
+                                        </div>
 
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
+                                        <div class="content">
+                                            <p>
+                                                {{ $news->description }}
+                                            </p>
+                                        </div>
 
-                                    <div class="content">
-                                        <p>
-                                            Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
-                                            praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                                        </p>
-                                    </div>
+                                        <div class="read-more mt-auto align-self-end">
+                                            <a href="{{ route('detail', $news->slug) }}">Baca</a>
+                                        </div>
 
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
-
-                                    <div class="post-img">
-                                        <img src="{{ asset('img/blog/blog-2.jpg') }}" alt="" class="img-fluid">
-                                    </div>
-
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                                    </h2>
-
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="content">
-                                        <p>
-                                            Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum
-                                            voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                                        </p>
-                                    </div>
-
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
-
-                                    <div class="post-img">
-                                        <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-                                    </div>
-
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et
-                                            soluta libero sit sint.</a>
-                                    </h2>
-
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="content">
-                                        <p>
-                                            Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem
-                                            dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt
-                                            omnis.
-                                        </p>
-                                    </div>
-
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
-
-                                    <div class="post-img">
-                                        <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-                                    </div>
-
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Non rem rerum nam cum quo minus. Dolor distinctio
-                                            deleniti explicabo eius exercitationem.</a>
-                                    </h2>
-
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="content">
-                                        <p>
-                                            Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae.
-                                            Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a
-                                            qui.
-                                        </p>
-                                    </div>
-
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
-
-                                    <div class="post-img">
-                                        <img src="assets/img/blog/blog-5.jpg" alt="" class="img-fluid">
-                                    </div>
-
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis
-                                            consequatur</a>
-                                    </h2>
-
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="content">
-                                        <p>
-                                            In itaque assumenda aliquam voluptatem qui temporibus iusto nisi quia. Autem
-                                            vitae quas aperiam nesciunt mollitia tempora odio omnis. Ipsa odit sit ut amet
-                                            necessitatibus. Quo ullam ut corrupti autem consequuntur totam dolorem.
-                                        </p>
-                                    </div>
-
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
-                            <div class="col-lg-6">
-                                <article class="d-flex flex-column">
-
-                                    <div class="post-img">
-                                        <img src="assets/img/blog/blog-6.jpg" alt="" class="img-fluid">
-                                    </div>
-
-                                    <h2 class="title">
-                                        <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
-                                    </h2>
-
-                                    <div class="meta-top">
-                                        <ul>
-                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                    href="blog-details.html">John Doe</a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                    href="blog-details.html"><time datetime="2022-01-01">Jan 1,
-                                                        2022</time></a></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                    href="blog-details.html">12 Comments</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="content">
-                                        <p>
-                                            Expedita et temporibus eligendi enim molestiae est architecto praesentium
-                                            dolores. Illo laboriosam officiis quis. Labore officia quia sit voluptatem nisi
-                                            est dignissimos totam. Et voluptate et consectetur voluptatem id dolor magni
-                                            impedit. Omnis dolores sit.
-                                        </p>
-                                    </div>
-
-                                    <div class="read-more mt-auto align-self-end">
-                                        <a href="blog-details.html">Read More</a>
-                                    </div>
-
-                                </article>
-                            </div><!-- End post list item -->
-
+                                    </article>
+                                </div><!-- End post list item -->
+                            @endforeach
                         </div><!-- End blog posts list -->
 
                         <div class="blog-pagination">
-                            <ul class="justify-content-center">
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                            </ul>
+                            {{ $lot_news->links() }}
                         </div><!-- End blog pagination -->
 
                     </div>
@@ -277,18 +84,20 @@
 
                             <div class="sidebar-item search-form">
                                 <h3 class="sidebar-title">Cari</h3>
-                                <form action="" class="mt-3">
-                                    <input type="text" placeholder="Masukkan judul">
+                                <form action="{{ route('news') }}" method="GET" class="mt-3">
+                                    <input type="text" name="title" placeholder="Masukkan judul">
                                     <button type="submit"><i class="bi bi-search"></i></button>
                                 </form>
+
                             </div><!-- End sidebar search formn-->
 
                             <div class="sidebar-item tags">
                                 <h3 class="sidebar-title">Tags</h3>
                                 <ul class="mt-3">
-                                    <li><a href="#">Kesehatan</a></li>
-                                    <li><a href="#">Pangan</a></li>
-                                    <li><a href="#">Indutri</a></li>
+                                    <li><a href="{{ route('news', ['title' => 'Kesehatan']) }}">Kesehatan</a></li>
+                                    <li><a href="{{ route('news', ['title' => 'Industri']) }}">Indutri</a></li>
+                                    <li><a href="{{ route('news', ['title' => 'Pangan']) }}">Pangan</a></li>
+                                    <li><a href="{{ route('news', ['title' => 'Umum']) }}">Umum</a></li>
                             </div><!-- End sidebar tags-->
 
                         </div><!-- End Blog Sidebar -->

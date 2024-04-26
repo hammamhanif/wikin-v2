@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="utf-8">
@@ -29,6 +31,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/style3.css') }}" rel="stylesheet">
+
 
 </head>
 
@@ -61,7 +64,7 @@
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/chart.js/chart.umd.js') }}"></script>
+    {{-- <script src="{{ asset('assets/chart.js/chart.umd.js') }}"></script> --}}
     <script src="{{ asset('assets/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('assets/quill/quill.js') }}"></script>
     <script src="{{ asset('assets/simple-datatables/simple-datatables.js') }}"></script>
@@ -70,12 +73,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('js/dashboard.js') }}"></script>
-
-
-    {{-- tinymce --}}
     <script>
         tinymce.init({
-            selector: '#contentnuklir', // Replace this CSS selector to match the placeholder element for TinyMCE
+            selector: '#news', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'code table lists',
             toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });

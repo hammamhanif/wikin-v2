@@ -8,11 +8,12 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Blog Details</h2>
+                    <h2>Detail Informasi</h2>
                     <ol>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li>Blog Details</li>
+                        <li><a href="{{ route('home') }}">Utama</a></li>
+                        <li>
+                            Forum </li>
+
                     </ol>
                 </div>
 
@@ -30,80 +31,70 @@
                         <article class="blog-details">
 
                             <div class="post-img">
-                                <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('images/' . $news->image) }}" alt="" class="img-fluid">
                             </div>
 
-                            <h2 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia
+                            <h2 class="title">{{ htmlentities($news->title) }}
                             </h2>
 
                             <div class="meta-top">
                                 <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                            href="blog-details.html">John Doe</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                                        {{ htmlentities($news->user->username) }}<a href=""></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                            href="blog-details.html"><time datetime="2020-01-01">Jan 1, 2022</time></a></li>
+                                            href=""><time
+                                                datetime="2020-01-01">{{ htmlentities($news->created) }}</time></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                            href="blog-details.html">12 Comments</a></li>
+                                            href="">12 Comments</a></li>
                                 </ul>
                             </div><!-- End meta top -->
 
                             <div class="content">
-                                <p>
-                                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
-                                    praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                                    Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est
-                                    cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis
-                                    dolore.
-                                </p>
-
-                                <p>
-                                    Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in
-                                    accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate
-                                    cupiditate.
-                                </p>
-
-                                <p>
-                                    Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore
-                                    provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta
-                                    est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
-                                    Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit
-                                    quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis neque.
-                                    Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem
-                                    magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
-                                </p>
-
-                                <h3>Et quae iure vel ut odit alias.</h3>
-                                <p>
-                                    Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum
-                                    atque. Optio provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem
-                                    laborum omnis ullam quibusdam perspiciatis nulla nostrum. Voluptatum est libero eum
-                                    nesciunt aliquid qui.
-                                    Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut
-                                    ratione aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem
-                                    omnis asperiores natus aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint
-                                    consequatur quidem ea.
-                                    Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum
-                                    quibusdam voluptatem voluptatem accusamus mollitia aut atque aut.
-                                </p>
-                                <img src="assets/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
-
-                                <h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
-                                <p>
-                                    Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In
-                                    assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut porro
-                                    autem. Consectetur sed excepturi sint non placeat quia repellat incidunt labore. Autem
-                                    facilis hic dolorum dolores vel.
-                                    Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis
-                                    quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut
-                                    illum ut a quam vitae.
-                                </p>
-                                <p>
-                                    Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas
-                                    incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
-                                </p>
-
+                                {!! html_entity_decode($news->content) !!}
                             </div><!-- End post content -->
 
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#reportModal">
+                                Laporkan
+                            </button>
+
+                            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Laporkan Informasi</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="">
+
+                                                <input type="hidden" value="asset_id_value" name="asset_id">
+                                                <div class="form-group">
+                                                    <label for="asset_name">Judul</label>
+                                                    <input type="text" class="form-control" value=""
+                                                        name="asset_name" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="creator_name">Nama Penulis</label>
+                                                    <input type="text" class="form-control" name="creator_name">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="description">Deskripsi</label>
+                                                    <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Tutup</button>
+                                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
                         </article><!-- End blog post -->
 
@@ -173,13 +164,8 @@
                             <div class="reply-form">
 
                                 <h4>Tambahkan Komentar</h4>
-                                <p>Your email address will not be published. Required fields are marked * </p>
+
                                 <form action="">
-                                    <div class="row">
-                                        <div class="col form-group">
-                                            <input name="website" type="text" class="form-control" placeholder="Nama">
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col form-group">
                                             <textarea name="comment" class="form-control" placeholder="Komentar"></textarea>

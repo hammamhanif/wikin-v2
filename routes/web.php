@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PemasController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 
@@ -16,9 +19,13 @@ use App\Http\Controllers\ForgotPasswordController;
 |
 */
 
-Route::get('/', function () {
-    return view('tamplate.landingpage.landingpage');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
+
+Route::get('news', [LandingController::class, 'details'])->name('news');
+Route::get('/news_detail/{slug}', [LandingController::class, 'detail'])->name('detail');
+
+
+
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login')->middleware('guest');
@@ -34,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::put('profile/{id}/update', [DashboardController::class, 'update_profile'])->whereNumber('id')->name('profile.update');
     Route::post('profile/{id}/resetpass', [DashboardController::class, 'updatepassword'])->whereNumber('id')->name('password.update');
+
+
+    Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
+    Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
 });
 
 
@@ -43,6 +54,8 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'main'])->middleware('guest')->name('password.reset');
 Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetToken'])->middleware('guest')->name('password.update');
 
+Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
+
 Route::get('contact', function () {
     return view('tamplate.landingpage.contact');
 })->name('contact');
@@ -50,12 +63,7 @@ Route::get('contact', function () {
 Route::get('communities', function () {
     return view('komunitas.communities');
 })->name('communities');
-Route::get('news', function () {
-    return view('berita.news');
-})->name('news');
-Route::get('news-detail', function () {
-    return view('berita.news_detail');
-})->name('news-detail');
+
 Route::get('pengmases', function () {
     return view('pemas.pengmases');
 })->name('pengmases');
