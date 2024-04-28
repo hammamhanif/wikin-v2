@@ -27,9 +27,18 @@
                             @endif
                             <button class="btn btn-outline-primary" wire:click="selectReply({{ $comment->id }})"
                                 type="submit">Balas</button>
-                            <button class="btn btn-danger" type="submit"><i class="bi bi-heart-fill"></i>
-                                (0)
-                            </button>
+
+                            @if (isset($comment->hasLike))
+                                <button class="btn btn-danger" wire:click="like({{ $comment->id }})"><i
+                                        class="bi bi-heart-fill"></i>
+                                    ({{ $comment->totalLikes() }})
+                                </button>
+                            @else
+                                <button wire:click="like({{ $comment->id }})" class="btn btn-outline-danger"><i
+                                        class="bi bi-heart-fill"></i>
+                                    ({{ $comment->totalLikes() }})
+                                </button>
+                            @endif
                         @endauth
                     </div>
                     @if (isset($comment_id) && $comment_id == $comment->id)
@@ -100,9 +109,17 @@
                                     @endif
                                     <button class="btn btn-outline-primary" wire:click="selectReply({{ $comment2->id }})"
                                         type="submit">Balas</button>
-                                    <button class="btn btn-danger" type="submit"><i class="bi bi-heart-fill"></i>
-                                        (0)
-                                    </button>
+                                    @if (isset($comment2->hasLike))
+                                        <button class="btn btn-danger" wire:click="like({{ $comment2->id }})"><i
+                                                class="bi bi-heart-fill"></i>
+                                            ({{ $comment2->totalLikes() }})
+                                        </button>
+                                    @else
+                                        <button wire:click="like({{ $comment2->id }})" class="btn btn-outline-danger"><i
+                                                class="bi bi-heart-fill"></i>
+                                            ({{ $comment2->totalLikes() }})
+                                        </button>
+                                    @endif
                                 @endauth
                             </div>
                             @if (isset($comment_id) && $comment_id == $comment2->id)

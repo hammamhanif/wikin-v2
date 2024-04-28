@@ -75,7 +75,7 @@
                                             href=""><time
                                                 datetime="2020-01-01">{{ htmlentities($news->created) }}</time></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                            href="">12 Comments</a></li>
+                                            href="">{{ htmlentities($news->total_comments) }} Comments</a></li>
                                 </ul>
                             </div><!-- End meta top -->
 

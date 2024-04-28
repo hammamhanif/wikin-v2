@@ -2,10 +2,11 @@
 
 namespace App\Livewire\News;
 
+use App\Models\Like;
+use App\Models\News;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment as ModelsComment;
-use App\Models\News;
 
 class Comment extends Component
 {
@@ -103,5 +104,21 @@ class Comment extends Component
             session()->flash('danger', 'Komentar diskusi gagal dihapus!');
             return redirect()->route('detail', $this->news->slug);
         }
+    }
+
+    public function like($id)
+    {
+        $data = [
+            'comment_id' => $id,
+            'user_id' => Auth::user()->id
+        ];
+
+        $like = Like::where($data);
+        if ($like->count() > 0) {
+            $like->delete();
+        } else {
+            Like::create($data);
+        }
+        return NULL;
     }
 }

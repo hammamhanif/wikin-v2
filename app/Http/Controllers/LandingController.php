@@ -44,6 +44,7 @@ class LandingController extends Controller
         $lot_news->getCollection()->transform(function ($news) {
             $news->created = $news->created_at->format('M jS Y');
             $news->content = substr($news->content, 0, 200);
+            $news->total_comments = $news->comments->count(); // Mengambil total komentar
             return $news;
         });
 
@@ -54,6 +55,7 @@ class LandingController extends Controller
     {
         $news = News::whereSlug($slug)->first();
         $news->created = $news->created_at->format('M jS Y');
+        $news->total_comments = $news->comments->count(); // Mengambil total komentar
         return view('berita.news_detail', compact('news'));
     }
     public function detailspemas(Request $request)
