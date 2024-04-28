@@ -41,7 +41,7 @@
                                         </h2>
                                         <div>
                                             Kategori: ({{ $news->category }})
-                                            </>
+
                                         </div>
 
                                         <div class="meta-top">
@@ -53,7 +53,7 @@
                                                             datetime="2022-01-01">{{ $news->created }}</time></a></li>
                                             </ul>
                                             <li class="d-flex align-items-center mt-2"><i class="bi bi-chat-dots"></i>
-                                                <a href="blog-details.html">12 Comments</a>
+                                                <a href="blog-details.html"> Comments</a>
                                             </li>
                                         </div>
 

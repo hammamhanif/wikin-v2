@@ -57,11 +57,18 @@
 
                                         <div class="mb-3">
                                             <input type="text" class="form-control" name="name" id="name_penelitian"
-                                                placeholder="Nama">
+                                                placeholder="Nama Kegiatan">
                                         </div>
                                         <div class="mb-3">
                                             <input type="text" class="form-control" name="location" id="name_penelitian"
                                                 placeholder="Lokasi">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select class="form-select" name="status" id="status">
+                                                <option value="proses">Proses</option>
+                                                <option value="terlaksana">Terlaksana</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="category" class="form-label">Kategori</label>

@@ -27,6 +27,7 @@ class PemasController extends Controller
         $pemas = new pemas();
         $pemas->name = $request->input('name');
         $pemas->category = $request->input('category');
+        $pemas->status = $request->input('status');
         $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
         $pemas->slug = hash('sha256', $request->input('name')); // Menggunakan SHA256 hashing
@@ -44,5 +45,12 @@ class PemasController extends Controller
 
 
         return redirect()->route('pemas')->with('success', 'Berhasil Diajukan! silahkan cek menu pengabdian');
+    }
+
+    public function detailpemas($slug)
+    {
+        $pemas = pemas::whereSlug($slug)->first();
+        $pemas->created = $pemas->created_at->format('M jS Y');
+        return view('pemas.pemas_detail', compact('pemas'));
     }
 }

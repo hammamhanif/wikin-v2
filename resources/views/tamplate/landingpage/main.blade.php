@@ -38,14 +38,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: HeroBiz
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @stack('css')
 </head>
 
 <body>
@@ -104,7 +98,7 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
-
+    @stack('js')
 </body>
 
 </html>

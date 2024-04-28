@@ -21,7 +21,7 @@
           </li><!-- End Profile Page Nav -->
           <li class="nav-heading">Pengabdian Masyarakat</li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-faq.html">
+              <a class="nav-link collapsed" href="{{ route('pemas') }}">
                   <i class="bi bi-house-door"></i>
                   <span>Pengajuan</span>
               </a>

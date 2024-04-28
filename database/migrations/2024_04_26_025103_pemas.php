@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('slug')->unique();
             $table->string('image');
+            $table->enum('status', ['proses', 'selesai'])->default('proses'); // Kolom status dengan nilai default proses
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

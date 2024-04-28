@@ -32,7 +32,12 @@
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
         </nav><!-- .navbar -->
 
-        <a class="btn-getstarted scrollto" href="{{ route('dashboard') }}">Masuk</a>
+        @if (Auth::check())
+            <a class="btn-getstarted scrollto" href="{{ route('dashboard') }}">Dashboard</a>
+        @else
+            <a class="btn-getstarted scrollto" href="{{ route('login') }}">Masuk</a>
+        @endif
+
 
     </div>
 </header><!-- End Header -->

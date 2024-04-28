@@ -24,6 +24,9 @@ Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('news', [LandingController::class, 'details'])->name('news');
 Route::get('/news_detail/{slug}', [LandingController::class, 'detail'])->name('detail');
 
+Route::get('pengmases', [LandingController::class, 'detailspemas'])->name('pengmases');
+Route::get('/pengmases/{slug}', [LandingController::class, 'detailpemas'])->name('detailpemas');
+
 
 
 
@@ -63,7 +66,3 @@ Route::get('contact', function () {
 Route::get('communities', function () {
     return view('komunitas.communities');
 })->name('communities');
-
-Route::get('pengmases', function () {
-    return view('pemas.pengmases');
-})->name('pengmases');
