@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PemasController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -59,10 +60,10 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetToken
 
 Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 
-Route::get('contact', function () {
-    return view('tamplate.landingpage.contact');
-})->name('contact');
-
+Route::controller(ContactController::class)->group(function () {
+    Route::get('contact',  'index')->name('contact');
+    Route::post('/contact', 'store')->name('kontaks');
+});
 Route::get('communities', function () {
     return view('komunitas.communities');
 })->name('communities');

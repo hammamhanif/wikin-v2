@@ -7,7 +7,8 @@
 
             <div class="section-header">
                 <h2>Hubungi Kami</h2>
-                <p>Apabila ada pertanyaan dan masukkan seputar fitur wikin. silahkan kirimkan formulir di bawah ini</p>
+                <p>Apabila ada pertanyaan, masukkan, dan meminta bantuan seputar fitur wikin. silahkan kirimkan formulir di
+                    bawah ini</p>
             </div>
 
         </div>
@@ -25,15 +26,15 @@
                 <div class="col-lg-4">
 
                     <div class="info">
-                        <h3>Get in touch</h3>
-                        <p>Et id eius voluptates atque nihil voluptatem enim in tempore minima sit ad mollitia commodi
-                            minus.</p>
+                        <h3>Hubungi Luring</h3>
+                        <p>Silahkan datangi kami sesuai alamat kami.</p>
 
                         <div class="info-item d-flex">
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
-                                <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <h4>Lokasi:</h4>
+                                <p>Jl. Babarsari Kotak POB 6101/YKKB, Ngentak, Caturtunggal, Kec. Depok, Kabupaten Sleman,
+                                    Daerah Istimewa Yogyakarta 55281</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -48,7 +49,7 @@
                         <div class="info-item d-flex">
                             <i class="bi bi-phone flex-shrink-0"></i>
                             <div>
-                                <h4>Call:</h4>
+                                <h4>Telepon:</h4>
                                 <p>+1 5589 55488 55</p>
                             </div>
                         </div><!-- End Info Item -->
@@ -58,7 +59,20 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                        </div>
+                    @elseif(session('unsuccess'))
+                        <div class="alert alert-danger" role="alert">
+                            <strong class="font-bold">Unsuccess!</strong>
+                            <span class="block sm:inline">{{ session('unsuccess') }}</span>
+                        </div>
+                    @endif
+                    <form action="{{ route('kontaks') }}" method="post" role="form" class="php-email-form">
+                        @method('POST')
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Nama"
@@ -75,11 +89,6 @@
                         </div>
                         <div class="form-group mt-3">
                             <textarea class="form-control" name="message" placeholder="Pesan" required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
                         <div class="text-center"><button type="submit">Kirimkan pesan</button></div>
                     </form>

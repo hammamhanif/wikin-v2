@@ -90,7 +90,7 @@
                 <div id="comment-1" class="comment ms-5">
                     <div class="d-flex">
                         <div class="comment-img"><img
-                                src="{{ asset($comment->user->image ?? 'img/Avatar_Profile.png') }}" alt="">
+                                src="{{ asset($comment2->user->image ?? 'img/Avatar_Profile.png') }}" alt="">
                         </div>
                         <div>
                             <h5><a href="">{{ $comment2->user->name }}</a></a>
