@@ -4,24 +4,24 @@
       <ul class="sidebar-nav" id="sidebar-nav">
 
           <li class="nav-item">
-              <a class="nav-link " href="{{ route('dashboard') }}">
+              <a class="nav-link {{ Request::is('dashboard') ? '' : 'collapsed' }}" href="{{ route('dashboard') }}">
                   <i class="bi bi-grid"></i>
                   <span>Dashboard</span>
               </a>
           </li><!-- End Dashboard Nav -->
 
 
-          <li class="nav-heading">Berita Kamu (0)</li>
+          <li class="nav-heading">Berita Kamu ()</li>
 
           <li class="nav-item">
-              <a class="nav-link collapsed" href="users-profile.html">
+              <a class="nav-link {{ Request::is('informasi') ? '' : 'collapsed' }}" href="{{ route('informasi') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Berita</span>
               </a>
           </li><!-- End Profile Page Nav -->
           <li class="nav-heading">Pengabdian Masyarakat</li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('pemas') }}">
+              <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
                   <i class="bi bi-house-door"></i>
                   <span>Pengajuan</span>
               </a>
@@ -48,7 +48,7 @@
 
           <li class="nav-heading">Menu Admin</li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-register.html">
+              <a class="nav-link {{ Request::is('userdate') ? '' : 'collapsed' }}" href="{{ route('userdate') }}">
                   <i class="bi bi-person-circle"></i>
                   <span>User</span>
               </a>
@@ -74,7 +74,8 @@
               </a>
           </li><!-- End Error 404 Page Nav -->
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-error-404.html">
+              <a class="nav-link {{ Request::is('contact.index') ? '' : 'collapsed' }}"
+                  href="{{ route('contact.index') }}">
                   <i class="bi bi-exclamation-triangle-fill"></i>
                   <span>Laporan</span>
               </a>

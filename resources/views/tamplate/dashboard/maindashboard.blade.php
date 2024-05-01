@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Wikin | Website Interaktif Komunitas Nuklir Indonesia</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -70,6 +70,11 @@
     <script src="{{ asset('assets/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
     <script src="{{ asset('assets/php-email-form/validate.js') }}"></script>
+
+
+
+    {{-- Sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('js/dashboard.js') }}"></script>

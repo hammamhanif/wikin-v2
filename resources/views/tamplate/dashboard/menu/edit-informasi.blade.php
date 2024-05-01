@@ -4,11 +4,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Pengajuan Pengabdian Masyarakat</h1>
+            <h1>Edit Informasi</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Pengajuan</li>
+                    <li class="breadcrumb-item ">Menu Berita</li>
+                    <li class="breadcrumb-item active">Detail</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -26,7 +27,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Ajukan Program Pengabdian Masyarakatmu!</h5>
+                                    <h5 class="card-title">Perbaiki psotingan informasi kenukliran anda!</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -50,52 +51,51 @@
                                     @endif
 
                                     <!-- TinyMCE Editor -->
-                                    <form role="form text-left" action="{{ route('pemas.store') }}" method="post"
+                                    <form role="form text-left" id="updateNewsForm"
+                                        action="{{ route('news.update', ['slug' => $news->slug]) }}" method="post"
                                         enctype="multipart/form-data">
-                                        @method('POST')
+                                        @method('PUT')
                                         @csrf
 
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" name="name" id="name_penelitian"
-                                                placeholder="Nama Kegiatan">
+                                            <input type="text" class="form-control" name="title" id="name_penelitian"
+                                                placeholder="Judul" value="{{ htmlentities($news->title) }}">
                                         </div>
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" name="location" id="name_penelitian"
-                                                placeholder="Lokasi">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="status" class="form-label">Status</label>
-                                            <select class="form-select" name="status" id="status">
-                                                <option value="pencarian volunteer">Pencarian Volunteer</option>
-                                                <option value="selesai">Selesai</option>
-                                                <option value="sedang berjalan">sedang berjalan</option>
-                                            </select>
+                                            <input type="text" class="form-control" name="description"
+                                                id="name_penelitian" placeholder="Deskripsi"
+                                                value="{{ htmlentities($news->description) }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="category" class="form-label">Kategori</label>
                                             <select class="form-select" name="category" id="category">
-                                                <option value="Umum">Umum</option>
-                                                <option value="Kesehatan">Kesehatan</option>
-                                                <option value="Energi">Energi</option>
-                                                <option value="Industri">Industri</option>
-                                                <option value="Pangan">Pangan</option>
+                                                <option value="Umum" @if ($news->category === 'Umum') selected @endif>
+                                                    Umum</option>
+                                                <option value="Kesehatan" @if ($news->category === 'Kesehatan') selected @endif>
+                                                    Kesehatan</option>
+                                                <option value="Energi" @if ($news->category === 'Energi') selected @endif>
+                                                    Energi</option>
+                                                <option value="Industri" @if ($news->category === 'Industri') selected @endif>
+                                                    Industri</option>
+                                                <option value="Pangan" @if ($news->category === 'Pangan') selected @endif>
+                                                    Pangan</option>
                                             </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="news" class="col-form-label">Isi</label>
-                                            <textarea class="form-control" id="news" name="content"></textarea>
-                                        </div>
 
+                                        <div class="mb-3">
+                                            <label for="news" class="col-form-label">Konten</label>
+                                            <textarea class="form-control" id="news" name="content">{!! htmlentities($news->content) !!}</textarea>
+                                        </div>
 
                                         <div class="row mb-3">
                                             <div class="col-sm-12">
-                                                <label for="image" class="col-sm-5 col-form-label">Gambar </label>
+                                                <label for="image" class="col-sm-5 col-form-label">Gambar</label>
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
+                                            <button type="button" class="btn btn-primary" id="submitBtn">Kirimkan</button>
                                         </div>
                                     </form>
                                 </div>
@@ -118,5 +118,26 @@
 
     </main><!-- End #main -->
 
-
+    <script>
+        // Ketika tombol submit diklik
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Tampilkan SweetAlert konfirmasi
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan menyimpan perubahan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, simpan!',
+                cancelButtonText: 'Batalkan'
+            }).then((result) => {
+                // Jika pengguna mengonfirmasi
+                if (result.isConfirmed) {
+                    // Submit formulir
+                    document.getElementById('updateNewsForm').submit();
+                }
+            });
+        });
+    </script>
 @endsection

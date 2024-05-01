@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PemasController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
@@ -49,6 +50,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
+
+    Route::get('userdate', [UserController::class, 'index'])->name('userdate');
+    Route::put('userdate/{id}/update', [UserController::class, 'update'])->whereNumber('id')->name('userdate.update');
+    Route::delete('userdate/{id}/delete', [UserController::class, 'destroy'])->whereNumber('id')->name('userdate.delete');
+
+    Route::get('informasi', [NewsController::class, 'index'])->name('informasi');
+    Route::delete('/informasi/{id}', [NewsController::class, 'delete'])->name('news.delete');
+    Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
+
+    Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 });
 
 
@@ -61,8 +73,11 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetToken
 Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 
 Route::controller(ContactController::class)->group(function () {
-    Route::get('contact',  'index')->name('contact');
+    Route::get('contact',  'create')->name('contact');
     Route::post('/contact', 'store')->name('kontaks');
+
+    Route::get('/contacts', 'index')->name('contact.index');
+    Route::delete('/contacts/{id}', 'destroy')->name('contact.destroy');
 });
 Route::get('communities', function () {
     return view('komunitas.communities');

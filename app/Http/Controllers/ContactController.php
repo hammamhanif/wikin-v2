@@ -12,9 +12,15 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('tamplate.landingpage.contact');
+        $search = $request->input('search');
+
+        $contacts = Contact::where('name', 'like', "%$search%")
+            ->orWhere('subject', 'like', "%$search%")
+            ->orWhere('email', 'like', "%$search%")
+            ->paginate(5);
+        return view('tamplate.dashboard.menuadmin.contactUs', compact('contacts'));
     }
 
     /**
@@ -22,7 +28,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('tamplate.landingpage.contact');
     }
 
     /**
@@ -72,8 +78,10 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        $contact = Contact::findOrFail($id); // Mencari data Contact berdasarkan ID
+        $contact->delete(); // Menghapus data Contact
+        return redirect()->route('contact.index')->with('success', 'Data berhasil dihapus.');
     }
 }

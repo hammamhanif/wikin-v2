@@ -96,35 +96,33 @@
                                             <h5 class="modal-title" id="exampleModalLabel">Laporkan Informasi</h5>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="">
-
-                                                <input type="hidden" value="asset_id_value" name="asset_id">
+                                            <form method="POST" action="{{ route('report.store') }}">
+                                                @method('POST')
+                                                @csrf
+                                                <input type="hidden" value="{{ $news->id }}" name="news_id">
                                                 <div class="form-group">
-                                                    <label for="asset_name">Judul</label>
-                                                    <input type="text" class="form-control" value=""
-                                                        name="asset_name" readonly>
+                                                    <label for="asset_name">Nama Berita / Informasi</label>
+                                                    <input type="text" class="form-control" value="{{ $news->title }}"
+                                                        name="title" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="creator_name">Nama Penulis</label>
-                                                    <input type="text" class="form-control" name="creator_name">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $news->user->name }}" name="creator_name" readonly>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <label for="description">Deskripsi</label>
                                                     <textarea name="description" id="description" class="form-control" rows="4"></textarea>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="modal-footer">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Tutup</button>
-                                                <button type="submit" class="btn btn-primary">Kirim</button>
-                                            </div>
-                                        </div>
-                                        </form>
                                     </div>
                                 </div>
-                            </div>
 
                         </article><!-- End blog post -->
 

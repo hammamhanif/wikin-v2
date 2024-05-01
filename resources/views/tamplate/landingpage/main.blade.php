@@ -87,6 +87,9 @@
 
     <div id="preloader"></div>
 
+    {{-- Sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

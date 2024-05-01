@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(pemas::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'reported_by_user_id');
+    }
+
+    public function reportedNews()
+    {
+        return $this->hasManyThrough(News::class, Report::class, 'reported_by_user_id', 'id', 'id', 'news_id');
+    }
 }
