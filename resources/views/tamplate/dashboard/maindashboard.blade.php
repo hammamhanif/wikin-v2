@@ -32,6 +32,8 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/style3.css') }}" rel="stylesheet">
 
+    @stack('styles')
+
 
 </head>
 

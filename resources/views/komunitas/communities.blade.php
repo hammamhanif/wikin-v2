@@ -41,7 +41,7 @@
                 <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
                     <div class="service-item">
                         <div class="img">
-                            <img src="{{ asset('img/services-5.jpg') }}" class="img-fluid" alt="">
+                            <img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="">
                         </div>
                         <div class="details position-relative">
                             <div class="icon">

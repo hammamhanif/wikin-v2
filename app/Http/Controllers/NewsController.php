@@ -45,7 +45,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
+            'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan', // Validasi kategori
         ]);
 

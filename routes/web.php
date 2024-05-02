@@ -8,6 +8,7 @@ use App\Http\Controllers\PemasController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommunitiesController;
 use App\Http\Controllers\ForgotPasswordController;
 
 /*
@@ -61,6 +62,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
 
     Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
+
+
+    // Rute untuk menampilkan form tambah komunitas
+    Route::get('/communities/create', [CommunitiesController::class, 'create'])->name('communities.create');
+
+    // Rute untuk menyimpan data komunitas yang baru dibuat
+    Route::post('/communities', [CommunitiesController::class, 'store'])->name('communities.store');
 });
 
 
@@ -76,7 +84,7 @@ Route::controller(ContactController::class)->group(function () {
     Route::get('contact',  'create')->name('contact');
     Route::post('/contact', 'store')->name('kontaks');
 
-    Route::get('/contacts', 'index')->name('contact.index');
+    Route::get('/contacts', 'index')->name('contacts');
     Route::delete('/contacts/{id}', 'destroy')->name('contact.destroy');
 });
 Route::get('communities', function () {

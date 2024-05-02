@@ -34,7 +34,7 @@
           </li>
           <li class="nav-heading">Komunitas Kamu</li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-contact.html">
+              <a class="nav-link collapsed" href="{{ route('communities.create') }}">
                   <i class="bi bi-people-fill"></i>
                   <span>Pendaftaran Komunitas</span>
               </a>
@@ -74,8 +74,13 @@
               </a>
           </li><!-- End Error 404 Page Nav -->
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('contact.index') ? '' : 'collapsed' }}"
-                  href="{{ route('contact.index') }}">
+              <a class="nav-link {{ Request::is('contacts') ? '' : 'collapsed' }}" href="{{ route('contacts') }}">
+                  <i class="bi bi-telephone-inbound"></i>
+                  <span>Hubungi Admin</span>
+              </a>
+          </li><!-- End Error 404 Page Nav -->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="">
                   <i class="bi bi-exclamation-triangle-fill"></i>
                   <span>Laporan</span>
               </a>

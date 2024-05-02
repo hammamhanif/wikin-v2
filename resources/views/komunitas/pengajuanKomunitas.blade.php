@@ -4,12 +4,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Edit Informasi</h1>
+            <h1>Pendaftaran Komunitas</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item ">Menu Berita</li>
-                    <li class="breadcrumb-item active">Detail</li>
+                    <li class="breadcrumb-item active">Pendaftaran</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -27,8 +26,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title ">Perbaiki postingan informasi kenukliran
-                                        anda!</h5>
+                                    <h5 class="card-title">Daftarkan Komunitas kamu!</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -52,54 +50,46 @@
                                     @endif
 
                                     <!-- TinyMCE Editor -->
-                                    <form role="form text-left" id="updateNewsForm"
-                                        action="{{ route('news.update', ['slug' => $news->slug]) }}" method="post"
+                                    <form role="form text-left" action="{{ route('communities.store') }}" method="post"
                                         enctype="multipart/form-data">
-                                        @method('PUT')
+                                        @method('POST')
                                         @csrf
-
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Judul </label>
-                                                <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul" value="{{ htmlentities($news->title) }}">
+                                                <label for="nama">Nama Komunitas</label>
+                                                <input type="text" class="form-control" name="name" id="nama"
+                                                    placeholder="Nama Komunitas..">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Deskripsi</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($news->description) }}">
+                                                <label for="nama">Link Join Grup/ Kontak yang dapat dihubungi</label>
+                                                <input type="text" class="form-control" name="link_number" id="nama"
+                                                    placeholder="Link Join / Nomor yang dapat dihubungi..">
                                             </div>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="category" class="form-label">Kategori</label>
+                                        <div class="col-sm-12">
+                                            <label for="category">Kategori</label>
                                             <select class="form-select" name="category" id="category">
-                                                <option value="Umum" @if ($news->category === 'Umum') selected @endif>
-                                                    Umum</option>
-                                                <option value="Kesehatan" @if ($news->category === 'Kesehatan') selected @endif>
-                                                    Kesehatan</option>
-                                                <option value="Energi" @if ($news->category === 'Energi') selected @endif>
-                                                    Energi</option>
-                                                <option value="Industri" @if ($news->category === 'Industri') selected @endif>
-                                                    Industri</option>
-                                                <option value="Pangan" @if ($news->category === 'Pangan') selected @endif>
-                                                    Pangan</option>
+                                                <option value="Umum">Umum</option>
+                                                <option value="Kesehatan">Kesehatan</option>
+                                                <option value="Energi">Energi</option>
+                                                <option value="Industri">Industri</option>
+                                                <option value="Pangan">Pangan</option>
                                             </select>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-12">
-                                                <label for="image" class="col-sm-5 col-form-label">Gambar(Apabila
-                                                    ada)</label>
+                                                <label for="image" class="col-sm-5 col-form-label">Logo atau Gambar
+                                                    kegiatan</label>
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="news" class="col-form-label">Konten</label>
-                                            <textarea class="form-control" id="news" name="content">{!! htmlentities($news->content) !!}</textarea>
+                                            <label for="news" class="col-form-label">Isi</label>
+                                            <textarea class="form-control" id="news" name="content"></textarea>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="submitBtn">Kirimkan</button>
+                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
                                         </div>
                                     </form>
                                 </div>
@@ -122,26 +112,5 @@
 
     </main><!-- End #main -->
 
-    <script>
-        // Ketika tombol submit diklik
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            // Tampilkan SweetAlert konfirmasi
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda akan menyimpan perubahan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, simpan!',
-                cancelButtonText: 'Batalkan'
-            }).then((result) => {
-                // Jika pengguna mengonfirmasi
-                if (result.isConfirmed) {
-                    // Submit formulir
-                    document.getElementById('updateNewsForm').submit();
-                }
-            });
-        });
-    </script>
+
 @endsection

@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(News::class, Report::class, 'reported_by_user_id', 'id', 'id', 'news_id');
     }
+
+    public function communities()
+    {
+        return $this->hasMany(Communities::class);
+    }
 }
