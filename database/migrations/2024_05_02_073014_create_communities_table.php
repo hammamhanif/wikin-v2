@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('category', ['Umum', 'Kesehatan', 'Energi', 'Industri', 'Pangan']);
+            $table->enum('status', ['verifikasi', 'active', 'inactive']);
             $table->longText('content');
             $table->string('slug')->unique();
-            $table->string('link_number')->nullable();
+            $table->string('number')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

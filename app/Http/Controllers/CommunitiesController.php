@@ -11,7 +11,7 @@ class CommunitiesController extends Controller
 {
     public function create()
     {
-        return view('komunitas.pengajuanKomunitas'); // Mengembalikan view form untuk menambahkan komunitas baru
+        return view('komunitas.pengajuanKomunitas');
     }
 
     public function store(Request $request)
@@ -36,23 +36,23 @@ class CommunitiesController extends Controller
         // Generate slug menggunakan nama komunitas yang dihash
         $slug = Str::slug($request->name) . '-' . Str::random(8);
 
-        // Generate nama hash untuk gambar jika ada
         $imageHashName = null;
         if ($imagePath) {
             $imageHashName = Str::random(40) . '.' . $request->file('image')->getClientOriginalExtension();
-            // Simpan gambar dengan nama hash
             $request->file('image')->storeAs('images/community', $imageHashName);
         }
-
-        // Membuat entri baru dalam tabel communities
         $community = new Communities;
         $community->name = $request->name;
         $community->category = $request->category;
         $community->content = $request->content;
-        $community->slug = $slug;
-        $community->link_number = $request->link_number;
+        $community->slug = hash('sha256', $slug);
         $community->image = $imageHashName;
         $community->user_id = Auth::id(); // Mengambil ID user yang sedang login
+        if (substr($request->number, 0, 1) === '0') {
+            $community->number = '62' . substr($request->number, 1);
+        } else {
+            $community->number = $request->number;
+        }
         $community->save();
 
         // Redirect ke halaman yang tepat dengan pesan sukses

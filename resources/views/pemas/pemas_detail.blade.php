@@ -8,11 +8,11 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Detail Informasi</h2>
+                    <h2>Detail Pengabdian</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
                         <li>
-                            Forum </li>
+                            Pengabdian </li>
 
                     </ol>
                 </div>

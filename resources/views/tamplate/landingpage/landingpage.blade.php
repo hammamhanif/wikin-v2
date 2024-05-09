@@ -159,8 +159,7 @@
 
                 <div class="section-header">
                     <h2>Layanan tersedia</h2>
-                    <p>Ea vitae aspernatur deserunt voluptatem impedit deserunt magnam occaecati dssumenda quas ut ad
-                        dolores adipisci aliquam.</p>
+                    <p>Terdapat beberapa layanan yang tersedia di platform wikin.</p>
                 </div>
 
                 <div class="row gy-5">
@@ -168,17 +167,19 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('img/services-4.jpg') }}" class="img-fluid" alt="">
+                                <img src="{{ asset('img/informasi.jpeg') }}" class="img-fluid" alt="">
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
-                                    <i class="bi bi-bounding-box-circles"></i>
+                                    <i class="bi bi-chat-square-text"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>Sharing Informasi</h3>
                                 </a>
-                                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga
-                                    sit provident adipisci neque.</p>
+                                <p>Sharing informasi kenukliran adalah proses pengguna untuk memperluas pengetahuan dan
+                                    memahami sudut pandang yang beragam terhadap nuklir melalui
+                                    kolaborasi dan diskusi, sehingga mencapai pemahaman yang lebih dalam dan menyeluruh.
+                                </p>
                                 <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
@@ -187,17 +188,19 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('img/services-5.jpg') }}" class="img-fluid" alt="">
+                                <img src="{{ asset('img/pemas.jpeg') }}" class="img-fluid" alt="">
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
-                                    <i class="bi bi-calendar4-week"></i>
+                                    <i class="bi bi-house-heart-fill"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>Pengajuan Pemas</h3>
                                 </a>
-                                <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed
-                                    animi at autem alias eius labore.</p>
+                                <p>Pengajuan Pengabdian Masyarakat (Pemas) adalah masyarakat dapat mengajukan suatu kegiatan
+                                    di
+                                    daerahnya ataupun di suatu tempat yang berhubungan dengan teknologi nuklir.
+                                </p>
                                 <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
@@ -206,17 +209,18 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
+                                <img src="{{ asset('img/community.jpeg') }}" class="img-fluid" alt="">
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
-                                    <i class="bi bi-chat-square-text"></i>
+                                    <i class="bi bi-people"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>Galeri Komunitas</h3>
                                 </a>
-                                <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                    Corrupti recusandae ducimus enim.</p>
+                                <p>Galeri Komunitas adalah ruang bagi masyarakat untuk mengeksplorasi mengenai
+                                    komunitas-komunitas nuklir di Indonesia. Selain itu, dapat melihat kegiatan-kegiatan
+                                    komunitas tersebut hingga dapat berkolaborasi.</p>
                                 <a href="#" class="stretched-link"></a>
                             </div>
                         </div>
@@ -236,20 +240,14 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
+                                <img src="{{ asset('img/testimonials/testimonials-3.jpg') }}" class="testimonial-img"
                                     alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
+                                <h3>B.J. Habibie</h3>
+                                <h4>Presiden Ketiga Dan Mantan Kementrian Ristek dan Teknologi</h4>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit
-                                    rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                    risus at semper.
+                                    Saya tidak menolak (pembangunan PLTN), namun sebaiknya tetap harus berhati-hati
+                                    dalam mengambil keputusan.
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>

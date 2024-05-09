@@ -69,9 +69,9 @@
 
                                             <td>
                                                 <div style="display: flex; align-items: center;">
-                                                    <a href="{{ route('news.edit', ['slug' => $new->slug]) }}"
+                                                    <a href="{{ route('news.editAdmin', ['slug' => $new->slug]) }}"
                                                         class="btn btn-info" style="margin-right: 5px;">
-                                                        <i class="bi bi-info-circle"></i>
+                                                        <i class="bi bi-box-arrow-in-right"></i>
                                                     </a>
 
                                                     <form action="{{ route('news.delete', ['id' => $new->id]) }}"

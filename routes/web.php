@@ -30,6 +30,9 @@ Route::get('/news_detail/{slug}', [LandingController::class, 'detail'])->name('d
 Route::get('pengmases', [LandingController::class, 'detailspemas'])->name('pengmases');
 Route::get('/pengmases/{slug}', [LandingController::class, 'detailpemas'])->name('detailpemas');
 
+Route::get('communities', [LandingController::class, 'detailscommunities'])->name('communities');
+Route::get('/communities/{slug}', [LandingController::class, 'detailcommunity'])->name('detailcommunity');
+
 
 
 
@@ -51,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
+    Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
+    Route::post('requestpemas/store', [PemasController::class, 'storeForm'])->name('requestpemas.store');
 
     Route::get('userdate', [UserController::class, 'index'])->name('userdate');
     Route::put('userdate/{id}/update', [UserController::class, 'update'])->whereNumber('id')->name('userdate.update');
@@ -61,14 +66,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
 
+
+    Route::get('/menuNews/{slug}', [NewsController::class, 'editAdmin'])->name('news.editAdmin');
+    Route::put('/menuNews/{slug}/update', [NewsController::class, 'updateAdmin'])->name('news.updateAdmin');
+    Route::get('menuNews', [NewsController::class, 'indexAdmin'])->name('menuNews');
+
     Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 
 
     // Rute untuk menampilkan form tambah komunitas
-    Route::get('/communities/create', [CommunitiesController::class, 'create'])->name('communities.create');
+    Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');
 
     // Rute untuk menyimpan data komunitas yang baru dibuat
-    Route::post('/communities', [CommunitiesController::class, 'store'])->name('communities.store');
+    Route::post('community/create', [CommunitiesController::class, 'store'])->name('communities.store');
 });
 
 
@@ -87,6 +97,3 @@ Route::controller(ContactController::class)->group(function () {
     Route::get('/contacts', 'index')->name('contacts');
     Route::delete('/contacts/{id}', 'destroy')->name('contact.destroy');
 });
-Route::get('communities', function () {
-    return view('komunitas.communities');
-})->name('communities');

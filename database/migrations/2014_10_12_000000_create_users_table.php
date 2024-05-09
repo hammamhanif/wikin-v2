@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->enum('type', ['admin', 'user'])->default('user');
+            $table->enum('type', ['admin', 'dosen', 'mahasiswa', 'masyarakat']);
             $table->string('email')->unique();
             $table->string('image')->nullable();
             $table->string('job')->nullable();

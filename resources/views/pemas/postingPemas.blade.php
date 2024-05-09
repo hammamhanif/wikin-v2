@@ -4,7 +4,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Pengajuan Pengabdian Masyarakat</h1>
+            <h1>Informasi Pengabdian Masyarakat</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -26,7 +26,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Ajukan Program Pengabdian Masyarakatmu!</h5>
+                                    <h5 class="card-title">Posting Program Pengabdian Masyarakatmu!</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -50,49 +50,31 @@
                                     @endif
 
                                     <!-- TinyMCE Editor -->
-                                    <form role="form text-left" action="{{ route('requestpemas.store') }}" method="post"
+                                    <form role="form text-left" action="{{ route('pemas.store') }}" method="post"
                                         enctype="multipart/form-data">
                                         @method('POST')
                                         @csrf
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="kegiatan" class="form-label">Nama Pengguna</label>
-                                                <input type="text" class="form-control" name="name" id="kegiatan"
-                                                    placeholder="Masukkan Nama.." value="{{ Auth::user()->name }}" readonly>
+                                                <input type="text" class="form-control" name="name"
+                                                    id="name_penelitian" placeholder="Nama Kegiatan">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="lokasi" class="form-label">Nomor Identitas</label>
-                                                <input type="text" class="form-control" name="noID" id="lokasi"
-                                                    placeholder="NIP / NIM / NIK ...">
+                                                <input type="text" class="form-control" name="location"
+                                                    id="name_penelitian" placeholder="Lokasi">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="kegiatan" class="form-label">Nama Kegiatan</label>
-                                                <input type="text" class="form-control" name="nama_kegiatan"
-                                                    id="kegiatan" placeholder="Nama Kegiatan..">
+                                                <label for="status" class="form-label">Status</label>
+                                                <select class="form-select" name="status_pemas" id="status">
+                                                    <option value="pengajuan">Pengajuan</option>
+                                                    <option value="pencarian volunteer">Pencarian Volunteer</option>
+                                                    <option value="selesai">Selesai</option>
+                                                    <option value="sedang berjalan">Sedang berjalan</option>
+                                                </select>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="lokasi" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control" name="location" id="lokasi"
-                                                    placeholder="Lokasi..">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="waktuMulai" class="form-label">Waktu Mulai</label>
-                                                <input type="datetime-local" class="form-control" name="start_time"
-                                                    id="waktuMulai">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="waktuSelesai" class="form-label">Waktu Selesai</label>
-                                                <input type="datetime-local" class="form-control" name="end_time"
-                                                    id="waktuSelesai">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-sm-12 col-xs-12 mt-3">
                                                 <label for="category" class="form-label">Kategori</label>
                                                 <select class="form-select" name="category" id="category">
                                                     <option value="Umum">Umum</option>
@@ -103,9 +85,17 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-12">
+                                                <label for="image" class="col-sm-5 col-form-label">Gambar </label>
+                                                <input class="form-control" type="file" name="image" id="image"
+                                                    accept="image/*">
+                                            </div>
+                                        </div>
+
                                         <div class="mb-3">
-                                            <label for="pemas" class="col-form-label">Deskripsi Kegiatan</label>
-                                            <textarea class="form-control" id="pemas" name="content" placeholder="Masukkan deskrispsi secara jelas.."></textarea>
+                                            <label for="news" class="col-form-label">Isi</label>
+                                            <textarea class="form-control" id="news" name="content"></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Kirimkan</button>

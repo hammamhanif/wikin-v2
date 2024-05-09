@@ -73,4 +73,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Communities::class);
     }
+    public function forms()
+    {
+        return $this->hasMany(FormPemas::class, 'name', 'name');
+    }
 }

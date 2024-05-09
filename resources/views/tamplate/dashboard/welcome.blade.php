@@ -166,7 +166,7 @@
                                                     placeholder="Judul">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 ">
-                                                <label for="deskripsi" class="col-sm-5 col-form-label">Judul</label>
+                                                <label for="deskripsi" class="col-sm-5 col-form-label">Deskripsi</label>
                                                 <input type="text" class="form-control" name="description" id="deskripsi"
                                                     placeholder="Deskripsi">
                                             </div>

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->longText('content');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->enum('status', ['sedang berjalan', 'selesai', 'pencarian volunteer'])->default('pencarian volunteer'); // Kolom status dengan nilai default proses
+            $table->enum('status_pemas', ['pengajuan', 'sedang berjalan', 'selesai', 'pencarian volunteer'])->default('pengajuan'); // Kolom status dengan nilai default proses
+            $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi'); // Kolom status dengan nilai default proses
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
@@ -27,7 +28,7 @@ return new class extends Migration
         });
 
 
-        Schema::create('comments-pemas', function (Blueprint $table) {
+        Schema::create('comments_pemas', function (Blueprint $table) {
             $table->id();
             $table->text('body');
             $table->text('comment-pemas_id')->nullable();
@@ -37,7 +38,7 @@ return new class extends Migration
             $table->foreign('pemas_id')->references('id')->on('pemas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
-        Schema::create('likes-pemas', function (Blueprint $table) {
+        Schema::create('likes_pemas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pemas_id');

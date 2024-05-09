@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\pemas;
+use App\Models\FormPemas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class PemasController extends Controller
 {
     public function index()
+    {
+        return view('pemas.postingPemas');
+    }
+    public function request()
     {
         return view('pemas.pengajuanPemas');
     }
@@ -30,7 +37,9 @@ class PemasController extends Controller
         $pemas->status = $request->input('status');
         $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
-        $pemas->slug = hash('sha256', $request->input('name')); // Menggunakan SHA256 hashing
+        $pemas->slug = hash('sha256', $request->input('name'));
+        $pemas->status = 'Proses Verifikasi';
+
 
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
@@ -45,6 +54,44 @@ class PemasController extends Controller
 
 
         return redirect()->route('pemas')->with('success', 'Berhasil Diajukan! silahkan cek menu pengabdian');
+    }
+
+    public function storeForm(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'noID' => 'nullable|string',
+            'nama_kegiatan' => 'required|string',
+            'location' => 'required|string',
+            'start_time' => 'required|date',
+            'end_time' => ['required', 'date', 'after_or_equal:start_time'],
+            'category' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Membuat instansi baru dari model FormPemas
+        $formPemas = new FormPemas();
+
+        // Mengisi properti dari instansi dengan data dari request
+        $formPemas->name = auth()->user()->name;
+        $formPemas->noID = $request->input('noID');
+        $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
+        $formPemas->location = $request->input('location');
+        $formPemas->start_time = $request->input('start_time');
+        $formPemas->end_time = $request->input('end_time');
+        $formPemas->category = $request->input('category');
+        $formPemas->content = $request->input('content');
+
+        // Menyimpan data ke basis data
+        $formPemas->save();
+
+        // Redirect ke halaman atau rute yang diinginkan dengan pesan sukses
+        return redirect()->back()->with('success', 'Data kegiatan berhasil disimpan.');
     }
 
     public function detailpemas($slug)

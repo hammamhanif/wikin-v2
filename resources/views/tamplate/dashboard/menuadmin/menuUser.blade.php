@@ -110,8 +110,14 @@
                                                                                 @if ($user->type === 'admin') selected @endif
                                                                                 value="admin">Admin</option>
                                                                             <option
-                                                                                @if ($user->type === 'user') selected @endif
-                                                                                value="user">User</option>
+                                                                                @if ($user->type === 'dosen') selected @endif
+                                                                                value="dosen">Dosen</option>
+                                                                            <option
+                                                                                @if ($user->type === 'masyarakat') selected @endif
+                                                                                value="masyarakat">Masyarakat</option>
+                                                                            <option
+                                                                                @if ($user->type === 'mahasiswa') selected @endif
+                                                                                value="mahasiswa">Mahasiswa</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="modal-footer">

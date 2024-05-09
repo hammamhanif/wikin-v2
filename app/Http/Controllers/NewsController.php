@@ -25,6 +25,11 @@ class NewsController extends Controller
         return view('tamplate.dashboard.menu.informasi', compact('news'));
     }
 
+    public function  indexAdmin()
+    {
+        $news = News::all(); // Mendapatkan semua berita
+        return view('tamplate.dashboard.menuadmin.menuNews', compact('news'));
+    }
     public function edit($slug)
     {
         // Mengambil berita berdasarkan slug
@@ -36,6 +41,13 @@ class NewsController extends Controller
         }
 
         return view('tamplate.dashboard.menu.edit-informasi', compact('news'));
+    }
+    public function editAdmin($slug)
+    {
+        // Mengambil berita berdasarkan slug
+        $news = News::where('slug', $slug)->first();
+
+        return view('tamplate.dashboard.menuadmin.edit-informasi', compact('news'));
     }
 
     public function store(Request $request)
@@ -55,7 +67,8 @@ class NewsController extends Controller
         $news->description = $request->input('description');
         $news->content = $request->input('content');
         $news->category = $request->input('category');
-        $news->slug = Str::slug($request->title); // Generate slug from the title
+        $news->status = 'verifikasi';
+        $news->slug = hash('sha256', $request->input('name'));
 
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
@@ -95,6 +108,20 @@ class NewsController extends Controller
 
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
         return redirect()->route('informasi')->with('success', 'Berita berhasil dihapus.');
+    }
+    public function updateAdmin(Request $request, $slug)
+    {
+        // Mengambil berita berdasarkan slug
+        $news = News::where('slug', $slug)->first();
+        // Validasi request
+        $request->validate([
+            'status' => 'required|in:verifikasi,inactive,active', // Validasi status
+        ]);
+        $news->status = $request->status;
+        $news->save();
+
+        // Mengembalikan ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Status berita berhasil diperbarui.');
     }
     public function update(Request $request, $slug)
     {

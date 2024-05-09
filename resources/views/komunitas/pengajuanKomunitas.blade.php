@@ -61,9 +61,9 @@
                                                     placeholder="Nama Komunitas..">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="nama">Link Join Grup/ Kontak yang dapat dihubungi</label>
-                                                <input type="text" class="form-control" name="link_number" id="nama"
-                                                    placeholder="Link Join / Nomor yang dapat dihubungi..">
+                                                <label for="nama">Kontak yang dapat dihubungi (Whatsapp)</label>
+                                                <input type="text" class="form-control" name="number" id="nama"
+                                                    placeholder="Contoh 62857XXXXXXX..">
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="news" class="col-form-label">Isi</label>
+                                            <label for="news" class="col-form-label">Deskripsi Komunitas</label>
                                             <textarea class="form-control" id="news" name="content"></textarea>
                                         </div>
                                         <div class="modal-footer">

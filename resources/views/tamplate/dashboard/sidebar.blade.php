@@ -11,7 +11,7 @@
           </li><!-- End Dashboard Nav -->
 
 
-          <li class="nav-heading">Berita Kamu ()</li>
+          <li class="nav-heading">Berita Kamu</li>
 
           <li class="nav-item">
               <a class="nav-link {{ Request::is('informasi') ? '' : 'collapsed' }}" href="{{ route('informasi') }}">
@@ -21,9 +21,16 @@
           </li><!-- End Profile Page Nav -->
           <li class="nav-heading">Pengabdian Masyarakat</li>
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
-                  <i class="bi bi-house-door"></i>
+              <a class="nav-link {{ Request::is('requestpemas') ? '' : 'collapsed' }}"
+                  href="{{ route('requestpemas') }}">
+                  <i class="bi bi-ui-checks"></i>
                   <span>Pengajuan</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
+                  <i class="bi bi-file-earmark-post"></i>
+                  <span>Postingan</span>
               </a>
           </li>
           <li class="nav-item">

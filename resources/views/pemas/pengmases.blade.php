@@ -8,10 +8,10 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Informasi Kenukliran</h2>
+                    <h2>Pengabdian Masyarakat Nuklir</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
-                        <li>Informasi</li>
+                        <li>Pengabdian</li>
                     </ol>
                 </div>
 
@@ -55,7 +55,7 @@
                                                 </li>
                                                 <li class="d-flex align-items-center mt-2"><i class="bi bi-alarm"></i>
                                                     <a href="blog-details.html">Status:
-                                                        <strong>{{ $pemas->status }}</strong></a>
+                                                        <strong>{{ $pemas->status_pemas }}</strong></a>
                                                 </li>
                                             </ul>
 
@@ -98,7 +98,8 @@
                                 <h3 class="sidebar-title">Tags</h3>
                                 <ul class="mt-3">
                                     <li><a href="{{ route('pengmases', ['name' => 'selesai']) }}">Selesai</a></li>
-                                    <li><a href="{{ route('pengmases', ['name' => 'proses']) }}">Proses</a></li>
+                                    <li><a href="{{ route('pengmases', ['name' => 'Pencarian Volunteer']) }}">Pencarian
+                                            Volunteer</a></li>
                                     <li><a href="{{ route('pengmases', ['name' => 'Kesehatan']) }}">Kesehatan</a></li>
                                     <li><a href="{{ route('pengmases', ['name' => 'Industri']) }}">Indutri</a></li>
                                     <li><a href="{{ route('pengmases', ['name' => 'Pangan']) }}">Pangan</a></li>

@@ -33,6 +33,7 @@
     <link href="{{ asset('css/style3.css') }}" rel="stylesheet">
 
     @stack('styles')
+    @stack('news')
 
 
 </head>

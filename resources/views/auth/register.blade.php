@@ -55,7 +55,6 @@
                     @method('POST')
                     @csrf
                     <div class="row align-items-center">
-
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Nama lengkap" name="name" required>
@@ -68,9 +67,19 @@
                             <input type="email" class="form-control form-control-lg bg-light fs-6" name="email"
                                 placeholder="Email address" required>
                         </div>
-                        <div class="input-group mb-1">
+                        <div class="input-group mb-3">
                             <input type="password" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Password" name="password" required>
+                        </div>
+
+                        <label for="type">Pilih Peran:</label>
+                        <div class="input-group mb-1 mt-3">
+                            <select class="form-select" name="type" id="type">
+                                <option value="dosen">Dosen</option>
+                                <option value="mahasiswa">Mahasiswa</option>
+                                <option value="admin">Admin</option>
+                                <option value="masyarakat">Masyarakat</option>
+                            </select>
                         </div>
                         <div class="input-group mb-5 d-flex justify-content-between">
                             <div class="forgot">
@@ -81,10 +90,10 @@
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 custom-btn">Daftar</button>
                         </div>
                         <div class="input-group mb-3">
-                            <button type="submit" class="btn btn-lg btn-light w-100 fs-6"><img
-                                    src="{{ asset('images/google.png') }}" style="width:20px" class="me-2"><small>Sign
-                                    In with
-                                    Google</small></button>
+                            <button type="submit" class="btn btn-lg btn-light w-100 fs-6">
+                                <img src="{{ asset('images/google.png') }}" style="width:20px" class="me-2">
+                                <small>Sign In with Google</small>
+                            </button>
                         </div>
                         <div class="row">
                             <small>Sudah Punya Akun? <a href="{{ route('login') }}">Log In</a></small>
@@ -93,7 +102,7 @@
                             <a href="{{ route('home') }}">Kembali</a>
                         </div>
                     </div>
-                </form>
+                </form>type
 
             </div>
 

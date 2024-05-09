@@ -1,155 +1,117 @@
 @extends('tamplate.landingpage.main')
 
 @section('main')
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-        <div class="container" data-aos="fade-up">
+    <main id="main">
 
-            <div class="section-header">
-                <h2>Galeri <strong>Komunitas Nuklir</strong></h2>
-                <p>Komunitas-komunitas nuklir di indonesia yang bergerak di berbagai bidang. untuk bergabung dan melihat
-                    detail silahkan klik komunitas.</p>
-                <form class="input-group mt-3">
-                    <input type="text" class="form-control"
-                        placeholder="Masukkan Nama Komunitas Nuklir (pangan, kesehatan, industri)" aria-label="Search for...">
-                    <button class="btn btn-custom" type="submit">Cari</button>
-                </form>
-            </div>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs">
+            <div class="container">
 
-
-            <div class="row gy-5">
-
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-4.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-bounding-box-circles"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Asperiores Commodit</h3>
-                            </a>
-                            <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga
-                                sit provident adipisci neque.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-calendar4-week"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Velit Doloremque</h3>
-                            </a>
-                            <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed
-                                animi at autem alias eius labore.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
-                            </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
-                            </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
-                            </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
-                            </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-item">
-                        <div class="img">
-                            <img src="{{ asset('img/services-6.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="details position-relative">
-                            <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
-                            </div>
-                            <a href="#" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
-                            </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="#" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Galeri Komunitas Nuklir</h2>
+                    <ol>
+                        <li><a href="{{ route('home') }}">Utama</a></li>
+                        <li>Komunitas</li>
+                    </ol>
+                </div>
 
             </div>
+        </div><!-- End Breadcrumbs -->
 
-        </div>
-    </section><!-- End Services Section -->
+        <!-- ======= Blog Section ======= -->
+        <section id="blog" class="blog">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row g-5">
+
+                    <div class="col-lg-8">
+
+                        <div class="row gy-4 posts-list">
+                            @foreach ($communities as $community)
+                                <div class="col-lg-6">
+                                    <article class="d-flex flex-column">
+
+                                        <div class="post-img">
+                                            <img src="{{ asset('images/' . $community->image) }}" alt=""
+                                                class="img-fluid">
+                                        </div>
+
+                                        <h2 class="title">
+                                            <a
+                                                href="{{ route('detailpemas', $community->slug) }}">{{ $community->name }}</a>
+                                        </h2>
+
+                                        <div class="meta-top">
+                                            <ul>
+                                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
+                                                        href="blog-details.html">{{ $community->user->username }}</a></li>
+                                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                                                        href="blog-details.html"><time
+                                                            datetime="{{ $community->created }}">{{ $community->created }}</time></a>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li class="d-flex align-items-center mt-2"><i class="bi bi-alarm"></i> <a
+                                                        href="blog-details.html">Status:
+                                                        <strong>{{ $community->status }}</strong></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="content">
+                                            <p>
+                                                {!! $community->content !!}
+                                            </p>
+                                        </div>
+
+                                        <div class="read-more mt-auto align-self-end">
+                                            <a href="{{ route('detailcommunity', $community->slug) }}">Baca</a>
+                                        </div>
+
+                                    </article>
+                                </div><!-- End post list item -->
+                            @endforeach
+                        </div>
+
+                        <div class="blog-pagination">
+                            {{ $communities->links() }}
+                        </div><!-- End blog pagination -->
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+                        <div class="sidebar">
+
+                            <div class="sidebar-item search-form">
+                                <h3 class="sidebar-title">Cari</h3>
+                                <form action="{{ route('pengmases') }}" method="GET" class="mt-3">
+                                    <input type="text" name="name" placeholder="Masukkan judul">
+                                    <button type="submit"><i class="bi bi-search"></i></button>
+                                </form>
+
+                            </div><!-- End sidebar search formn-->
+
+                            <div class="sidebar-item tags">
+                                <h3 class="sidebar-title">Tags</h3>
+                                <ul class="mt-3">
+                                    <li><a href="{{ route('communities', ['name' => 'selesai']) }}">Selesai</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Pencarian Volunteer']) }}">Pencarian
+                                            Volunteer</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Kesehatan']) }}">Kesehatan</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Industri']) }}">Indutri</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Pangan']) }}">Pangan</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Umum']) }}">Umum</a></li>
+                            </div><!-- End sidebar tags-->
+
+                        </div><!-- End Blog Sidebar -->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Blog Section -->
+
+    </main><!-- End #main -->
 @endsection

@@ -38,7 +38,7 @@ class AuthController extends Controller
             if ($user->type == 'admin') {
                 return redirect()->route('dashboard')->withSuccess("Selamat Datang di Dashboard Admin");
             } else if ($user->type == 'user') {
-                return redirect()->route('dashboard')->withSuccess("Selamat Datang di Dashboard Admin");
+                return redirect()->back()->withSuccess("Selamat Datang di Wikin Dashboard ");
             } else {
                 return redirect()->route('login')->withUnsuccess("Akun anda di nonaktifkan oleh admin, silahkan hubungi admin");
             }
@@ -73,6 +73,7 @@ class AuthController extends Controller
             'name' => 'required|min:5|max:50|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|email|unique:users|max:50',
             'password' => 'required|min:8|max:20',
+            'type' => 'required|in:dosen,mahasiswa,admin,masyarakat'
         ], [
             'username.required' => 'Nama pengguna wajib diisi.',
             'username.unique' => 'Nama pengguna sudah digunakan.',
@@ -89,6 +90,8 @@ class AuthController extends Controller
             'password.required' => 'Kata sandi wajib diisi.',
             'password.min' => 'Kata sandi harus minimal 8 karakter.',
             'password.max' => 'Kata sandi tidak boleh melebihi 20 karakter.',
+            'type.required' => 'Peran wajib dipilih.',
+            'type.in' => 'Pilih salah satu peran yang tersedia (dosen, mahasiswa, admin, masyarakat).'
         ]);
 
         $user = new User();
@@ -96,6 +99,7 @@ class AuthController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
+        $user->type = $request->input('type');
         $user->save();
 
         return redirect()->route('login')->withSuccess('Akun berhasil dibuat. Silahkan login.');
