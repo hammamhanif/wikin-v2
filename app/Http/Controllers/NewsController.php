@@ -107,7 +107,7 @@ class NewsController extends Controller
         $news->delete();
 
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
-        return redirect()->route('informasi')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->back()->with('success', 'Berita berhasil dihapus.');
     }
     public function updateAdmin(Request $request, $slug)
     {

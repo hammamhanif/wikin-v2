@@ -57,31 +57,39 @@ Route::middleware(['auth'])->group(function () {
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
     Route::post('requestpemas/store', [PemasController::class, 'storeForm'])->name('requestpemas.store');
 
-    Route::get('userdate', [UserController::class, 'index'])->name('userdate');
-    Route::put('userdate/{id}/update', [UserController::class, 'update'])->whereNumber('id')->name('userdate.update');
-    Route::delete('userdate/{id}/delete', [UserController::class, 'destroy'])->whereNumber('id')->name('userdate.delete');
-
     Route::get('informasi', [NewsController::class, 'index'])->name('informasi');
     Route::delete('/informasi/{id}', [NewsController::class, 'delete'])->name('news.delete');
     Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
 
 
-    Route::get('/menuNews/{slug}', [NewsController::class, 'editAdmin'])->name('news.editAdmin');
-    Route::put('/menuNews/{slug}/update', [NewsController::class, 'updateAdmin'])->name('news.updateAdmin');
-    Route::get('menuNews', [NewsController::class, 'indexAdmin'])->name('menuNews');
-
     Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 
 
     // Rute untuk menampilkan form tambah komunitas
-    Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');
 
-    // Rute untuk menyimpan data komunitas yang baru dibuat
+    Route::get('galeri', [CommunitiesController::class, 'indexGalery'])->name('galeri');
+    Route::get('komunitas', [CommunitiesController::class, 'index'])->name('komunitas');
+    Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');
     Route::post('community/create', [CommunitiesController::class, 'store'])->name('communities.store');
+    Route::get('community/{slug}', [CommunitiesController::class, 'edit'])->name('communities.edit');
+    Route::put('/community/{slug}/update', [CommunitiesController::class, 'update'])->name('communities.update');
+    Route::delete('/community/{id}', [CommunitiesController::class, 'delete'])->name('communities.delete');
 });
 
+Route::middleware(['IsAdmin'])->group(function () {
+    Route::get('/menuNews/{slug}', [NewsController::class, 'editAdmin'])->name('news.editAdmin');
+    Route::put('/menuNews/{slug}/update', [NewsController::class, 'updateAdmin'])->name('news.updateAdmin');
+    Route::get('menuNews', [NewsController::class, 'indexAdmin'])->name('menuNews');
 
+    Route::get('menuCommunity', [CommunitiesController::class, 'indexAdmin'])->name('menuCommunity');
+    Route::get('menuCommunity/{slug}', [CommunitiesController::class, 'editAdmin'])->name('communities.editAdmin');
+    Route::put('/menuCommunity/{slug}/update', [CommunitiesController::class, 'updateAdmin'])->name('communities.updateAdmin');
+
+    Route::get('userdate', [UserController::class, 'index'])->name('userdate');
+    Route::put('userdate/{id}/update', [UserController::class, 'update'])->whereNumber('id')->name('userdate.update');
+    Route::delete('userdate/{id}/delete', [UserController::class, 'destroy'])->whereNumber('id')->name('userdate.delete');
+});
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
 

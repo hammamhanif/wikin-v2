@@ -47,52 +47,61 @@
               </a>
           </li><!-- End Contact Page Nav -->
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-contact.html">
+              <a class="nav-link {{ Request::is('komunitas') || Request::is('community/*') ? '' : 'collapsed' }}"
+                  href="{{ route('komunitas') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Komunitas</span>
               </a>
           </li><!-- End Contact Page Nav -->
+          @if (Auth::check() && Auth::user()->type == 'admin')
+              <li class="nav-heading">Menu Admin</li>
+              <li class="nav-item">
+                  <a class="nav-link {{ Request::is('userdate') ? '' : 'collapsed' }}" href="{{ route('userdate') }}">
+                      <i class="bi bi-person-circle"></i>
+                      <span>User</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
 
-          <li class="nav-heading">Menu Admin</li>
-          <li class="nav-item">
-              <a class="nav-link {{ Request::is('userdate') ? '' : 'collapsed' }}" href="{{ route('userdate') }}">
-                  <i class="bi bi-person-circle"></i>
-                  <span>User</span>
-              </a>
-          </li><!-- End Register Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link {{ Request::is('menuNews') || Request::is('menuNews/*') ? '' : 'collapsed' }}"
+                      href="{{ route('menuNews') }}">
+                      <i class="bi bi-border-style"></i>
+                      <span>Berita</span>
+                  </a>
+              </li><!-- End Login Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="pages-blank.html">
+                      <i class="bi bi-house-door"></i>
+                      <span>Pengabdian Masyarakat</span>
+                  </a>
+              </li><!-- End Blank Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link {{ Request::is('menuCommunity') || Request::is('menuCommunity/*') ? '' : 'collapsed' }}"
+                      href="{{ route('menuCommunity') }}">
+                      <i class="bi bi-people"></i>
+                      <span>Komunitas</span>
+                  </a>
+              </li><!-- End Blank Page Nav -->
 
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-login.html">
-                  <i class="bi bi-border-style"></i>
-                  <span>Berita</span>
-              </a>
-          </li><!-- End Login Page Nav -->
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-blank.html">
-                  <i class="bi bi-house-door"></i>
-                  <span>Pengabdian Masyarakat</span>
-              </a>
-          </li><!-- End Blank Page Nav -->
-
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-error-404.html">
-                  <i class="bi bi-columns-gap"></i>
-                  <span>Halaman Utama</span>
-              </a>
-          </li><!-- End Error 404 Page Nav -->
-          <li class="nav-item">
-              <a class="nav-link {{ Request::is('contacts') ? '' : 'collapsed' }}" href="{{ route('contacts') }}">
-                  <i class="bi bi-telephone-inbound"></i>
-                  <span>Hubungi Admin</span>
-              </a>
-          </li><!-- End Error 404 Page Nav -->
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="">
-                  <i class="bi bi-exclamation-triangle-fill"></i>
-                  <span>Laporan</span>
-              </a>
-          </li><!-- End Error 404 Page Nav -->
-
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="pages-error-404.html">
+                      <i class="bi bi-columns-gap"></i>
+                      <span>Halaman Utama</span>
+                  </a>
+              </li><!-- End Error 404 Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link {{ Request::is('contacts') ? '' : 'collapsed' }}" href="{{ route('contacts') }}">
+                      <i class="bi bi-telephone-inbound"></i>
+                      <span>Hubungi Admin</span>
+                  </a>
+              </li><!-- End Error 404 Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="">
+                      <i class="bi bi-exclamation-triangle-fill"></i>
+                      <span>Laporan</span>
+                  </a>
+              </li><!-- End Error 404 Page Nav -->
+          @endif
           <div style="text-align: center;">
               <a href="{{ route('home') }}" class="btn btn-outline-primary mb-3">
                   Halaman utama

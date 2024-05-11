@@ -3,20 +3,39 @@
     <style>
         .post-img {
             margin-bottom: 20px;
-            max-width: 100%;
+            max-width: 60%;
             /* Adjusted maximum width */
         }
 
+        .button-container {
+            text-align: right;
+            /* Mengatur agar konten berada di kanan */
+        }
+
+        .btn {
+            margin-left: 10px;
+            /* Memberi jarak antara tombol */
+        }
 
 
         @media (min-width: 768px) {
-            .post-img {
+
+
+            .bg-image {
+                margin-left: 60px;
                 float: left;
-                margin-right: 20px;
-                /* Reduced margin for better spacing */
-                width: 40%;
-                /* Reduced width for better layout */
+                width: 400px;
             }
+
+            .post-img {
+
+                margin-right: 200px;
+                /* Reduced margin for better spacing */
+                width: 60%;
+                /* Reduced width for better layout */
+                max-width: 350px;
+            }
+
 
             .content {
                 overflow: hidden;
@@ -26,11 +45,10 @@
         /* For screen sizes smaller than 768px */
         @media (max-width: 993px) {
             .post-img {
-                display: block;
-                margin: auto;
-                width: 100%;
-                float: none;
-                /* Disable float for center alignment */
+                /* display: block;
+                                    margin: auto;
+                                    width: 100%;
+                                    float: none; */
             }
 
             .content {
@@ -72,11 +90,11 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Detail Pengabdian</h2>
+                    <h2>Detail Komunitas</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
                         <li>
-                            Pengabdian </li>
+                            Komunitas </li>
 
                     </ol>
                 </div>
@@ -90,8 +108,11 @@
                 <div class="row g-5">
                     <div class="col-lg-12">
                         <article class="blog-details">
-                            <div class="post-img mt-3">
-                                <img src="{{ asset('images/' . $community->image) }}" alt="" class="img-fluid">
+                            <div class="bg-image">
+                                <div class="post-img mt-3">
+                                    <img src="{{ asset('images/community/' . $community->image) }}" alt=""
+                                        class="img-fluid ">
+                                </div>
                             </div>
                             <h2 class="title">{{ htmlentities($community->name) }}</h2>
                             <div class="meta-top">
@@ -111,12 +132,15 @@
                             <div class="content">
                                 {!! html_entity_decode($community->content) !!}
                             </div><!-- End post content -->
-                            <a class="btn btn-outline-primary-custom"
-                                href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
-                                role="button" target="_blank">Hubungi Kontak</a>
-                            <a class="btn btn-primary-custom2"
-                                href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
-                                role="button" target="_blank">Galeri Kegiatan</a>
+                            <div class="button-container">
+                                <a class="btn btn-outline-primary-custom"
+                                    href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
+                                    role="button" target="_blank">Hubungi Kontak</a>
+                                <a class="btn btn-primary-custom2"
+                                    href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
+                                    role="button" target="_blank">Galeri Kegiatan</a>
+                            </div>
+
                         </article><!-- End blog post -->
                     </div>
                 </div>
