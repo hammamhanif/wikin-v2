@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class   Communities extends Model
+class galleries extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name', 'category', 'content', 'slug', 'link_number', 'image', 'user_id'
+        'title', 'description', 'image', 'community_id', 'user_id',
     ];
+    public function community()
+    {
+        return $this->belongsTo(Communities::class);
+    }
 
+    /**
+     * Get the user that created the gallery.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    public function galleries()
-    {
-        return $this->hasMany(galleries::class);
     }
 }

@@ -82,8 +82,8 @@
                                         @csrf
                                         <div class="image-container">
                                             @if ($communities->image)
-                                                <img src="{{ asset('images/community/' . $communities->image) }}"
-                                                    class="img-fluid" alt="Gambar Berita">
+                                                <img src="{{ asset('storage/' . $communities->image) }}" class="img-fluid"
+                                                    alt="Gambar Berita">
                                             @endif
                                         </div>
                                         <div class="row mb-3">

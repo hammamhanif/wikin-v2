@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -94,15 +95,18 @@ class AuthController extends Controller
             'type.in' => 'Pilih salah satu peran yang tersedia (dosen, mahasiswa, admin, masyarakat).'
         ]);
 
-        $user = new User();
-        $user->username = $request->input('username');
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->type = $request->input('type');
-        $user->save();
+        $user = User::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'type' => $request->input('type'), // Menambahkan bidang 'type'
+        ]);
 
-        return redirect()->route('login')->withSuccess('Akun berhasil dibuat. Silahkan login.');
+        event(new Registered($user));
+        Auth::login($user, $request->get('remember'));
+
+        return redirect('/email/verify');
     }
 
     /**

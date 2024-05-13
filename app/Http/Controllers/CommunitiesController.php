@@ -17,10 +17,7 @@ class CommunitiesController extends Controller
         $communities = Communities::where('user_id', Auth::id())->get();
         return view('tamplate.dashboard.menu.komunitas', compact('communities'));
     }
-    public function indexGalery()
-    {
-        return view('tamplate.dashboard.menu.addGaleryCommunity');
-    }
+
     public function indexAdmin()
     {
         $communities = Communities::all();
@@ -66,7 +63,7 @@ class CommunitiesController extends Controller
 
         // Mengunggah gambar jika ada
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/community');
+            $imagePath = $request->file('image')->store('public');
         } else {
             $imagePath = null;
         }
@@ -77,7 +74,7 @@ class CommunitiesController extends Controller
         $imageHashName = null;
         if ($imagePath) {
             $imageHashName = Str::random(40) . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('images/community', $imageHashName);
+            $request->file('image')->storeAs('public', $imageHashName);
         }
         $community = new Communities;
         $community->name = $request->name;

@@ -32,7 +32,7 @@
                                     <article class="d-flex flex-column">
 
                                         <div class="post-img">
-                                            <img src="{{ asset('images/community/' . $community->image) }}" alt=""
+                                            <img src="{{ asset('storage/' . $community->image) }}" alt=""
                                                 class="img-fluid">
                                         </div>
 

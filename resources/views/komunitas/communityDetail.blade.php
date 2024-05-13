@@ -46,9 +46,9 @@
         @media (max-width: 993px) {
             .post-img {
                 /* display: block;
-                                    margin: auto;
-                                    width: 100%;
-                                    float: none; */
+                                            margin: auto;
+                                            width: 100%;
+                                            float: none; */
             }
 
             .content {
@@ -110,7 +110,7 @@
                         <article class="blog-details">
                             <div class="bg-image">
                                 <div class="post-img mt-3">
-                                    <img src="{{ asset('images/community/' . $community->image) }}" alt=""
+                                    <img src="{{ asset('storage/' . $community->image) }}" alt=""
                                         class="img-fluid ">
                                 </div>
                             </div>
@@ -136,8 +136,7 @@
                                 <a class="btn btn-outline-primary-custom"
                                     href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
                                     role="button" target="_blank">Hubungi Kontak</a>
-                                <a class="btn btn-primary-custom2"
-                                    href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
+                                <a class="btn btn-primary-custom2" href="{{ route('galeri', $community->slug) }}"
                                     role="button" target="_blank">Galeri Kegiatan</a>
                             </div>
 

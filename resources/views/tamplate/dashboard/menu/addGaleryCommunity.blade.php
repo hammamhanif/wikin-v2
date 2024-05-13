@@ -24,7 +24,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title ">Tambahkan Galeri anda!</h5>
+                                    <h5 class="card-title ">Tambahkan Galeri Komunitas anda!</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -48,11 +48,11 @@
                                     @endif
 
                                     <!-- TinyMCE Editor -->
-                                    <form role="form text-left" id="updateNewsForm" action="" method="post"
-                                        {{-- {{ route('news.update', ['slug' => $news->slug]) }} --}} enctype="multipart/form-data">
-                                        @method('PUT')
+                                    <form role="form text-left" id="updateNewsForm" action="{{ route('galeri.store') }}"
+                                        method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="community_id" value="{{ $community->id }}">
+                                        @method('POST')
                                         @csrf
-
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Judul </label>
@@ -81,110 +81,28 @@
                             <div class="container">
                                 <div class="card-container d-flex justify-content-center">
                                     <div class="row row-cols-2 row-cols-lg-4 justify-content-center">
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
+                                        @foreach ($galleries as $gallery)
+                                            <div class="card col " style="width: 18rem; margin-right: 10px;">
+                                                <img src="{{ asset('storage/' . $gallery->image) }}" class="card-img-top"
+                                                    alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center">{{ $gallery->title }}</h5>
+                                                    <p class="card-text">Some quick example text to build on the card title
+                                                        and
+                                                        make up the bulk of the card's content.</p>
+                                                    <form id="deleteForm"
+                                                        action="{{ route('galeri.delete', ['id' => $gallery->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-outline-danger mt-3 mb-3">Hapus</button>
+                                                    </form>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                            <img src="{{ asset('images/1.png') }}" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center">Halow</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and
-                                                    make up the bulk of the card's content.</p>
-                                                <form id="myForm" action="/submit" method="post">
-                                                    <button type="submit" class="btn btn-outline-danger mt-3 mb-3 ">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +117,7 @@
             // Tampilkan SweetAlert konfirmasi
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Anda akan menyimpan perubahan ini!",
+                text: "Menambahkan Galeri ini!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

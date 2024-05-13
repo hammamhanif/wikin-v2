@@ -77,7 +77,6 @@
                             <select class="form-select" name="type" id="type">
                                 <option value="dosen">Dosen</option>
                                 <option value="mahasiswa">Mahasiswa</option>
-                                <option value="admin">Admin</option>
                                 <option value="masyarakat">Masyarakat</option>
                             </select>
                         </div>

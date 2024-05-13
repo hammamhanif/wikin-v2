@@ -8,8 +8,10 @@ use App\Http\Controllers\PemasController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\CommunitiesController;
 use App\Http\Controllers\ForgotPasswordController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,7 @@ Route::get('communities', [LandingController::class, 'detailscommunities'])->nam
 Route::get('/communities/{slug}', [LandingController::class, 'detailcommunity'])->name('detailcommunity');
 
 
+Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name('galeri');
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -44,7 +47,18 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'registerPost')->name('register.post');
 });
 
-Route::middleware(['auth'])->group(function () {
+
+Route::get('/email/verify', function () {
+    return view('auth.processAuth');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
@@ -68,7 +82,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Rute untuk menampilkan form tambah komunitas
 
-    Route::get('galeri', [CommunitiesController::class, 'indexGalery'])->name('galeri');
+    Route::get('galeri/{slug}', [GalleriesController::class, 'index'])->name('galeri.add');
+    Route::post('galeri', [GalleriesController::class, 'store'])->name('galeri.store');
+    Route::delete('/galeri/{id}', [GalleriesController::class, 'delete'])->name('galeri.delete');
+
+
     Route::get('komunitas', [CommunitiesController::class, 'index'])->name('komunitas');
     Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');
     Route::post('community/create', [CommunitiesController::class, 'store'])->name('communities.store');
