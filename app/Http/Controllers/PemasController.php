@@ -20,6 +20,30 @@ class PemasController extends Controller
         return view('pemas.pengajuanPemas');
     }
 
+    public function indexAdmin()
+    {
+        $pengmases = pemas::all();
+        return view('tamplate.dashboard.menuadmin.menuPemas', compact('pengmases'));
+    }
+    public function editAdmin($slug)
+    {
+        $pemas = pemas::where('slug', $slug)->first();
+        return view('tamplate.dashboard.menuadmin.edit-pemas', compact('pemas'));
+    }
+    public function updateAdmin(Request $request, $slug)
+    {
+        // Mengambil berita berdasarkan slug
+        $pemas = pemas::where('slug', $slug)->first();
+        // Validasi request
+        $request->validate([
+            'status' => 'required|in:Proses verifikasi,Diterima,Ditolak', // Validasi status
+        ]);
+        $pemas->status = $request->status;
+        $pemas->save();
+
+        // Mengembalikan ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Status berita berhasil diperbarui.');
+    }
     public function store(Request $request)
     { // Validasi form
         $request->validate([

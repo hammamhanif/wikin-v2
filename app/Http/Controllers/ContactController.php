@@ -41,6 +41,9 @@ class ContactController extends Controller
             'email' => 'required',
             'subject' => 'required',
             'message' => 'required',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha' => 'Captcha tidak sesuai, silahkan ulang kembali.',
         ]);
 
         $contact = new Contact();

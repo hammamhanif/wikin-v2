@@ -78,11 +78,20 @@
 
                         <div class="input-group mb-3">
                             <input type="email" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Email address" name="email">
+                                placeholder="Masukkan Alamat Email" name="email">
                         </div>
                         <div class="input-group mb-1">
                             <input type="password" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Password" name="password">
+                                placeholder=" Masukkan Password" name="password">
+                        </div>
+                        <div class="form-group mb-3 mt-2">
+                            <div class="captcha">
+                                <span id="captcha-img">{!! captcha_img() !!}</span>
+                                <button type="button" class="btn btn-primary reload" id="reload">&#x21bb;</button>
+                            </div>
+                        </div>
+                        <div class="input-group mb-1">
+                            <input type="text" id="captcha" name="captcha" required placeholder="Masukkan Captcha">
                         </div>
                         <div class="input-group mb-5 d-flex justify-content-between">
                             <div class="form-check">
@@ -117,5 +126,21 @@
     </div>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the reload button and captcha image
+        var reloadButton = document.getElementById('reload');
+        var captchaImage = document.getElementById('captcha-img');
+
+        // Attach a click event listener to the reload button
+        reloadButton.addEventListener('click', function() {
+            // Generate a new captcha image URL by adding a timestamp parameter
+            var captchaImageUrl = "{{ route('captcha') }}?" + Date.now();
+
+            // Update the src attribute of the captcha image with the new URL
+            captchaImage.innerHTML = '<img src="' + captchaImageUrl + '" alt="Captcha Image">';
+        });
+    });
+</script>
 
 </html>

@@ -70,7 +70,8 @@
                   </a>
               </li><!-- End Login Page Nav -->
               <li class="nav-item">
-                  <a class="nav-link collapsed" href="pages-blank.html">
+                  <a class="nav-link  {{ Request::is('menuPemas') || Request::is('menuPemas/*') ? '' : 'collapsed' }}"
+                      href="{{ route('menuPemas') }}">
                       <i class="bi bi-house-door"></i>
                       <span>Pengabdian Masyarakat</span>
                   </a>

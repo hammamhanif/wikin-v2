@@ -34,7 +34,7 @@ Route::get('/pengmases/{slug}', [LandingController::class, 'detailpemas'])->name
 
 Route::get('communities', [LandingController::class, 'detailscommunities'])->name('communities');
 Route::get('/communities/{slug}', [LandingController::class, 'detailcommunity'])->name('detailcommunity');
-
+Route::get('/captcha', [AuthController::class], 'getCaptcha')->name('captcha');
 
 Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name('galeri');
 
@@ -79,9 +79,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 
-
-    // Rute untuk menampilkan form tambah komunitas
-
     Route::get('galeri/{slug}', [GalleriesController::class, 'index'])->name('galeri.add');
     Route::post('galeri', [GalleriesController::class, 'store'])->name('galeri.store');
     Route::delete('/galeri/{id}', [GalleriesController::class, 'delete'])->name('galeri.delete');
@@ -95,10 +92,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/community/{id}', [CommunitiesController::class, 'delete'])->name('communities.delete');
 });
 
-Route::middleware(['IsAdmin'])->group(function () {
+Route::middleware(['IsAdmin', 'verified'])->group(function () {
     Route::get('/menuNews/{slug}', [NewsController::class, 'editAdmin'])->name('news.editAdmin');
     Route::put('/menuNews/{slug}/update', [NewsController::class, 'updateAdmin'])->name('news.updateAdmin');
     Route::get('menuNews', [NewsController::class, 'indexAdmin'])->name('menuNews');
+
+    Route::get('menuPemas', [PemasController::class, 'indexAdmin'])->name('menuPemas');
+    Route::get('/menuPemas/{slug}', [PemasController::class, 'editAdmin'])->name('pemas.editAdmin');
+    Route::put('/menuPemas/{slug}/update', [PemasController::class, 'updateAdmin'])->name('pemas.updateAdmin');
 
     Route::get('menuCommunity', [CommunitiesController::class, 'indexAdmin'])->name('menuCommunity');
     Route::get('menuCommunity/{slug}', [CommunitiesController::class, 'editAdmin'])->name('communities.editAdmin');

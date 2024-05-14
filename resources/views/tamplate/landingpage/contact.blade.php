@@ -70,6 +70,15 @@
                             <span class="block sm:inline">{{ session('unsuccess') }}</span>
                         </div>
                     @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            <ul class="list-disc pl-5">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ htmlentities($error) }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('kontaks') }}" method="post" role="form" class="php-email-form">
                         @method('POST')
                         @csrf
@@ -87,8 +96,18 @@
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek"
                                 required>
                         </div>
+
                         <div class="form-group mt-3">
                             <textarea class="form-control" name="message" placeholder="Pesan" required></textarea>
+                        </div>
+                        <div class="form-group mb-3 mt-2">
+                            <div class="captcha">
+                                <span id="captcha-img">{!! captcha_img() !!}</span>
+                                <button type="button" class="btn btn-primary reload" id="reload">&#x21bb;</button>
+                            </div>
+                        </div>
+                        <div class="input-group mb-1">
+                            <input type="text" id="captcha" name="captcha" required placeholder="Masukkan Captcha">
                         </div>
                         <div class="text-center"><button type="submit">Kirimkan pesan</button></div>
                     </form>
@@ -98,4 +117,20 @@
 
         </div>
     </section><!-- End Contact Section -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the reload button and captcha image
+            var reloadButton = document.getElementById('reload');
+            var captchaImage = document.getElementById('captcha-img');
+
+            // Attach a click event listener to the reload button
+            reloadButton.addEventListener('click', function() {
+                // Generate a new captcha image URL by adding a timestamp parameter
+                var captchaImageUrl = "{{ route('captcha') }}?" + Date.now();
+
+                // Update the src attribute of the captcha image with the new URL
+                captchaImage.innerHTML = '<img src="' + captchaImageUrl + '" alt="Captcha Image">';
+            });
+        });
+    </script>
 @endsection

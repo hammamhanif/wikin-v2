@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Mews\Captcha\Facades\Captcha;
 
 class AuthController extends Controller
 {
@@ -22,10 +23,16 @@ class AuthController extends Controller
 
     public function loginPost(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+                'captcha' => 'required|captcha',
+            ],
+            [
+                'captcha' => 'Captcha tidak sesuai, silahkan ulang kembali.',
+            ]
+        );
 
         $credentials = $request->only('email', 'password');
         $remember = $request->filled('remember'); // Mendapatkan nilai remember dari input form
@@ -155,5 +162,9 @@ class AuthController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    public function getCaptcha()
+    {
+        return Captcha::create();
     }
 }
