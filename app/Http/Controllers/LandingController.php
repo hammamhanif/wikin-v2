@@ -11,7 +11,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $lot_news = News::with('user')->where('status', 'Diterima')->orderByDesc('updated_at')->get()->take(3)->map(function ($news) {
+        $lot_news = News::with('user')->where('status', 'Active')->orderByDesc('updated_at')->get()->take(3)->map(function ($news) {
             $news->created = $news->created_at->format('M jS Y');
             $news->content = substr($news->content, 0, 200);
             $news->author = $news->user->username;
@@ -91,6 +91,7 @@ class LandingController extends Controller
 
         $pengmases->getCollection()->transform(function ($pemas) {
             $pemas->created = $pemas->created_at->format('M jS Y');
+            $pemas->total_comments = $pemas->comments->count();
             $pemas->content = substr($pemas->content, 0, 200);
             return $pemas;
         });
@@ -106,6 +107,7 @@ class LandingController extends Controller
 
         if ($pemas && $pemas->status === 'Diterima') {
             $pemas->created = $pemas->created_at->format('M jS Y');
+            $pemas->total_comments = $pemas->comments->count();
             return view('pemas.pemas_detail', compact('pemas'));
         } else {
             abort(404);

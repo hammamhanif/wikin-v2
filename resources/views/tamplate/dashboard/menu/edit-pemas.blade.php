@@ -77,7 +77,7 @@
 
                                     <!-- TinyMCE Editor -->
                                     <form role="form text-left" id="updateNewsForm"
-                                        action="{{ route('pemas.updateAdmin', ['slug' => $pemas->slug]) }}" method="post"
+                                        action="{{ route('pemas.update', ['slug' => $pemas->slug]) }}" method="post"
                                         enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
@@ -100,7 +100,13 @@
                                                     pemas readonly>
                                             </div>
                                         </div>
-
+                                        <div class="row mb-2">
+                                            <div class="col-sm-12">
+                                                <label for="image" class="col-sm-5 col-form-label">Gambar</label>
+                                                <input class="form-control" type="file" name="image" id="image"
+                                                    accept="image/*">
+                                            </div>
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="category" class="form-label">Kategori</label>
@@ -123,26 +129,37 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="status" class="form-label">Status</label>
-                                                <select class="form-select" name="status" id="status">
-                                                    <option value="Proses verifikasi"
-                                                        @if ($pemas->status === 'Proses verifikasi') selected @endif>
-                                                        Proses Verifikasi</option>
-                                                    <option value="Diterima"
-                                                        @if ($pemas->status === 'Diterima') selected @endif>
-                                                        Diterima</option>
-                                                    <option value="Ditolak"
-                                                        @if ($pemas->status === 'Ditolak') selected @endif>
-                                                        Ditolak</option>
+                                                <label for="status" class="form-label">Status Kegiatan</label>
+                                                <select class="form-select" name="status_pemas" id="status">
+                                                    <option value="pengajuan"
+                                                        @if ($pemas->status_pemas === 'Proses verifikasi') selected @endif>
+                                                        Pengajuan</option>
+                                                    <option value="pencarian volunteer"
+                                                        @if ($pemas->status_pemas === 'pencarian volunteer') selected @endif>
+                                                        Pencarian Volunteer</option>
+                                                    <option value="sedang berjalan"
+                                                        @if ($pemas->status_pemas === 'sedang berjalan') selected @endif>
+                                                        Sedang berjalan</option>
+                                                    <option value="selesai"
+                                                        @if ($pemas->status_pemas === 'selesai') selected @endif>
+                                                        Selesai</option>
                                                 </select>
                                             </div>
 
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="judul" class="form-label">Status Kegiatan</label>
-                                            <input type="text" class="form-control" name="status_pemas" id="judul"
-                                                placeholder="Status Kegiatan"
-                                                value="{{ htmlentities($pemas->status_pemas) }}" readonly>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="judul" class="form-label">Lokasi</label>
+                                                <input type="text" class="form-control" name="location" id="judul"
+                                                    placeholder="Status Kegiatan"
+                                                    value="{{ htmlentities($pemas->location) }}" readonly>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="judul" class="form-label">Status </label>
+                                                <input type="text" class="form-control" name="status" id="judul"
+                                                    placeholder="Status Kegiatan"
+                                                    value="{{ htmlentities($pemas->status) }}" readonly>
+                                            </div>
                                         </div>
                                         <div class="mb-3">
                                             <label for="news" class="col-form-label">Konten</label>

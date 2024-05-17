@@ -18,4 +18,9 @@ class FormPemas extends Model
         'category',
         'content',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

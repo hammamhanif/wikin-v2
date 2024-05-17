@@ -28,10 +28,10 @@ return new class extends Migration
         });
 
 
-        Schema::create('comments_pemas', function (Blueprint $table) {
+        Schema::create('comment_pemas', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->text('comment-pemas_id')->nullable();
+            $table->text('comment_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pemas_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
@@ -41,9 +41,9 @@ return new class extends Migration
         Schema::create('likes_pemas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('pemas_id');
+            $table->unsignedBigInteger('comment_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('pemas_id')->references('id')->on('pemas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('comment_id')->references('id')->on('comment_pemas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -55,8 +55,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes-pemas');
-        Schema::dropIfExists('comments-pemas');
+        Schema::dropIfExists('likes_pemas');
+        Schema::dropIfExists('comment_pemas');
         Schema::dropIfExists('pemas');
     }
 };

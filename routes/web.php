@@ -67,6 +67,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
+    Route::get('pemasSetting', [PemasController::class, 'create'])->name('pemasSetting');
+    Route::get('/pemasSetting/{slug}', [PemasController::class, 'edit'])->name('pemas.edit');
+    Route::put('/pemasSetting/{slug}/update', [PemasController::class, 'update'])->name('pemas.update');
+    Route::get('/formPemas/{slug}', [PemasController::class, 'editForm'])->name('pemas.editform');
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
     Route::post('requestpemas/store', [PemasController::class, 'storeForm'])->name('requestpemas.store');

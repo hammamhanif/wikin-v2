@@ -2,7 +2,7 @@
 @section('dashboard')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Menu Komunitas</h1>
+            <h1>Menu Komunitas Admin</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

@@ -101,7 +101,7 @@
                             <a href="{{ route('home') }}">Kembali</a>
                         </div>
                     </div>
-                </form>type
+                </form>
 
             </div>
 

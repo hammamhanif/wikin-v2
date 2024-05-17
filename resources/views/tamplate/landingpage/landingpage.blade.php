@@ -397,7 +397,7 @@
                                 <div class="meta">
                                     <span class="post-date">{{ $pemas->created }}</span>
                                     <span class="post-author"> / {{ $pemas->author }}</span>
-                                    <span class="post-author"> / Status: ({{ $pemas->status }})</span>
+                                    <span class="post-author"> / Status: ({{ $pemas->status_pemas }})</span>
                                 </div>
                                 <h3 class="post-title">{{ $pemas->name }} ({{ $pemas->location }})
                                 </h3>

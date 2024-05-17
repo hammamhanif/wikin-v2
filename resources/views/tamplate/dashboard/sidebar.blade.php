@@ -34,7 +34,8 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-faq.html">
+              <a class="nav-link {{ Request::is('pemasSetting') || Request::is('pemasSetting/*') ? '' : 'collapsed' }}"
+                  href="{{ route('pemasSetting') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Pengabdian</span>
               </a>

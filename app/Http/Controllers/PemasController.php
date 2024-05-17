@@ -7,6 +7,9 @@ use App\Models\FormPemas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PemasController extends Controller
@@ -20,15 +23,68 @@ class PemasController extends Controller
         return view('pemas.pengajuanPemas');
     }
 
+    public function create()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+        $pengmases = pemas::where('user_id', $user->id)->get();
+        $formPengmases = FormPemas::where('user_id', $user->id)->get();
+        return view('tamplate.dashboard.menu.menuPemas', compact('pengmases', 'formPengmases'));
+    }
     public function indexAdmin()
     {
         $pengmases = pemas::all();
         return view('tamplate.dashboard.menuadmin.menuPemas', compact('pengmases'));
     }
+    public function edit($slug)
+    {
+        $pemas = pemas::where('slug', $slug)->first();
+        return view('tamplate.dashboard.menu.edit-pemas', compact('pemas'));
+    }
     public function editAdmin($slug)
     {
         $pemas = pemas::where('slug', $slug)->first();
         return view('tamplate.dashboard.menuadmin.edit-pemas', compact('pemas'));
+    }
+    public function update(Request $request, $slug)
+    {
+        // Mengambil berita berdasarkan slug
+        $pemas = Pemas::where('slug', $slug)->first();
+
+        // Validasi request
+        $request->validate([
+            'location' => 'required|string|max:255', // Validasi location
+            'category' => 'required|string|max:255', // Validasi category
+            'content' => 'required|string', // Validasi content
+            'status_pemas' => 'required|in:pengajuan,sedang berjalan,selesai,pencarian volunteer', // Validasi status_pemas
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi image
+        ]);
+
+        // Perbarui field dengan nilai baru
+        $pemas->location = $request->location;
+        $pemas->category = $request->category;
+        $pemas->content = $request->content;
+        $pemas->status_pemas = $request->status_pemas;
+
+        // Periksa apakah ada file gambar yang diunggah
+        if ($request->hasFile('image')) {
+            // Simpan file gambar dan dapatkan path
+            $imagePath = $request->file('image')->store('images', 'public');
+
+            // Hapus gambar lama jika ada
+            if ($pemas->image) {
+                Storage::disk('public')->delete($pemas->image);
+            }
+
+            // Perbarui field image dengan path baru
+            $pemas->image = $imagePath;
+        }
+
+        // Simpan perubahan ke database
+        $pemas->save();
+
+        // Mengembalikan ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Data pemas berhasil diperbarui.');
     }
     public function updateAdmin(Request $request, $slug)
     {
@@ -42,7 +98,7 @@ class PemasController extends Controller
         $pemas->save();
 
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Status berita berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Data Pengabdian berhasil diperbarui.');
     }
     public function store(Request $request)
     { // Validasi form
@@ -68,8 +124,9 @@ class PemasController extends Controller
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
+            $hashName = Hash::make(time() . $image->getClientOriginalName());
+            $imageName = md5($hashName) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('images', $imageName, 'public');
             $pemas->image = $imageName;
         }
 
@@ -103,6 +160,7 @@ class PemasController extends Controller
 
         // Mengisi properti dari instansi dengan data dari request
         $formPemas->name = auth()->user()->name;
+        $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
         $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
         $formPemas->location = $request->input('location');

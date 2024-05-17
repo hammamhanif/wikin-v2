@@ -1,10 +1,12 @@
 <div>
+    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <h4 class="comments-count">Diskusi Komentar ({{ $total_comments }})</h4>
     @guest
         <div class="alert alert-success" role="alert">
             Login / masuk terlebih dahulu untuk berdiskusi <a href="{{ route('login') }}" class="alert-link">Klik di sini</a>.
         </div>
     @endguest
+
     @foreach ($comments as $comment)
         <div id="comment-{{ $comment->id }}" class="comment">
             <div class="d-flex">
@@ -22,12 +24,13 @@
                             @if ($comment->user_id == Auth::user()->id)
                                 <button class="btn btn-outline-warning"
                                     wire:click="selectEdit({{ $comment->id }})">Edit</button>
+                            @endif
+                            @if ($comment->user_id == Auth::user()->id || Auth::user()->type == 'admin')
                                 <button class="btn btn-outline-danger"
                                     wire:click="delete({{ $comment->id }})">Hapus</button>
                             @endif
                             <button class="btn btn-outline-primary" wire:click="selectReply({{ $comment->id }})"
                                 type="submit">Balas</button>
-
                             @if (isset($comment->hasLike))
                                 <button class="btn btn-danger" wire:click="like({{ $comment->id }})"><i
                                         class="bi bi-heart-fill"></i>
@@ -39,8 +42,9 @@
                                     ({{ $comment->totalLikes() }})
                                 </button>
                             @endif
-                        @endauth
-                    </div>
+
+                        </div>
+                    @endauth
                     @if (isset($comment_id) && $comment_id == $comment->id)
                         <form wire:submit.prevent="reply" class="mt-3">
                             <div class="row">
@@ -163,15 +167,13 @@
                             @endif
                         </div>
                     </div>
-
+                    <!-- End balasant #1 -->
                 </div>
-                <!-- End balasant #1 -->
             @endforeach
             <hr>
         @endif
     @endforeach
 
-    <!-- End comment #1 -->
     @auth
         <div class="reply-form">
 
@@ -181,7 +183,7 @@
                 <div class="row">
                     <div class="col form-group">
                         <textarea wire:model.defer="body" class="form-control @error('body') is-invalid
-                    @enderror"
+                @enderror"
                             placeholder="Tulis Komentar.." minlength="3"></textarea>
                         @error('body')
                             <div class="invalid-feedback">
@@ -195,7 +197,7 @@
 
 
         </div>
-
     @endauth
+
 
 </div>

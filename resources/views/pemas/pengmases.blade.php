@@ -32,7 +32,7 @@
                                     <article class="d-flex flex-column">
 
                                         <div class="post-img">
-                                            <img src="{{ asset('images/' . $pemas->image) }}" alt=""
+                                            <img src="{{ asset('storage/images/' . $pemas->image) }}" alt=""
                                                 class="img-fluid">
                                         </div>
 
@@ -51,7 +51,7 @@
                                             </ul>
                                             <ul>
                                                 <li class="d-flex align-items-center mt-2"><i class="bi bi-chat-dots"></i>
-                                                    <a href="blog-details.html">12 Comments</a>
+                                                    <a href="blog-details.html">{{ $pemas->total_comments }} Komentar</a>
                                                 </li>
                                                 <li class="d-flex align-items-center mt-2"><i class="bi bi-alarm"></i>
                                                     <a href="blog-details.html">Status:

@@ -1,10 +1,42 @@
 @extends('tamplate.landingpage.main')
 
+
+@push('css')
+    @livewireStyles
+@endpush
+@push('js')
+    @livewireScripts
+
+    <script>
+        Livewire.on('comment_store', commentId => {
+            var helloScroll = document.getElementById('comment-' + commentId);
+            helloScroll.scrollIntoView({
+                behavior: 'smooth'
+            }, true);
+        })
+    </script>
+@endpush
+
 @section('main')
     <main id="main">
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
+            @if (Session::has('success'))
+                <div class="alert alert-primary" role="alert">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ htmlentities($error) }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -31,7 +63,7 @@
                         <article class="blog-details">
 
                             <div class="post-img">
-                                <img src="{{ asset('images/' . $pemas->image) }}" alt="" class="img-fluid">
+                                <img src="{{ asset('storage/images/' . $pemas->image) }}" alt="" class="img-fluid">
                             </div>
 
                             <h2 class="title">{{ htmlentities($pemas->title) }}
@@ -40,12 +72,12 @@
                             <div class="meta-top">
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i>
-                                        {{ htmlentities($pemas->user->username) }}<a href=""></a></li>
+                                        {{ htmlentities($pemas->user->name) }}<a href=""></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
                                             href=""><time
                                                 datetime="2020-01-01">{{ htmlentities($pemas->created) }}</time></a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                            href="">12 Comments</a></li>
+                                            href="">{{ $pemas->total_comments }} Komentar</a></li>
                                 </ul>
                             </div><!-- End meta top -->
 
@@ -99,83 +131,7 @@
                         </article><!-- End blog post -->
 
                         <div class="comments">
-
-                            <h4 class="comments-count">Diskusi Komentar</h4>
-
-                            <div id="comment-1" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="{{ asset('img/blog/comments-1.jpg') }}"
-                                            alt=""></div>
-                                    <div>
-                                        <h5><a href="">Georgia Reader</a></a>
-                                        </h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut
-                                            sapiente quis molestiae est qui cum soluta.
-                                            Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div><!-- End comment #1 -->
-
-
-                            <div id="comment-3" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="{{ asset('img/blog/comments-5.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <h5><a href="">Nolan Davidson</a> <a href="#">
-                                            </a>
-                                        </h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia
-                                            nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem
-                                            aspernatur aut quam ut. Voluptatem est accusamus iste at.
-                                            Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est
-                                            consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et
-                                            optio veniam. Quam officia sit nostrum dolorem.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div><!-- End comment #3 -->
-
-                            <div id="comment-4" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="{{ asset('img/blog/blog-author.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <h5><a href="">Kay Duggan</a> <a href="#" class="reply"></a></h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit
-                                            tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in
-                                            fugiat.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div><!-- End comment #4 -->
-
-                            <div class="reply-form">
-
-                                <h4>Tambahkan Komentar</h4>
-
-                                <form action="">
-                                    <div class="row">
-                                        <div class="col form-group">
-                                            <textarea name="comment" class="form-control" placeholder="Komentar"></textarea>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-
-                                </form>
-
-                            </div>
+                            @livewire('pemas.comment', ['id' => $pemas->id])
 
                         </div><!-- End blog comments -->
 
