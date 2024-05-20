@@ -21,6 +21,11 @@
             display: block;
             /* Agar gambar berada di tengah */
         }
+
+        #pemas {
+            height: 200px;
+            /* Atur tinggi sesuai kebutuhan */
+        }
     </style>
 @endpush
 
@@ -32,8 +37,8 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item ">Menu Admin</li>
-                    <li class="breadcrumb-item ">Pengabdian Masyarakat</li>
+                    <li class="breadcrumb-item ">Menu Pemas</li>
+                    <li class="breadcrumb-item ">Pengajuan Pengabdian Masyarakat</li>
                     <li class="breadcrumb-item active">Edit Pengabdian Masyarakat</li>
                 </ol>
             </nav>
@@ -52,7 +57,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title ">Edit Pengabdian Masyarakat</h5>
+                                    <h5 class="card-title ">Edit Pengajuan Pengabdian Masyarakat (Admin)</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -77,76 +82,73 @@
 
                                     <!-- TinyMCE Editor -->
                                     <form role="form text-left" id="updateNewsForm"
-                                        action="{{ route('pemas.updateAdmin', ['slug' => $pemas->slug]) }}" method="post"
-                                        enctype="multipart/form-data">
+                                        action="{{ route('formPemas.updateAdmin', ['slug' => $pemas->slug]) }}"
+                                        method="post" enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
-                                        <div class="image-container">
-                                            @if ($pemas->image)
-                                                <img src="{{ asset('storage/images/' . $pemas->image) }}" class="img-fluid"
-                                                    alt="Gambar Berita">
-                                            @endif
-                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
-                                                <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul" value="{{ htmlentities($pemas->name) }}" readonly>
+                                                <input type="text" class="form-control" name="nama_kegiatan"
+                                                    id="judul" placeholder="Nama Pengabdian Masyarakat.."
+                                                    value="{{ htmlentities($pemas->nama_kegiatan) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Nama Pembuat</label>
+                                                <label for="deskripsi" class="form-label">Nama Pengguna yang
+                                                    mengajukan</label>
                                                 <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->user->name) }}"
-                                                    pemas readonly>
+                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->name) }}" pemas
+                                                    readonly>
                                             </div>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select class="form-select" name="status" id="status">
+                                                <option value="Proses verifikasi"
+                                                    @if ($pemas->status === 'Proses verifikasi') selected @endif>
+                                                    Proses Verifikasi</option>
+                                                <option value="Diterima" @if ($pemas->status === 'Diterima') selected @endif>
+                                                    Diterima</option>
+                                                <option value="Ditolak" @if ($pemas->status === 'Ditolak') selected @endif>
+                                                    Ditolak</option>
+                                            </select>
 
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" name="category" id="category">
-                                                    <option value="Umum"
-                                                        @if ($pemas->category === 'Umum') selected @endif>
-                                                        Umum</option>
-                                                    <option value="Kesehatan"
-                                                        @if ($pemas->category === 'Kesehatan') selected @endif>
-                                                        Kesehatan</option>
-                                                    <option value="Energi"
-                                                        @if ($pemas->category === 'Energi') selected @endif>
-                                                        Energi</option>
-                                                    <option value="Industri"
-                                                        @if ($pemas->category === 'Industri') selected @endif>
-                                                        Industri</option>
-                                                    <option value="Pangan"
-                                                        @if ($pemas->category === 'Pangan') selected @endif>
-                                                        Pangan</option>
-                                                </select>
+                                                <label for="judul" class="form-label">Lokasi</label>
+                                                <input type="text" class="form-control" name="location" id="judul"
+                                                    placeholder="Status Kegiatan"
+                                                    value="{{ htmlentities($pemas->location) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="status" class="form-label">Status</label>
-                                                <select class="form-select" name="status" id="status">
-                                                    <option value="Proses verifikasi"
-                                                        @if ($pemas->status === 'Proses verifikasi') selected @endif>
-                                                        Proses Verifikasi</option>
-                                                    <option value="Diterima"
-                                                        @if ($pemas->status === 'Diterima') selected @endif>
-                                                        Diterima</option>
-                                                    <option value="Ditolak"
-                                                        @if ($pemas->status === 'Ditolak') selected @endif>
-                                                        Ditolak</option>
-                                                </select>
+                                                <label for="judul" class="form-label">Kategori</label>
+                                                <input type="text" class="form-control" name="category" id="judul"
+                                                    placeholder="Status Kegiatan"
+                                                    value="{{ htmlentities($pemas->category) }}" readonly>
                                             </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="waktuMulai" class="form-label">Waktu Mulai</label>
+                                                <input type="datetime-local" class="form-control" name="start_time"
+                                                    id="waktuMulai" value="{{ htmlentities($pemas->start_time) }}">
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="waktuSelesai" class="form-label">Waktu Selesai</label>
+                                                <input type="datetime-local" class="form-control" name="end_time"
+                                                    id="waktuSelesai" value="{{ htmlentities($pemas->end_time) }}">
+                                            </div>
+                                        </div>
 
+                                        <div class="mb-3">
+                                            <label for="judul" class="form-label">Nomor NIK/NIM/NIP </label>
+                                            <input type="text" class="form-control" name="noID" id="judul"
+                                                placeholder="Nomor ID " value="{{ htmlentities($pemas->noID) }}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="judul" class="form-label">Status Kegiatan</label>
-                                            <input type="text" class="form-control" name="status_pemas" id="judul"
-                                                placeholder="Status Kegiatan"
-                                                value="{{ htmlentities($pemas->status_pemas) }}" readonly>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="news" class="col-form-label">Konten</label>
-                                            <textarea class="form-control" id="news" name="content">{!! htmlentities($pemas->content) !!}</textarea>
+                                            <label for="pemas" class="col-form-label">Konten</label>
+                                            <textarea class="form-control" id="pemas" name="content">{!! htmlentities($pemas->content) !!}</textarea>
                                         </div>
                                         <div class="modal-footer justify-content-center">
                                             <button type="button" class="btn btn-outline-primary"

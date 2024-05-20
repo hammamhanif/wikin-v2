@@ -25,6 +25,7 @@ class PemasController extends Controller
 
     public function create()
     {
+        setlocale(LC_TIME, 'id_ID.utf8');
         // Get the currently authenticated user
         $user = Auth::user();
         $pengmases = pemas::where('user_id', $user->id)->get();
@@ -34,7 +35,8 @@ class PemasController extends Controller
     public function indexAdmin()
     {
         $pengmases = pemas::all();
-        return view('tamplate.dashboard.menuadmin.menuPemas', compact('pengmases'));
+        $formPengmases = FormPemas::all();
+        return view('tamplate.dashboard.menuadmin.menuPemas', compact('pengmases', 'formPengmases'));
     }
     public function edit($slug)
     {
@@ -46,6 +48,16 @@ class PemasController extends Controller
         $pemas = pemas::where('slug', $slug)->first();
         return view('tamplate.dashboard.menuadmin.edit-pemas', compact('pemas'));
     }
+    public function editForm($slug)
+    {
+        $pemas = formPemas::where('slug', $slug)->first();
+        return view('tamplate.dashboard.menu.edit-formPemas', compact('pemas'));
+    }
+    public function editFormAdmin($slug)
+    {
+        $pemas = formPemas::where('slug', $slug)->first();
+        return view('tamplate.dashboard.menuadmin.edit-formPemas', compact('pemas'));
+    }
     public function update(Request $request, $slug)
     {
         // Mengambil berita berdasarkan slug
@@ -55,6 +67,7 @@ class PemasController extends Controller
         $request->validate([
             'location' => 'required|string|max:255', // Validasi location
             'category' => 'required|string|max:255', // Validasi category
+            'name' => 'required|string|max:255', // Validasi category
             'content' => 'required|string', // Validasi content
             'status_pemas' => 'required|in:pengajuan,sedang berjalan,selesai,pencarian volunteer', // Validasi status_pemas
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi image
@@ -63,6 +76,7 @@ class PemasController extends Controller
         // Perbarui field dengan nilai baru
         $pemas->location = $request->location;
         $pemas->category = $request->category;
+        $pemas->name = $request->name;
         $pemas->content = $request->content;
         $pemas->status_pemas = $request->status_pemas;
 
@@ -100,6 +114,75 @@ class PemasController extends Controller
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
         return redirect()->back()->with('success', 'Data Pengabdian berhasil diperbarui.');
     }
+
+    public function updateFormAdmin(Request $request, $slug)
+    {
+        $formPemas =  formPemas::where('slug', $slug)->first();
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:Proses verifikasi,Diterima,Ditolak',
+        ]);
+
+        // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Periksa apakah record ada
+        if (!$formPemas) {
+            return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
+        }
+        $formPemas->status = $request->status;
+
+        // Menyimpan perubahan ke basis data
+        $formPemas->save();
+
+        // Redirect ke halaman atau rute yang diinginkan dengan pesan sukses
+        return redirect()->back()->with('success', 'Data kegiatan berhasil diperbarui.');
+    }
+    public function updateForm(Request $request, $slug)
+    {
+        $formPemas =  formPemas::where('slug', $slug)->first();
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'noID' => 'nullable|string',
+            'nama_kegiatan' => 'required|string',
+            'location' => 'required|string',
+            'start_time' => 'required|date',
+            'end_time' => ['required', 'date', 'after_or_equal:start_time'],
+            'category' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Periksa apakah record ada
+        if (!$formPemas) {
+            return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
+        }
+
+        // Mengisi properti dari instansi dengan data dari request
+        $formPemas->name = auth()->user()->name;
+        $formPemas->user_id = auth()->user()->id;
+        $formPemas->noID = $request->input('noID');
+        $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
+        $formPemas->location = $request->input('location');
+        $formPemas->start_time = $request->input('start_time');
+        $formPemas->end_time = $request->input('end_time');
+        $formPemas->category = $request->input('category');
+        $formPemas->content = $request->input('content');
+
+        // Menyimpan perubahan ke basis data
+        $formPemas->save();
+
+        // Redirect ke halaman atau rute yang diinginkan dengan pesan sukses
+        return redirect()->back()->with('success', 'Data kegiatan berhasil diperbarui.');
+    }
+
+
     public function store(Request $request)
     { // Validasi form
         $request->validate([
@@ -110,7 +193,7 @@ class PemasController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
         ]);
 
-        // Proses penyimpanan berita
+        // Proses penyimpanan pemas
         $pemas = new pemas();
         $pemas->name = $request->input('name');
         $pemas->category = $request->input('category');
@@ -162,12 +245,14 @@ class PemasController extends Controller
         $formPemas->name = auth()->user()->name;
         $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
+        $formPemas->slug = hash('sha256', $request->input('nama_kegiatan'));
         $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
         $formPemas->location = $request->input('location');
         $formPemas->start_time = $request->input('start_time');
         $formPemas->end_time = $request->input('end_time');
         $formPemas->category = $request->input('category');
         $formPemas->content = $request->input('content');
+        $formPemas->status = 'Proses verifikasi'; // Menambahkan status default
 
         // Menyimpan data ke basis data
         $formPemas->save();
@@ -181,5 +266,43 @@ class PemasController extends Controller
         $pemas = pemas::whereSlug($slug)->first();
         $pemas->created = $pemas->created_at->format('M jS Y');
         return view('pemas.pemas_detail', compact('pemas'));
+    }
+
+    public function destroy($id)
+    {
+        // Cari pemas berdasarkan ID
+        $pemas = pemas::findOrFail($id);
+
+        // Otorisasi: Pastikan hanya pemilik yang bisa menghapus data ini
+        if (auth()->user()->id !== $pemas->user_id) {
+            return redirect()->route('pemas')->with('error', 'Anda tidak memiliki izin untuk menghapus data ini');
+        }
+
+        // Hapus gambar jika ada
+        if ($pemas->image) {
+            Storage::disk('public')->delete('images/' . $pemas->image);
+        }
+
+        // Hapus data pemas
+        $pemas->delete();
+
+        return redirect()->route('pemasSetting')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function destroyForm($id)
+    {
+        // Find the record by ID
+        $formPemas = FormPemas::find($id);
+
+        // Check if the record exists
+        if (!$formPemas) {
+            return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
+        }
+
+        // Delete the record
+        $formPemas->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Data kegiatan berhasil dihapus.');
     }
 }

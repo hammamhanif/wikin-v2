@@ -90,8 +90,9 @@
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
-                                                <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul" value="{{ htmlentities($pemas->name) }}" readonly>
+                                                <input type="text" class="form-control" name="name" id="judul"
+                                                    placeholder="Nama Pengabdian Masyarakat.."
+                                                    value="{{ htmlentities($pemas->name) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pembuat</label>
@@ -152,7 +153,7 @@
                                                 <label for="judul" class="form-label">Lokasi</label>
                                                 <input type="text" class="form-control" name="location" id="judul"
                                                     placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->location) }}" readonly>
+                                                    value="{{ htmlentities($pemas->location) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Status </label>
@@ -165,8 +166,9 @@
                                             <label for="news" class="col-form-label">Konten</label>
                                             <textarea class="form-control" id="news" name="content">{!! htmlentities($pemas->content) !!}</textarea>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="submitBtn">Ubah</button>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-primary"
+                                                id="submitBtn">Ubah</button>
                                         </div>
                                     </form>
                                 </div>

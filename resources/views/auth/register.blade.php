@@ -75,15 +75,11 @@
                         <label for="type">Pilih Peran:</label>
                         <div class="input-group mb-1 mt-3">
                             <select class="form-select" name="type" id="type">
+                                <option value="" selected disabled>Pilih salah satu</option>
                                 <option value="dosen">Dosen</option>
                                 <option value="mahasiswa">Mahasiswa</option>
                                 <option value="masyarakat">Masyarakat</option>
                             </select>
-                        </div>
-                        <div class="input-group mb-5 d-flex justify-content-between">
-                            <div class="forgot">
-                                <small><a href="{{ route('forgot') }}">Lupa akun?</a></small>
-                            </div>
                         </div>
                         <div class="input-group mb-3">
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 custom-btn">Daftar</button>

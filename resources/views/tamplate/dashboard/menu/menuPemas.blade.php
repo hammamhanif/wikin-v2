@@ -11,8 +11,27 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @elseif(session('unsuccess'))
+            <div class="alert alert-danger" role="alert">
+                <strong class="font-bold">Unsuccess!</strong>
+                <span class="block sm:inline">{{ session('unsuccess') }}</span>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul class="list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ htmlentities($error) }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @if (Auth::check() && in_array(Auth::user()->type, ['admin', 'dosen', 'mahasiswa']))
-
             <section class="section">
                 <div class="row">
                     <!-- List Data User -->
@@ -20,26 +39,7 @@
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
                                 <h5 class="card-title">Daftar Postingan Pengabdian Masyarakat</span></h5>
-                                @if (session('success'))
-                                    <div class="alert alert-success" role="alert">
-                                        <strong class="font-bold">Success!</strong>
-                                        <span class="block sm:inline">{{ session('success') }}</span>
-                                    </div>
-                                @elseif(session('unsuccess'))
-                                    <div class="alert alert-danger" role="alert">
-                                        <strong class="font-bold">Unsuccess!</strong>
-                                        <span class="block sm:inline">{{ session('unsuccess') }}</span>
-                                    </div>
-                                @endif
-                                @if ($errors->any())
-                                    <div class="alert alert-danger" role="alert">
-                                        <ul class="list-disc pl-5">
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ htmlentities($error) }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+
                                 <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                                 </div>
                                 <table class="table table-borderless datatable">
@@ -105,8 +105,7 @@
                                                             <i class="bi bi-images"></i>
                                                         </a>
 
-                                                        <form
-                                                            action="{{ route('communities.delete', ['id' => $pemas->id]) }}"
+                                                        <form action="{{ route('pemas.destroy', ['id' => $pemas->id]) }}"
                                                             method="POST" class="delete-form" style="margin-right: 5px;">
                                                             @csrf
                                                             @method('DELETE')
@@ -135,26 +134,6 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <h5 class="card-title">Daftar Pengajuan Pengabdian Masyarakat</span></h5>
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    <strong class="font-bold">Success!</strong>
-                                    <span class="block sm:inline">{{ session('success') }}</span>
-                                </div>
-                            @elseif(session('unsuccess'))
-                                <div class="alert alert-danger" role="alert">
-                                    <strong class="font-bold">Unsuccess!</strong>
-                                    <span class="block sm:inline">{{ session('unsuccess') }}</span>
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger" role="alert">
-                                    <ul class="list-disc pl-5">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ htmlentities($error) }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                             </div>
                             <table class="table table-borderless datatable">
@@ -163,20 +142,22 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Pemas</th>
                                         <th scope="col">Lokasi</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Status Kegiatan</th>
+                                        <th scope="col">Nama Pengguna</th>
+                                        <th scope="col">Waktu</th>
+                                        <th scope="col">Status </th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($formPengmases as $pemas)
                                         <tr>
-                                            <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->name) }}</td>
+                                            <th scope="row"><a href="">{{ $loop->iteration }}</a></th>
+                                            <td>{{ htmlentities($pemas->nama_kegiatan) }}</td>
                                             <td>{{ htmlentities($pemas->location) }}</td>
-                                            <td><a href="#"
-                                                    class="text-primary">{{ htmlentities($pemas->category) }}</a>
+                                            <td><a href="" class="text-primary">{{ htmlentities($pemas->name) }}</a>
+                                            </td>
+                                            <td>{{ htmlentities(strftime('%d %B %Y', strtotime($pemas->start_time))) }} S.d
+                                                {{ htmlentities(strftime('%d %B %Y', strtotime($pemas->end_time))) }}
                                             </td>
                                             @if ($pemas->status == 'Diterima')
                                                 <td><span
@@ -190,35 +171,15 @@
                                                 <td><span class="badge bg-danger">{{ htmlentities($pemas->status) }}</span>
                                                 </td>
                                             @endif
-                                            @if ($pemas->status_pemas == 'pengajuan')
-                                                <td><span
-                                                        class="badge bg-warning">{{ htmlentities($pemas->status_pemas) }}</span>
-                                                </td>
-                                            @elseif ($pemas->status_pemas == 'sedang berjalan')
-                                                <td><span
-                                                        class="badge bg-primary">{{ htmlentities($pemas->status_pemas) }}</span>
-                                                </td>
-                                            @elseif ($pemas->status_pemas == 'selesai')
-                                                <td><span
-                                                        class="badge bg-success">{{ htmlentities($pemas->status_pemas) }}</span>
-                                                </td>
-                                            @elseif ($pemas->status_pemas == 'pencarian volunteer')
-                                                <td><span
-                                                        class="badge bg-warning">{{ htmlentities($pemas->status_pemas) }}</span>
-                                                </td>
-                                            @endif
 
                                             <td>
                                                 <div style="display: flex; align-items: center;">
-                                                    <a href="" class="btn btn-info" style="margin-right: 5px;">
-
+                                                    <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
+                                                        class="btn btn-info" style="margin-right: 5px;">
+                                                        Detail
                                                     </a>
-                                                    <a href="" class="btn btn-warning" style="margin-right: 5px;">
-                                                        <i class="bi bi-images"></i>
-                                                    </a>
-
-                                                    <form action="" method="POST" class="delete-form"
-                                                        style="margin-right: 5px;">
+                                                    <form action="{{ route('formPemas.destroy', ['id' => $pemas->id]) }}"
+                                                        method="POST" class="delete-form" style="margin-right: 5px;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" onclick="confirmDelete(this.form)"

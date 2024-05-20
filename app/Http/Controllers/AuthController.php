@@ -81,7 +81,7 @@ class AuthController extends Controller
             'name' => 'required|min:5|max:50|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|email|unique:users|max:50',
             'password' => 'required|min:8|max:20',
-            'type' => 'required|in:dosen,mahasiswa,admin,masyarakat'
+            'type' => 'required|in:dosen,mahasiswa,masyarakat'
         ], [
             'username.required' => 'Nama pengguna wajib diisi.',
             'username.unique' => 'Nama pengguna sudah digunakan.',
@@ -99,16 +99,18 @@ class AuthController extends Controller
             'password.min' => 'Kata sandi harus minimal 8 karakter.',
             'password.max' => 'Kata sandi tidak boleh melebihi 20 karakter.',
             'type.required' => 'Peran wajib dipilih.',
-            'type.in' => 'Pilih salah satu peran yang tersedia (dosen, mahasiswa, admin, masyarakat).'
+            'type.in' => 'Pilih salah satu peran yang tersedia (dosen, mahasiswa, masyarakat).'
         ]);
 
         $user = User::create([
             'name' => $request->input('name'),
             'username' => $request->input('username'),
             'email' => $request->input('email'),
+            'type' => $request->input('type'),
             'password' => Hash::make($request->input('password')),
-            'type' => $request->input('type'), // Menambahkan bidang 'type'
+
         ]);
+        // dd($request->all());
 
         event(new Registered($user));
         Auth::login($user, $request->get('remember'));

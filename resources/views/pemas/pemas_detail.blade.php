@@ -55,13 +55,9 @@
         <!-- ======= Blog Details Section ======= -->
         <section id="blog" class="blog">
             <div class="container" data-aos="fade-up">
-
                 <div class="row g-5">
-
                     <div class="col-lg-12">
-
                         <article class="blog-details">
-
                             <div class="post-img">
                                 <img src="{{ asset('storage/images/' . $pemas->image) }}" alt="" class="img-fluid">
                             </div>
