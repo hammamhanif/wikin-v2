@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\CommunitiesController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\RegistrasiPemasController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -37,6 +38,7 @@ Route::get('/communities/{slug}', [LandingController::class, 'detailcommunity'])
 Route::get('/captcha', [AuthController::class], 'getCaptcha')->name('captcha');
 
 Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name('galeri');
+
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -78,6 +80,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/formPemas/admin/{slug}/update', [PemasController::class, 'updateFormAdmin'])->name('formPemas.updateAdmin');
     Route::get('/formPemas/{slug}', [PemasController::class, 'editForm'])->name('formPemas.edit');
     Route::put('/formPemas/{slug}/update', [PemasController::class, 'updateForm'])->name('formPemas.update');
+
+    Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
+    Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');
+
 
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');

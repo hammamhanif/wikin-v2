@@ -23,4 +23,8 @@ class pemas extends Model
     {
         return $this->hasMany(CommentPemas::class);
     }
+    public function registrasiPemas()
+    {
+        return $this->hasMany(RegistrasiPemas::class);
+    }
 }

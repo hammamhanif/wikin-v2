@@ -391,7 +391,7 @@
                     @foreach ($pemases as $pemas)
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="post-box">
-                                <div class="post-img"><img src="{{ asset('images/' . $pemas->image) }}"
+                                <div class="post-img"><img src="{{ asset('storage/images/' . $pemas->image) }}"
                                         class="img-fluid" alt="">
                                 </div>
                                 <div class="meta">

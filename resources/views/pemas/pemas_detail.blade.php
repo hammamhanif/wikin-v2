@@ -62,7 +62,7 @@
                                 <img src="{{ asset('storage/images/' . $pemas->image) }}" alt="" class="img-fluid">
                             </div>
 
-                            <h2 class="title">{{ htmlentities($pemas->title) }}
+                            <h2 class="title ">{{ htmlentities($pemas->name) }}
                             </h2>
 
                             <div class="meta-top">
@@ -80,7 +80,9 @@
                             <div class="content">
                                 {!! html_entity_decode($pemas->content) !!}
                             </div><!-- End post content -->
-
+                            <a class="btn btn-outline-warning"
+                                href="{{ route('registrasiPemas', ['slug' => $pemas->slug]) }}" role="button">Daftar
+                                anggota</a>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#reportModal">
                                 Laporkan
