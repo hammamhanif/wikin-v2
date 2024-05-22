@@ -6,10 +6,10 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-header">
-                <h2>Daftar Pengabdian Masyarakat <strong> </strong></h2>
+                <h2>Daftar Pengabdian Masyarakat </h2>
                 <h3>{{ $pemas->name }}</h3>
                 <div class="alert alert-warning" role="alert">
-                    Pastikan data yang diisikan benar karena tidak bisa diulang!
+                    Pastikan data yang diisikan benar karena tidak bisa diulang dan <strong>tidak bisa di ubah! </strong>
                 </div>
                 @if (Session::has('success'))
                     <div class="alert alert-primary" role="alert">
@@ -34,11 +34,9 @@
                 @endif
             </div>
 
-            <form action="{{ route('store.registrasiPemas') }}" method="POST">
+            <form id="registrasiForm" action="{{ route('store.registrasiPemas') }}" method="POST">
                 @csrf
                 <div class="row gy-4">
-
-
                     <div class="col-md-6" hidden>
                         <label for="pemas_id" class="form-label">Pemas ID</label>
                         <input type="number" class="form-control" id="pemas_id" name="pemas_id" hidden
@@ -94,11 +92,28 @@
                     </div>
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary ">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
                     </div>
-
                 </div>
             </form>
+
+            <script>
+                function submitForm() {
+                    Swal.fire({
+                        title: 'Apakah kamu yakin?',
+                        text: "Data yang diisikan sudah benar?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, daftar!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('registrasiForm').submit();
+                        }
+                    })
+                }
+            </script>
 
         </div>
     </section><!-- End Services Section -->

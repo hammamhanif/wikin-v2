@@ -34,7 +34,14 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('pemasSetting') || Request::is('pemasSetting/*') ? '' : 'collapsed' }}"
+              <a class="nav-link {{ Request::is('registrasi-pemas/*') ? '' : 'collapsed' }}"
+                  href="{{ route('registrasi_pemas.user') }}">
+                  <i class="bi bi-person-fill-check"></i>
+                  <span>Anggota Pengabdian</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link {{ Request::is('pemasSetting') || Request::is('pemasSetting/*') || Request::is('memberPemas/*') ? '' : 'collapsed' }}"
                   href="{{ route('pemasSetting') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Pengabdian</span>
@@ -59,7 +66,7 @@
               <li class="nav-item">
                   <a class="nav-link {{ Request::is('userdate') ? '' : 'collapsed' }}" href="{{ route('userdate') }}">
                       <i class="bi bi-person-circle"></i>
-                      <span>User</span>
+                      <span>Pengguna</span>
                   </a>
               </li><!-- End Register Page Nav -->
 
@@ -71,7 +78,7 @@
                   </a>
               </li><!-- End Login Page Nav -->
               <li class="nav-item">
-                  <a class="nav-link  {{ Request::is('menuPemas') || Request::is('menuPemas/*') ? '' : 'collapsed' }}"
+                  <a class="nav-link  {{ Request::is('menuPemas') || Request::is('menuPemas/*') || Request::is('memberPemas-admin/*') ? '' : 'collapsed' }}"
                       href="{{ route('menuPemas') }}">
                       <i class="bi bi-house-door"></i>
                       <span>Pengabdian Masyarakat</span>

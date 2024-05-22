@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->enum('program_study', ['Elektronika Instrumentasi', 'Teknokimia Nuklir', 'Elektro Mekanika']);
             $table->enum('type', ['dosen', 'mahasiswa', 'lainnya']);
+            $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi'); // Kolom status 
             $table->text('motivasi');
             $table->timestamps();
 

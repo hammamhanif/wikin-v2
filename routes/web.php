@@ -84,6 +84,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
     Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');
 
+    Route::get('/registrasi-pemas/user', [RegistrasiPemasController::class, 'getByUser'])->name('registrasi_pemas.user');
+    Route::get('/memberPemas/{slug}', [RegistrasiPemasController::class, 'indexMember'])->name('memberPemas');
+    Route::put('/memberPemas/{id}/update', [RegistrasiPemasController::class, 'update'])->name('memberPemas.update');
+    Route::delete('/memberPemas/{id}', [RegistrasiPemasController::class, 'destroy'])->name('memberPemas.delete');
+    Route::delete('/registrasi-pemas/{id}', [RegistrasiPemasController::class, 'destroyUser'])->name('registrasi_pemas.delete');
+
+
 
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
@@ -118,6 +125,8 @@ Route::middleware(['IsAdmin', 'verified'])->group(function () {
     Route::get('menuPemas', [PemasController::class, 'indexAdmin'])->name('menuPemas');
     Route::get('/menuPemas/{slug}', [PemasController::class, 'editAdmin'])->name('pemas.editAdmin');
     Route::put('/menuPemas/{slug}/update', [PemasController::class, 'updateAdmin'])->name('pemas.updateAdmin');
+
+    Route::get('/memberPemas-admin/{slug}', [RegistrasiPemasController::class, 'indexAdmin'])->name('memberPemas.admin');
 
     Route::get('menuCommunity', [CommunitiesController::class, 'indexAdmin'])->name('menuCommunity');
     Route::get('menuCommunity/{slug}', [CommunitiesController::class, 'editAdmin'])->name('communities.editAdmin');

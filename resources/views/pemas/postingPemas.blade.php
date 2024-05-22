@@ -27,6 +27,12 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">Posting Program Pengabdian Masyarakatmu!</h5>
+                                    <div class="alert alert-warning" role="alert">
+                                        <strong class="font-bold">Pastikan!</strong>
+                                        <span class="block sm:inline">Ajukan terlebih dahulu program pengabdian masyarakatmu
+                                            di bagian
+                                            pengajuan pengabdian.</span>
+                                    </div>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>

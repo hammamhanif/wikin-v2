@@ -100,9 +100,9 @@
                                                             class="btn btn-info" style="margin-right: 5px;">
                                                             Edit
                                                         </a>
-                                                        <a href="{{ route('communities.editAdmin', ['slug' => $pemas->slug]) }}"
+                                                        <a href="{{ route('memberPemas', ['slug' => $pemas->slug]) }}"
                                                             class="btn btn-warning" style="margin-right: 5px;">
-                                                            <i class="bi bi-images"></i>
+                                                            <i class="bi bi-people"></i>
                                                         </a>
 
                                                         <form action="{{ route('pemas.destroy', ['id' => $pemas->id]) }}"

@@ -54,30 +54,83 @@
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
-
-                        <!-- Sales Card -->
-                        <div class="col-xxl-6 col-sm-12 col-md-12">
-                            <div class="card info-card sales-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Selamat Datang di Dashboard</h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div class="ps-3">
-                                            {{-- <h6>Ajukan Program Pengabdian Anda!</h6> --}}
-                                            <span class="text-primary small pt-1 fw-bold">{{ Auth::user()->name }}</span>
-                                        </div>
-                                        <!-- Tambahkan gambar disini -->
-                                        <div class="ms-auto">
-                                            <img src="{{ asset('img/welcome-bg.png') }}" alt="Image" class="img-fluid">
+                        <div class="row">
+                            <div class="col-xxl-6 col-sm-12 col-md-12">
+                                <div class="card info-card sales-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Selamat Datang di Dashboard</h5>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ps-3">
+                                                <span
+                                                    class="text-primary small pt-1 fw-bold">{{ Auth::user()->name }}</span>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <img src="{{ asset('img/welcome-bg.png') }}" alt="Image"
+                                                    class="img-fluid">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- End Sales Card -->
+                            </div><!-- End Sales Card -->
+
+                            <div class="col-xxl-6 col-sm-12 col-md-12 mt-3 mt-xxl-0">
+                                <div class="alert alert-warning" role="alert">
+                                    <h5 class="alert-heading">Pemberitahuan</h5>
+                                    <p>Untuk mengakses setiap fitur silahkan klik pilihan menu yang ada di bagian
+                                        <strong>kiri.</strong> jangan lupa untuk selalu mengecek setiap status kegiatan yang
+                                        telah kamu unggah!
+                                    </p>
+                                    <hr>
+                                    Tetap semangat dalam berbagi ilmu!
+                                </div>
+                            </div><!-- End Alert -->
+                        </div>
 
 
                         <!-- Revenue Card -->
-                        <div class="col-xxl-3 col-md-6">
+                        <div class="col-xxl-3 col-xl-12">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Berita <span>| Postingan Kamu</span></h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-radioactive"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>8</h6>
+                                            <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                                class="text-muted small pt-2 ps-1">increase</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Card -->
+                        <div class="col-xxl-3 col-xl-12">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Berita <span>| Postingan Kamu</span></h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-radioactive"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>8</h6>
+                                            <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                                class="text-muted small pt-2 ps-1">increase</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Card -->
+                        <div class="col-xxl-3 col-xl-12">
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Berita <span>| Postingan Kamu</span></h5>
@@ -101,10 +154,7 @@
 
                         <!-- Customers Card -->
                         <div class="col-xxl-3 col-xl-12">
-
                             <div class="card info-card customers-card">
-
-
                                 <div class="card-body">
                                     <h5 class="card-title">Pemas <span>| Pengajuan Kamu</span></h5>
 
@@ -125,12 +175,38 @@
                             </div>
 
                         </div><!-- End Customers Card -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Aksi Cepat</h5>
+                                    <p class="card-text">Pilih salah satu tindakan berikut:</p>
+                                    <div class="row row-cols-1 row-cols-md-4 g-2">
+                                        <div class="col">
+                                            <a href="{{ route('communities.create') }}"
+                                                class="btn btn-outline-warning w-100">Buat Komunitas</a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('contact') }}" class="btn btn-outline-danger w-100">Hubungi
+                                                Admin</a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('requestpemas') }}"
+                                                class="btn btn-outline-success w-100">Ajukan Pengabdian</a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#berita" class="btn btn-outline-primary w-100">Tulis berita</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- Reports -->
                         <div class="col-12">
                             <div class="card">
 
-                                <div class="card-body">
+                                <div class="card-body" id="berita">
                                     <h5 class="card-title">Bagikan informasi seputar kenukliran</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
@@ -167,8 +243,8 @@
                                             </div>
                                             <div class="col-sm-6 col-xs-12 ">
                                                 <label for="deskripsi" class="col-sm-5 col-form-label">Deskripsi</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi">
+                                                <input type="text" class="form-control" name="description"
+                                                    id="deskripsi" placeholder="Deskripsi">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
