@@ -818,9 +818,9 @@ h6 {
     flex-grow: 0;
 }
 
-.dashboard .sales-card .card-icon {
-    color: #4154f1;
-    background: #f6f6fe;
+.dashboard .pemas-card .card-icon {
+    color: #05afed;
+    background: #c9f0fe;
 }
 
 .dashboard .revenue-card .card-icon {

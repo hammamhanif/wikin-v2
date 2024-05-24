@@ -84,8 +84,8 @@
 
                     <li class="nav-item col-12 col-md-4 col-lg-4">
                         <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                            <i class="bi bi-person color-cyan"></i>
-                            <h4>Creator</h4>
+                            <i class="bi bi-newspaper color-cyan"></i>
+                            <h4>Berita Informasi</h4>
                             <p>12</p>
                         </a>
                     </li><!-- End Tab 1 Nav -->

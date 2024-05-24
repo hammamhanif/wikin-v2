@@ -101,9 +101,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
 
-
     Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 
+    Route::get('galeriAdmin/{slug}', [GalleriesController::class, 'indexAdmin'])->name('galeri.Admin');
     Route::get('galeri/{slug}', [GalleriesController::class, 'index'])->name('galeri.add');
     Route::post('galeri', [GalleriesController::class, 'store'])->name('galeri.store');
     Route::delete('/galeri/{id}', [GalleriesController::class, 'delete'])->name('galeri.delete');
@@ -118,6 +118,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['IsAdmin', 'verified'])->group(function () {
+    Route::get('menuHome', [LandingController::class, 'menu'])->name('menuHome');
+    Route::get('menuHome/{id}', [LandingController::class, 'menuUpdate'])->name('menuHome.edit');
+    Route::put('menuHome/{id}/update', [LandingController::class, 'store'])->name('landings.store');
+
     Route::get('/menuNews/{slug}', [NewsController::class, 'editAdmin'])->name('news.editAdmin');
     Route::put('/menuNews/{slug}/update', [NewsController::class, 'updateAdmin'])->name('news.updateAdmin');
     Route::get('menuNews', [NewsController::class, 'indexAdmin'])->name('menuNews');

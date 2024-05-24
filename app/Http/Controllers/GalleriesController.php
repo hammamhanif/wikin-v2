@@ -14,9 +14,17 @@ class GalleriesController extends Controller
     {
         // Retrieve the community based on the slug
         $community = Communities::where('slug', $slug)->firstOrFail();
-        $galleries = Galleries::where('community_id', $community->id)->get();
+        $galleries = Galleries::where('community_id', $community->id)->paginate(3);
 
         return view('tamplate.dashboard.menu.addGaleryCommunity', compact('community', 'galleries'));
+    }
+    public function indexAdmin($slug)
+    {
+        // Retrieve the community based on the slug
+        $community = Communities::where('slug', $slug)->firstOrFail();
+        $galleries = Galleries::where('community_id', $community->id)->paginate(3);
+
+        return view('tamplate.dashboard.menuadmin.galeryCommunity', compact('community', 'galleries'));
     }
     public function indexLanding($slug)
     {

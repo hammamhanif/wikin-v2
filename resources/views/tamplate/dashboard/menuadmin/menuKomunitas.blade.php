@@ -79,7 +79,7 @@
                                                         class="btn btn-info" style="margin-right: 5px;">
                                                         Edit
                                                     </a>
-                                                    <a href="{{ route('communities.editAdmin', ['slug' => $community->slug]) }}"
+                                                    <a href="{{ route('galeri.Admin', ['slug' => $community->slug]) }}"
                                                         class="btn btn-warning" style="margin-right: 5px;">
                                                         <i class="bi bi-images"></i>
                                                     </a>

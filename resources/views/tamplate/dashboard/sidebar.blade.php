@@ -93,7 +93,8 @@
               </li><!-- End Blank Page Nav -->
 
               <li class="nav-item">
-                  <a class="nav-link collapsed" href="pages-error-404.html">
+                  <a class="nav-link {{ Request::is('menuHome') || Request::is('menuHome/*') ? '' : 'collapsed' }}"
+                      href="{{ route('menuHome') }}">
                       <i class="bi bi-columns-gap"></i>
                       <span>Halaman Utama</span>
                   </a>

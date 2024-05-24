@@ -31,7 +31,7 @@
 
                 margin-right: 200px;
                 /* Reduced margin for better spacing */
-                width: 60%;
+                width: 50%;
                 /* Reduced width for better layout */
                 max-width: 350px;
             }
@@ -46,9 +46,9 @@
         @media (max-width: 993px) {
             .post-img {
                 /* display: block;
-                                            margin: auto;
-                                            width: 100%;
-                                            float: none; */
+                                                                margin: auto;
+                                                                width: 100%;
+                                                                float: none; */
             }
 
             .content {
@@ -133,11 +133,11 @@
                                 {!! html_entity_decode($community->content) !!}
                             </div><!-- End post content -->
                             <div class="button-container">
-                                <a class="btn btn-outline-primary-custom"
+                                <a class="btn btn-outline-primary-custom mb-3"
                                     href="https://wa.me/{{ $community->number }}?text=Saya%20tertarik%20dengan%20komunitas%20Anda,%20bolehkah%20saya%20bertanya-tanya%3F"
                                     role="button" target="_blank">Hubungi Kontak</a>
-                                <a class="btn btn-primary-custom2" href="{{ route('galeri', $community->slug) }}"
-                                    role="button" target="_blank">Galeri Kegiatan</a>
+                                <a class="btn btn-primary-custom2 mb-3" href="{{ route('galeri', $community->slug) }}"
+                                    role="button">Galeri Kegiatan</a>
                             </div>
 
                         </article><!-- End blog post -->

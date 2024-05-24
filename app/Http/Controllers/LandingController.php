@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\pemas;
+use App\Models\landing;
 use App\Models\Communities;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LandingController extends Controller
 {
@@ -150,6 +152,79 @@ class LandingController extends Controller
             return view('komunitas.communityDetail', compact('community'));
         } else {
             abort(404);
+        }
+    }
+
+
+    // pengaturan landing page
+    public function menu()
+    {
+        $landings = Landing::all(); // Mengambil data dengan ID 1
+        return view('tamplate.dashboard.menuadmin.menuLanding', compact('landings'));
+    }
+    public function menuUpdate($id)
+    {
+        $landing = Landing::findOrFail($id);
+        return view('tamplate.dashboard.menuadmin.editLanding', compact('landing'));
+    }
+
+    public function store(Request $request, $id)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'video' => 'nullable|file|mimes:mp4,mov,ogg,qt|max:20000',
+            'location' => 'nullable|string|max:255',
+            'telp' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'question1' => 'nullable|string|max:255',
+            'answer1' => 'nullable|string',
+            'question2' => 'nullable|string|max:255',
+            'answer2' => 'nullable|string',
+            'question3' => 'nullable|string|max:255',
+            'answer3' => 'nullable|string',
+            'question4' => 'nullable|string|max:255',
+            'answer4' => 'nullable|string',
+            'question5' => 'nullable|string|max:255',
+            'answer5' => 'nullable|string',
+        ]);
+
+        // Cari data landing berdasarkan ID
+        $landing = Landing::find($id);
+
+        if ($landing) {
+            // Hapus video lama jika ada
+            if ($landing->video && $request->hasFile('video')) {
+                Storage::disk('public')->delete($landing->video);
+            }
+
+            // Update data jika ditemukan
+            // Upload video jika ada
+            if ($request->hasFile('video')) {
+                $file = $request->file('video');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('videos', $filename, 'public');
+                $validatedData['video'] = $filePath;
+            }
+
+            $landing->update($validatedData);
+
+            // Redirect atau berikan respon sesuai kebutuhan
+            return redirect()->back()->with('success', 'Data berhasil diperbarui.');
+        } else {
+            // Buat data baru jika tidak ditemukan
+            // Upload video jika ada
+            if ($request->hasFile('video')) {
+                $file = $request->file('video');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('videos', $filename, 'public');
+                $validatedData['video'] = $filePath;
+            }
+
+            Landing::create($validatedData);
+
+            // Redirect atau berikan respon sesuai kebutuhan
+            return redirect()->back()->with('success', 'Data baru berhasil dibuat.');
         }
     }
 }
