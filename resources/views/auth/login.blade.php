@@ -107,10 +107,12 @@
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 custom-btn">Login</button>
                         </div>
                         <div class="input-group mb-3">
-                            <button type="submit" class="btn btn-lg btn-light w-100 fs-6"><img
-                                    src="{{ asset('images/google.png') }}" style="width:20px" class="me-2"><small>Sign
-                                    In with
-                                    Google</small></button>
+                            <a href="{{ route('user.login.google') }}" class="btn btn-lg btn-light w-100 fs-6"
+                                role="button">
+                                <img src="{{ asset('images/google.png') }}" style="width:20px" class="me-2">
+                                <small>Sign In with Google</small>
+                            </a>
+
                         </div>
                         <div class="row">
                             <small>Belum punya akun? <a href="{{ route('register') }}">Daftar</a></small>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\PemasController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\CommunitiesController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RegistrasiPemasController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\RegistrasiCommunitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout')->name('logout');
     Route::get('register', 'register')->name('register')->middleware('guest');
     Route::post('register', 'registerPost')->name('register.post');
+    Route::get('sign-in-google', 'google')->middleware('guest')->name('user.login.google');
+    Route::get('auth/google/callback', 'handleProviderCallback')->name('user.google.callback');
 });
 
 
@@ -61,6 +65,8 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
@@ -96,6 +102,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
     Route::post('requestpemas/store', [PemasController::class, 'storeForm'])->name('requestpemas.store');
 
+    Route::get('post-informasi', [NewsController::class, 'post'])->name('post.informasi');
+
     Route::get('informasi', [NewsController::class, 'index'])->name('informasi');
     Route::delete('/informasi/{id}', [NewsController::class, 'delete'])->name('news.delete');
     Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
@@ -108,7 +116,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('galeri', [GalleriesController::class, 'store'])->name('galeri.store');
     Route::delete('/galeri/{id}', [GalleriesController::class, 'delete'])->name('galeri.delete');
 
+    Route::post('/registrasi-communities', [RegistrasiCommunitiesController::class, 'store'])->name('store.regKomunitas');
+    Route::get('/registrasi-communities/{slug}', [RegistrasiCommunitiesController::class, 'index'])->name('regKomunitas');
 
+
+    Route::get('komunitas/daftar', [CommunitiesController::class, 'daftar'])->name('komunitas.daftar');
     Route::get('komunitas', [CommunitiesController::class, 'index'])->name('komunitas');
     Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');
     Route::post('community/create', [CommunitiesController::class, 'store'])->name('communities.store');

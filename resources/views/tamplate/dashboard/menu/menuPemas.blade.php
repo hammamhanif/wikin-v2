@@ -175,7 +175,13 @@
                                             <td>
                                                 <div style="display: flex; align-items: center;">
                                                     <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
-                                                        class="btn btn-info" style="margin-right: 5px;">
+                                                        class="btn btn-outline-success" style="margin-right: 5px;"
+                                                        title="Tambah Anggota">
+                                                        <i class="bi bi-person-add"></i>
+                                                    </a>
+                                                    <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
+                                                        class="btn btn-info" style="margin-right: 5px;"
+                                                        title="Detail Pengabdian">
                                                         Detail
                                                     </a>
                                                     <form action="{{ route('formPemas.destroy', ['id' => $pemas->id]) }}"

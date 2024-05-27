@@ -355,7 +355,7 @@
                                 </div>
                                 <h3 class="post-title">{{ $news->title }}
                                 </h3>
-                                <p>{{ $news->description }}...</p>
+                                <p>{!! $news->content !!}...</p>
                                 <a href="{{ route('detail', $news->slug) }}"
                                     class="readmore stretched-link"><span>Baca</span><i class="bi bi-arrow-right"></i></a>
                             </div>
@@ -444,14 +444,12 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq-content-1">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Apa itu wikin?
+                                        {{ $landing->question1 }}
                                     </button>
                                 </h3>
                                 <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                                     <div class="accordion-body">
-                                        Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet
-                                        non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor
-                                        purus non.
+                                        {{ $landing->answer1 }}
                                     </div>
                                 </div>
                             </div><!-- # Faq item-->
@@ -461,15 +459,12 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq-content-2">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Bagaimana cara membuat informasi kenukliran?
+                                        {{ $landing->question2 }}
                                     </button>
                                 </h3>
                                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                                     <div class="accordion-body">
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
-                                        velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend
-                                        donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in
-                                        cursus turpis massa tincidunt dui.
+                                        {{ $landing->answer2 }}
                                     </div>
                                 </div>
                             </div><!-- # Faq item-->
@@ -479,15 +474,12 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq-content-3">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Bagaimana mengajukan pengabdian masyarakat?
+                                        {{ $landing->question3 }}
                                     </button>
                                 </h3>
                                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                                     <div class="accordion-body">
-                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus
-                                        pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit.
-                                        Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis
-                                        tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                                        {{ $landing->answer3 }}
                                     </div>
                                 </div>
                             </div><!-- # Faq item-->
@@ -497,16 +489,13 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq-content-4">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                                        {{ $landing->question4 }}
                                     </button>
                                 </h3>
                                 <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                                     <div class="accordion-body">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
-                                        velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend
-                                        donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in
-                                        cursus turpis massa tincidunt dui.
+                                        {{ $landing->answer4 }}
                                     </div>
                                 </div>
                             </div><!-- # Faq item-->
@@ -516,14 +505,12 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq-content-5">
                                         <i class="bi bi-question-circle question-icon"></i>
-                                        Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                                        {{ $landing->question5 }}
                                     </button>
                                 </h3>
                                 <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                                     <div class="accordion-body">
-                                        Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in
-                                        est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl
-                                        suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                                        {{ $landing->answer5 }}
                                     </div>
                                 </div>
                             </div><!-- # Faq item-->

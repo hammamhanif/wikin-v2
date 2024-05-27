@@ -60,14 +60,13 @@
                                     <!-- TinyMCE Editor -->
                                     <form role="form text-left"
                                         action="{{ route('landings.store', ['id' => $landing->id]) }}" method="post"
-                                        enctype="multipart/form-data">
+                                        enctype="multipart/form-data" id="landingForm">
                                         @csrf
                                         @method('PUT')
                                         <div class="row mb-3">
                                             <div class="col-sm-12">
                                                 <label for="video" class="col-sm-5 col-form-label">Video Halaman
-                                                    Utama
-                                                    :</label>
+                                                    Utama:</label>
                                                 <input class="form-control" type="file" name="video" id="video"
                                                     accept="video/*">
                                             </div>
@@ -103,8 +102,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="answer1" class="col-form-label">Jawaban Pertanyaan 1 :</label>
-                                            <textarea class="form-control" id="answer1" name="answer1" placeholder="Masukkan jawaban jelas.."
-                                                value="{{ $landing->answer1 }}"></textarea>
+                                            <textarea class="form-control" id="answer1" name="answer1" placeholder="Masukkan jawaban jelas..">{{ $landing->answer1 }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="question2" class="form-label">Pertanyaan 2 :</label>
@@ -112,10 +110,8 @@
                                                 placeholder="Pertanyaan 2.." value="{{ $landing->question2 }}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="answer2" class="col-form-label">Jawaban Pertanyaan 2
-                                                :</label>
-                                            <textarea class="form-control" id="answer2" name="answer2" placeholder="Masukkan jawaban jelas.."
-                                                value="{{ $landing->answer2 }}"></textarea>
+                                            <label for="answer2" class="col-form-label">Jawaban Pertanyaan 2 :</label>
+                                            <textarea class="form-control" id="answer2" name="answer2" placeholder="Masukkan jawaban jelas..">{{ $landing->answer2 }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="question3" class="form-label">Pertanyaan 3 :</label>
@@ -123,10 +119,8 @@
                                                 placeholder="Pertanyaan 3.." value="{{ $landing->question3 }}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="answer3" class="col-form-label">Jawaban Pertanyaan 3
-                                                :</label>
-                                            <textarea class="form-control" id="answer3" name="answer3" placeholder="Masukkan jawaban jelas.."
-                                                value="{{ $landing->answer3 }}"></textarea>
+                                            <label for="answer3" class="col-form-label">Jawaban Pertanyaan 3 :</label>
+                                            <textarea class="form-control" id="answer3" name="answer3" placeholder="Masukkan jawaban jelas..">{{ $landing->answer3 }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="question4" class="form-label">Pertanyaan 4 :</label>
@@ -134,10 +128,8 @@
                                                 placeholder="Pertanyaan 4.." value="{{ $landing->question4 }}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="answer4" class="col-form-label">Jawaban Pertanyaan 4
-                                                :</label>
-                                            <textarea class="form-control" id="answer4" name="answer4" placeholder="Masukkan jawaban jelas.."
-                                                value="{{ $landing->answer4 }}"></textarea>
+                                            <label for="answer4" class="col-form-label">Jawaban Pertanyaan 4 :</label>
+                                            <textarea class="form-control" id="answer4" name="answer4" placeholder="Masukkan jawaban jelas..">{{ $landing->answer4 }}</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="question5" class="form-label">Pertanyaan 5 :</label>
@@ -145,15 +137,32 @@
                                                 placeholder="Pertanyaan 5.." value="{{ $landing->question5 }}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="answer5" class="col-form-label">Jawaban Pertanyaan 5
-                                                :</label>
-                                            <textarea class="form-control" id="answer5" name="answer5" placeholder="Masukkan jawaban jelas.."
-                                                value="{{ $landing->answer5 }}"></textarea>
+                                            <label for="answer5" class="col-form-label">Jawaban Pertanyaan 5 :</label>
+                                            <textarea class="form-control" id="answer5" name="answer5" placeholder="Masukkan jawaban jelas..">{{ $landing->answer5 }}</textarea>
                                         </div>
                                         <div class="modal-footer justify-content-center">
                                             <button type="submit" class="btn btn-primary">Kirimkan</button>
                                         </div>
                                     </form>
+
+                                    <script>
+                                        document.getElementById('landingForm').addEventListener('submit', function(event) {
+                                            event.preventDefault();
+                                            Swal.fire({
+                                                title: 'Apakah anda yakin?',
+                                                text: "Anda akan mengubah data ini!",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Ya, ubah data!'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    this.submit();
+                                                }
+                                            });
+                                        });
+                                    </script>
 
                                 </div>
                             </div>

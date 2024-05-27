@@ -112,7 +112,7 @@
                         <div class="col-xxl-3 col-xl-12">
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Komunitas <span>| Pengajuan Kamu</span></h5>
+                                    <h5 class="card-title">Komunitas <span>| Kamu ikuti</span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -131,14 +131,14 @@
                             </div>
                         </div><!-- End Revenue Card -->
                         <div class="col-xxl-3 col-xl-12">
-                            <div class="card info-card revenue-card">
+                            <div class="card info-card pengmas-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Berita <span>| Postingan Kamu</span></h5>
+                                    <h5 class="card-title">Pemas <span>| kamu ikuti</span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-radioactive"></i>
+                                            <i class="bi bi-heart-fill"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6>8</h6>
@@ -194,90 +194,46 @@
                                                 class="btn btn-outline-success w-100">Ajukan Pengabdian</a>
                                         </div>
                                         <div class="col">
-                                            <a href="#berita" class="btn btn-outline-primary w-100">Tulis berita</a>
+                                            <a href="{{ route('post.informasi') }}"
+                                                class="btn btn-outline-primary w-100">Tulis berita</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div>
+                            <h5 class="text-center title-informasi">Informasi Penting</h5>
+                            <div class="container">
+                                <div class="card-container d-flex justify-content-center">
+                                    <div class="row row-cols-2 row-cols-lg-4 justify-content-center">
+                                        @foreach ($pengmases as $pemas)
+                                            <div class="card col " style="width: 18rem; margin-right: 10px;">
+                                                <img src="{{ asset('storage/' . $pemas->image) }}" class="card-img-top"
+                                                    alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center">{{ $pemas->name }}</h5>
+                                                    <p class="card-text">{!! $pemas->content !!}</p>
 
-                        <!-- Reports -->
-                        <div class="col-12">
-                            <div class="card">
+                                                    <p class="card-text text-center">({{ $pemas->location }})</p>
 
-                                <div class="card-body" id="berita">
-                                    <h5 class="card-title">Bagikan informasi seputar kenukliran</h5>
-                                    @if (Session::has('success'))
-                                        <div class="alert alert-primary" role="alert">
-                                            <strong class="font-bold">Success!</strong>
-                                            <span class="block sm:inline">{{ session('success') }}</span>
-                                        </div>
-                                    @endif
-                                    @if (Session::has('unsuccess'))
-                                        <div class="alert alert-danger" role="alert">
-                                            <strong class="font-bold">Unsuccess!</strong>
-                                            <span class="block sm:inline">{{ session('unsuccess') }}</span>
-                                        </div>
-                                    @endif
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger" role="alert">
-                                            <ul class="list-disc pl-5">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ htmlentities($error) }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
+                                                    <div class="d-flex justify-content-around">
+                                                        <a href="{{ route('registrasiPemas', ['slug' => $pemas->slug]) }}"
+                                                            class="btn btn-outline-primary mx-2">Daftar Anggota</a>
+                                                        <a href="{{ route('detailpemas', $pemas->slug) }}"
+                                                            class="btn btn-outline-success mx-2">Detail Informasi</a>
+                                                    </div>
 
-                                    <!-- TinyMCE Editor -->
-                                    <form role="form text-left" action="{{ route('news.store') }}" method="post"
-                                        enctype="multipart/form-data">
-                                        @method('POST')
-                                        @csrf
-                                        <div class="mb-3 row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <label for="judul" class="col-sm-5 col-form-label">Judul</label>
-                                                <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul">
+                                                </div>
                                             </div>
-                                            <div class="col-sm-6 col-xs-12 ">
-                                                <label for="deskripsi" class="col-sm-5 col-form-label">Deskripsi</label>
-                                                <input type="text" class="form-control" name="description"
-                                                    id="deskripsi" placeholder="Deskripsi">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12">
+                                        @endforeach
 
-                                                <label for="image" class="col-sm-5 col-form-label">Gambar (Apabila
-                                                    Ada)</label>
-                                                <input class="form-control" type="file" name="image" id="image"
-                                                    accept="image/*">
-                                            </div>
-
-                                            <div class="col-sm-6 col-xs-12">
-                                                <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" name="category" id="category">
-                                                    <option value="Umum">Umum</option>
-                                                    <option value="Kesehatan">Kesehatan</option>
-                                                    <option value="Energi">Energi</option>
-                                                    <option value="Industri">Industri</option>
-                                                    <option value="Pangan">Pangan</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="news" class="col-form-label">Konten</label>
-                                            <textarea class="form-control" id="news" name="content"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
-                                        </div>
+                                    </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
+                        {{ $pengmases->links() }}
+
                     </div>
                 </div><!-- End Left side columns -->
                 <!-- Right side columns -->
@@ -290,6 +246,4 @@
         </section>
 
     </main><!-- End #main -->
-
-
 @endsection

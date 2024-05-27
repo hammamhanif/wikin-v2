@@ -21,4 +21,9 @@ class   Communities extends Model
     {
         return $this->hasMany(galleries::class);
     }
+
+    public function registrasiCommunities()
+    {
+        return $this->hasMany(RegistrasiCommunities::class);
+    }
 }

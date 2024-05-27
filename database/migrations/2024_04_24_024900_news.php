@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->enum('status', ['verifikasi', 'inactive', 'active',])->default('verifikasi');
             $table->enum('category', ['Umum', 'Kesehatan', 'Energi', 'Industri', 'Pangan']);
-            $table->string('description');
             $table->longText('content');
             $table->string('slug')->unique();
             $table->string('image')->nullable();

@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="noID" class="form-label">NIP / NIK</label>
+                        <label for="noID" class="form-label">NIP / NIM</label>
                         <input type="text" class="form-control" id="noID" placeholder="Masukkan NIK atau NIM anda.."
                             name="noID" required>
                     </div>

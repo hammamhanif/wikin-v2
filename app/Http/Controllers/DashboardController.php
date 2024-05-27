@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\pemas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('tamplate.dashboard.welcome');
+        $pengmases = pemas::where('status_pemas', 'pencarian volunteer')->paginate(9);
+        return view('tamplate.dashboard.welcome', compact('pengmases'));
     }
 
     public function profile()

@@ -30,9 +30,9 @@ class LandingController extends Controller
                 $pemas->author = $pemas->user->username;
                 return $pemas;
             });
+        $landing = Landing::where('id', 1)->firstOrFail();
 
-
-        return view('tamplate.landingpage.landingpage', compact('lot_news', 'pemases'),);
+        return view('tamplate.landingpage.landingpage', compact('lot_news', 'pemases', 'landing'),);
     }
 
 

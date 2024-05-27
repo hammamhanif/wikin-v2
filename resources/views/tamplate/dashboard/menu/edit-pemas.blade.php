@@ -102,11 +102,17 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="image" class="col-sm-5 col-form-label">Gambar</label>
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
                                             </div>
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="lpj" class="col-sm-5 col-form-label">LPJ Kegiatan</label>
+                                                <input class="form-control" type="file" name="lpj" id="lpj"
+                                                    accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                            </div>
+
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">

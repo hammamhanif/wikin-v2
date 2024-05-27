@@ -14,12 +14,20 @@
           <li class="nav-heading">Berita Kamu</li>
 
           <li class="nav-item">
+              <a class="nav-link {{ Request::is('post-informasi') ? '' : 'collapsed' }}"
+                  href="{{ route('post.informasi') }}">
+                  <i class="bi bi-newspaper"></i>
+                  <span>Posting Berita</span>
+              </a>
+          </li><!-- End Profile Page Nav -->
+
+          <li class="nav-item">
               <a class="nav-link {{ Request::is('informasi') ? '' : 'collapsed' }}" href="{{ route('informasi') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Berita</span>
               </a>
           </li><!-- End Profile Page Nav -->
-          <li class="nav-heading">Pengabdian Masyarakat</li>
+          <li class="nav-heading">Pengabdian Masyarakat (Pemas)</li>
           <li class="nav-item">
               <a class="nav-link {{ Request::is('requestpemas') ? '' : 'collapsed' }}"
                   href="{{ route('requestpemas') }}">
@@ -30,14 +38,14 @@
           <li class="nav-item">
               <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
                   <i class="bi bi-file-earmark-post"></i>
-                  <span>Postingan</span>
+                  <span>Laporan dan Open Rec</span>
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link {{ Request::is('registrasi-pemas/*') ? '' : 'collapsed' }}"
                   href="{{ route('registrasi_pemas.user') }}">
                   <i class="bi bi-person-fill-check"></i>
-                  <span>Anggota Pengabdian</span>
+                  <span>Daftar Pengabdianmu</span>
               </a>
           </li>
           <li class="nav-item">
@@ -48,6 +56,13 @@
               </a>
           </li>
           <li class="nav-heading">Komunitas Kamu</li>
+          <li class="nav-item">
+              <a class="nav-link  {{ Request::is('komunitas') || Request::is('komunitas/*') ? '' : 'collapsed' }}"
+                  href="{{ route('komunitas.daftar') }}">
+                  <i class="bi bi-people-fill"></i>
+                  <span>Daftar Komunitas</span>
+              </a>
+          </li>
           <li class="nav-item">
               <a class="nav-link collapsed" href="{{ route('communities.create') }}">
                   <i class="bi bi-people-fill"></i>

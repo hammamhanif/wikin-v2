@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\File;
 
 class NewsController extends Controller
 {
+    public function post()
+    {
+        return view('tamplate.dashboard.menu.postberita');
+    }
 
     public function index()
     {
@@ -55,7 +59,6 @@ class NewsController extends Controller
         // Validasi form
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan', // Validasi kategori
@@ -64,11 +67,11 @@ class NewsController extends Controller
         // Proses penyimpanan berita
         $news = new News();
         $news->title = $request->input('title');
-        $news->description = $request->input('description');
         $news->content = $request->input('content');
         $news->category = $request->input('category');
         $news->status = 'verifikasi';
-        $news->slug = hash('sha256', $request->input('name'));
+        $slug = hash('sha256', $request->input('title') . time());
+        $news->slug = $slug;
 
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
@@ -82,7 +85,7 @@ class NewsController extends Controller
         $news->user_id = auth()->user()->id;
         $news->save();
 
-        return redirect()->route('dashboard')->with('success', 'Informasi berhasil disimpan!');
+        return redirect()->back()->with('success', 'Informasi berhasil disimpan!');
     }
     public function delete($id)
     {

@@ -2,7 +2,7 @@
 @section('dashboard')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Menu Komunitas Admin</h1>
+            <h1>Daftar Komunitas</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">Semua Komunitas Pengguna</span></h5>
+                            <h5 class="card-title">Semua Komunitas yang terdaftar</span></h5>
                             @if (session('success'))
                                 <div class="alert alert-success" role="alert">
                                     <strong class="font-bold">Success!</strong>
@@ -46,7 +46,6 @@
                                         <th scope="col">Nama Komunitas</th>
                                         <th scope="col">Nama PJ</th>
                                         <th scope="col">Kategori</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -59,43 +58,13 @@
                                             <td><a href="#"
                                                     class="text-primary">{{ htmlentities($community->category) }}</a>
                                             </td>
-                                            @if ($community->status == 'active')
-                                                <td><span
-                                                        class="badge bg-success">{{ htmlentities($community->status) }}</span>
-                                                </td>
-                                            @elseif ($community->status == 'verifikasi')
-                                                <td><span
-                                                        class="badge bg-warning">{{ htmlentities($community->status) }}</span>
-                                                </td>
-                                            @elseif ($community->status == 'inactive')
-                                                <td><span
-                                                        class="badge bg-danger">{{ htmlentities($community->status) }}</span>
-                                                </td>
-                                            @endif
 
                                             <td>
                                                 <div style="display: flex; align-items: center;">
-                                                    <a href="{{ route('communities.editAdmin', ['slug' => $community->slug]) }}"
-                                                        class="btn btn-info" style="margin-right: 5px;">
-                                                        Edit
-                                                    </a>
                                                     <a href="{{ route('regKomunitas', ['slug' => $community->slug]) }}"
-                                                        class="btn btn-outline-warning" style="margin-right: 5px;">
-                                                        <i class="bi bi-person-add"></i>
+                                                        class="btn btn-outline-success" style="margin-right: 5px;">
+                                                        Gabung
                                                     </a>
-                                                    <a href="{{ route('galeri.Admin', ['slug' => $community->slug]) }}"
-                                                        class="btn btn-warning" style="margin-right: 5px;">
-                                                        <i class="bi bi-images"></i>
-                                                    </a>
-
-                                                    <form
-                                                        action="{{ route('communities.delete', ['id' => $community->id]) }}"
-                                                        method="POST" class="delete-form" style="margin-right: 5px;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" onclick="confirmDelete(this.form)"
-                                                            class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                                                    </form>
                                                 </div>
 
                         </div>
@@ -110,23 +79,5 @@
             </div>
         </section>
     </main><!-- End #main -->
-    <script>
-        // Fungsi untuk menampilkan Sweet Alert konfirmasi sebelum menghapus
-        function confirmDelete(form) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda tidak akan bisa mengembalikan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); // Submit form jika pengguna mengonfirmasi
-                }
-            });
-        }
-    </script>
+
 @endsection

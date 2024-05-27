@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\landing;
+use Illuminate\Http\Request;
 use App\Mail\ContactConfirmation;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -28,7 +29,10 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('tamplate.landingpage.contact');
+        $landing = Landing::where('id', 1)->firstOrFail();
+
+
+        return view('tamplate.landingpage.contact', compact('landing'));
     }
 
     /**

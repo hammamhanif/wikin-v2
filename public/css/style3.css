@@ -823,11 +823,14 @@ h6 {
     background: #c9f0fe;
 }
 
+.dashboard .pengmas-card .card-icon {
+    color: #a96086;
+    background: #f9dcec;
+}
 .dashboard .revenue-card .card-icon {
     color: #2eca6a;
     background: #e0f8e9;
 }
-
 .dashboard .customers-card .card-icon {
     color: #ff771d;
     background: #ffecdf;
@@ -1031,7 +1034,13 @@ h6 {
 .profile .profile-overview .card-title {
     color: #012970;
 }
-
+.title-informasi {
+    padding: 20px 0 15px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+}
 .profile .profile-overview .label {
     font-weight: 600;
     color: rgba(1, 41, 112, 0.6);

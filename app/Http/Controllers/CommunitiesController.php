@@ -12,6 +12,12 @@ use Illuminate\Validation\Rule;
 class CommunitiesController extends Controller
 {
 
+    public function daftar()
+    {
+        $communities = Communities::where('status', 'active')->get();
+
+        return view('tamplate.dashboard.menu.daftarKomunitas', compact('communities'));
+    }
     public function index()
     {
         $communities = Communities::where('user_id', Auth::id())->get();

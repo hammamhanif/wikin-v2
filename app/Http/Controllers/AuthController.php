@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
-use Mews\Captcha\Facades\Captcha;
+use Illuminate\Support\Facades\Password;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class AuthController extends Controller
 {
@@ -18,6 +23,39 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function google()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $callback = Socialite::driver('google')->stateless()->user();
+        $data = [
+            'name' => $callback->getName(),
+            'username' => $callback->getName(),
+            'type' => 'masyarakat',
+            'email' => $callback->getEmail(),
+            'email_verified_at' => now(),
+        ];
+
+        $user = User::whereEmail($data['email'])->first();
+        if (!$user) {
+            $data['password'] = Hash::make('password123');  // Sementara mengatur password default
+            $user = User::create($data);
+
+            // Menghasilkan token reset password
+            $token = Password::createToken($user);
+
+            // Mengirim notifikasi reset password
+            $user->sendPasswordResetNotification($token);
+        }
+
+        Auth::login($user, true);
+        return redirect(route('dashboard'));
+    }
+
 
     // login post
 

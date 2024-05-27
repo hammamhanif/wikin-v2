@@ -33,8 +33,7 @@
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
                                 <h4>Lokasi:</h4>
-                                <p>Jl. Babarsari Kotak POB 6101/YKKB, Ngentak, Caturtunggal, Kec. Depok, Kabupaten Sleman,
-                                    Daerah Istimewa Yogyakarta 55281</p>
+                                <p>{{ $landing->location }}</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -42,7 +41,7 @@
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h4>Email:</h4>
-                                <p>info@example.com</p>
+                                <p>{{ $landing->email }}</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -50,7 +49,7 @@
                             <i class="bi bi-phone flex-shrink-0"></i>
                             <div>
                                 <h4>Telepon:</h4>
-                                <p>+1 5589 55488 55</p>
+                                <p>{{ $landing->telp }}</p>
                             </div>
                         </div><!-- End Info Item -->
 
