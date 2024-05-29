@@ -55,23 +55,31 @@
                   <span>Menu Pengabdian</span>
               </a>
           </li>
-          <li class="nav-heading">Komunitas Kamu</li>
+
+          <li class="nav-heading">Komunitas </li>
           <li class="nav-item">
-              <a class="nav-link  {{ Request::is('komunitas') || Request::is('komunitas/*') ? '' : 'collapsed' }}"
+              <a class="nav-link  {{ Request::is('komunitas/daftar') ? '' : 'collapsed' }}"
                   href="{{ route('komunitas.daftar') }}">
-                  <i class="bi bi-people-fill"></i>
-                  <span>Daftar Komunitas</span>
+                  <i class="bi bi-person-video2"></i>
+                  <span>Daftar Komunitas Wikin</span>
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('communities.create') }}">
+              <a class="nav-link {{ Request::is('community') || Request::is('community/*') ? '' : 'collapsed' }}"
+                  href="{{ route('communities.create') }}">
                   <i class="bi bi-people-fill"></i>
                   <span>Pendaftaran Komunitas</span>
               </a>
           </li><!-- End Contact Page Nav -->
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('komunitas') || Request::is('community/*') ? '' : 'collapsed' }}"
-                  href="{{ route('komunitas') }}">
+              <a class="nav-link {{ Request::is('komunitas/pengguna') ? '' : 'collapsed' }}"
+                  href="{{ route('komunitas.pengguna') }}">
+                  <i class="bi bi-person-lines-fill"></i>
+                  <span>Komunitas Kamu</span>
+              </a>
+          </li><!-- End Contact Page Nav -->
+          <li class="nav-item">
+              <a class="nav-link {{ Request::is('komunitas') ? '' : 'collapsed' }}" href="{{ route('komunitas') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Komunitas</span>
               </a>

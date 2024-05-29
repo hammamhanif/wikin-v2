@@ -47,6 +47,7 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama User</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -56,6 +57,7 @@
                                         <tr>
                                             <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
                                             <td>{{ htmlentities($user->username) }}</td>
+                                            <td>{{ htmlentities($user->id) }}</td>
                                             <td><a href="#" class="text-primary">{{ htmlentities($user->email) }}</a>
                                             </td>
                                             <td><button type="button" class="btn btn-info" data-bs-toggle="modal"

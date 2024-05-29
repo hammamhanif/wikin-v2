@@ -50,4 +50,32 @@ class RegistrasiCommunitiesController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mendaftar.')->withInput();
         }
     }
+
+    public function editStatus($slug)
+    {
+        // Retrieve the specific Communities record based on the slug
+        $community = Communities::where('slug', $slug)->firstOrFail();
+
+        // Retrieve the related RegistrasiCommunities records
+        $registrasiCommunities = RegistrasiCommunities::where('community_id', $community->id)->get();
+
+        // Pass both to the view
+        return view('tamplate.dashboard.menu.daftarMemberKomunitas', compact('community', 'registrasiCommunities'));
+    }
+
+
+    // Method to update the status
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $community = RegistrasiCommunities::findOrFail($id);
+        $community->status = $request->input('status');
+        $community->save();
+
+        return redirect()->back()
+            ->with('success', 'Status updated successfully.');
+    }
 }

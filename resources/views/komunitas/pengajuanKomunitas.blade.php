@@ -61,9 +61,9 @@
                                                     placeholder="Nama Komunitas..">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="nama">Kontak yang dapat dihubungi (Whatsapp)</label>
-                                                <input type="text" class="form-control" name="number" id="nama"
-                                                    placeholder="Contoh 62857XXXXXXX..">
+                                                <label for="group">Masukkan link group chat</label>
+                                                <input type="text" class="form-control" name="group" id="group"
+                                                    placeholder="link group chat">
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

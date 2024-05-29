@@ -118,8 +118,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/registrasi-communities', [RegistrasiCommunitiesController::class, 'store'])->name('store.regKomunitas');
     Route::get('/registrasi-communities/{slug}', [RegistrasiCommunitiesController::class, 'index'])->name('regKomunitas');
+    Route::get('registrasi-communities/{slug}/edit-status', [RegistrasiCommunitiesController::class, 'editStatus'])->name('registrasiCommunities.editStatus');
+    Route::put('registrasi-communities/{id}/update-status', [RegistrasiCommunitiesController::class, 'updateStatus'])->name('registrasiCommunities.updateStatus');
 
-
+    Route::get('komunitas/pengguna', [CommunitiesController::class, 'komunitasPengguna'])->name('komunitas.pengguna');
     Route::get('komunitas/daftar', [CommunitiesController::class, 'daftar'])->name('komunitas.daftar');
     Route::get('komunitas', [CommunitiesController::class, 'index'])->name('komunitas');
     Route::get('community', [CommunitiesController::class, 'create'])->name('communities.create');

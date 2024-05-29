@@ -5,16 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Communities;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Validation\Rule;
+use App\Models\RegistrasiCommunities;
 
 class CommunitiesController extends Controller
 {
 
+    public function komunitasPengguna()
+    {
+        $communities = RegistrasiCommunities::where('user_id', Auth::id())
+            ->get();
+
+        return view('tamplate.dashboard.menu.komunitasPengguna', compact('communities'));
+    }
     public function daftar()
     {
-        $communities = Communities::where('status', 'active')->get();
+        $communities = Communities::where('status', 'active')->paginate(6);
 
         return view('tamplate.dashboard.menu.daftarKomunitas', compact('communities'));
     }
@@ -63,7 +71,7 @@ class CommunitiesController extends Controller
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
             // Tidak memvalidasi slug karena akan dihasilkan secara otomatis
-            'number' => 'nullable|string',
+            'group' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -88,12 +96,8 @@ class CommunitiesController extends Controller
         $community->content = $request->content;
         $community->slug = hash('sha256', $slug);
         $community->image = $imageHashName;
+        $community->group = $request->group;
         $community->user_id = Auth::id(); // Mengambil ID user yang sedang login
-        if (substr($request->number, 0, 1) === '0') {
-            $community->number = '62' . substr($request->number, 1);
-        } else {
-            $community->number = $request->number;
-        }
         $community->save();
 
         // Redirect ke halaman yang tepat dengan pesan sukses

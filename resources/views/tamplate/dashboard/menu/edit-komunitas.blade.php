@@ -65,10 +65,10 @@
                                                     placeholder="Judul" value="{{ htmlentities($community->name) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">No Hp. (Whatsapp)</label>
-                                                <input type="text" class="form-control" name="number" id="judul"
+                                                <label for="judul" class="form-label">Link Group</label>
+                                                <input type="text" class="form-control" name="group" id="group"
                                                     placeholder="No Handphone"
-                                                    value="{{ htmlentities($community->number) }}">
+                                                    value="{{ htmlentities($community->group) }}">
                                             </div>
                                         </div>
 

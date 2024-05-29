@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
+            $table->string('lpj')->nullable();
             $table->enum('status_pemas', ['pengajuan', 'sedang berjalan', 'selesai', 'pencarian volunteer'])->default('pengajuan'); // Kolom status dengan nilai default proses
             $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi'); // Kolom status dengan nilai default proses
             $table->unsignedBigInteger('user_id');
