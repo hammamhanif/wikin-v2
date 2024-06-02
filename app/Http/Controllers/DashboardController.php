@@ -33,6 +33,8 @@ class DashboardController extends Controller
             'name' => 'nullable|string|max:255',
             'username' => 'nullable|string|max:255|unique:users,username,' . $id,
             'phone' => 'nullable|string|max:20',
+            'facebook_profile' => 'nullable|url|max:255',
+            'instagram_profile' => 'nullable|url|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -59,6 +61,16 @@ class DashboardController extends Controller
             $user->phone = $request->phone;
         }
 
+        // Update Facebook profile if provided
+        if ($request->filled('facebook_profile')) {
+            $user->facebook_profile = $request->facebook_profile;
+        }
+
+        // Update Instagram profile if provided
+        if ($request->filled('instagram_profile')) {
+            $user->instagram_profile = $request->instagram_profile;
+        }
+
         // Update image if provided
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $allowedMimes = ['jpeg', 'png', 'jpg'];
@@ -79,6 +91,7 @@ class DashboardController extends Controller
 
         return redirect()->route('profile')->withSuccess("Profile berhasil diperbaharui.");
     }
+
 
 
     public function updatePassword(Request $request, $id)

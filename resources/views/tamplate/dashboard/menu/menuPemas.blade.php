@@ -58,7 +58,7 @@
                                         @foreach ($pengmases as $pemas)
                                             <tr>
                                                 <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                                <td>{{ htmlentities($pemas->name) }}</td>
+                                                <td>{{ htmlentities($pemas->formPemas->nama_kegiatan) }}</td>
                                                 <td>{{ htmlentities($pemas->location) }}</td>
                                                 <td><a href="#"
                                                         class="text-primary">{{ htmlentities($pemas->category) }}</a>
@@ -100,9 +100,10 @@
                                                             class="btn btn-info" style="margin-right: 5px;">
                                                             Edit
                                                         </a>
-                                                        <a href="{{ route('memberPemas', ['slug' => $pemas->slug]) }}"
-                                                            class="btn btn-warning" style="margin-right: 5px;">
-                                                            <i class="bi bi-people"></i>
+                                                        <a href="{{ route('download.lpj', ['slug' => $pemas->slug]) }}"
+                                                            class="btn btn-outline-success" style="margin-right: 5px;"
+                                                            title="Detail Pengabdian">
+                                                            <i class="bi bi-download"></i> LPJ
                                                         </a>
 
                                                         <form action="{{ route('pemas.destroy', ['id' => $pemas->id]) }}"
@@ -142,7 +143,7 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Pemas</th>
                                         <th scope="col">Lokasi</th>
-                                        <th scope="col">Nama Pengguna</th>
+                                        <th scope="col">Id Pemas</th>
                                         <th scope="col">Waktu</th>
                                         <th scope="col">Status </th>
                                         <th scope="col">Aksi</th>
@@ -154,7 +155,7 @@
                                             <th scope="row"><a href="">{{ $loop->iteration }}</a></th>
                                             <td>{{ htmlentities($pemas->nama_kegiatan) }}</td>
                                             <td>{{ htmlentities($pemas->location) }}</td>
-                                            <td><a href="" class="text-primary">{{ htmlentities($pemas->name) }}</a>
+                                            <td><a href="" class="text-primary">{{ htmlentities($pemas->id) }}</a>
                                             </td>
                                             <td>{{ htmlentities(strftime('%d %B %Y', strtotime($pemas->start_time))) }} S.d
                                                 {{ htmlentities(strftime('%d %B %Y', strtotime($pemas->end_time))) }}
@@ -174,7 +175,7 @@
 
                                             <td>
                                                 <div style="display: flex; align-items: center;">
-                                                    <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
+                                                    <a href="{{ route('memberPemas', ['slug' => $pemas->slug]) }}"
                                                         class="btn btn-outline-success" style="margin-right: 5px;"
                                                         title="Tambah Anggota">
                                                         <i class="bi bi-person-add"></i>
@@ -182,7 +183,12 @@
                                                     <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
                                                         class="btn btn-info" style="margin-right: 5px;"
                                                         title="Detail Pengabdian">
-                                                        Detail
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ route('download.proposal', ['slug' => $pemas->slug]) }}"
+                                                        class="btn btn-outline-primary" style="margin-right: 5px;"
+                                                        title="Download Proposal">
+                                                        <i class="bi bi-download"></i>
                                                     </a>
                                                     <form action="{{ route('formPemas.destroy', ['id' => $pemas->id]) }}"
                                                         method="POST" class="delete-form" style="margin-right: 5px;">

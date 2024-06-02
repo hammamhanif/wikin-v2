@@ -39,14 +39,14 @@
                 <div class="row gy-4">
                     <div class="col-md-6" hidden>
                         <label for="pemas_id" class="form-label">Pemas ID</label>
-                        <input type="number" class="form-control" id="pemas_id" name="pemas_id" hidden
-                            value="{{ $pemas->id }}" required>
+                        <input type="number" class="form-control" id="pemas_id" name="form_pemas_id"
+                            value="{{ $pemas->formPemas->id }}" required>
                     </div>
 
                     <div class="col-md-6">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama"
-                            placeholder="Masukkan nama anda.." required>
+                            value="{{ auth()->check() ? auth()->user()->name : '' }}" readonly>
                     </div>
 
                     <div class="col-md-6">
@@ -57,8 +57,8 @@
 
                     <div class="col-md-6">
                         <label for="judul" class="form-label">Nama Pengabdian Masyarakat</label>
-                        <input type="text" class="form-control" id="judul" name="judul" value="{{ $pemas->name }}"
-                            readonly>
+                        <input type="text" class="form-control" id="judul" name="judul"
+                            value="{{ $pemas->formPemas->nama_kegiatan }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label for="alamat" class="form-label">Alamat</label>

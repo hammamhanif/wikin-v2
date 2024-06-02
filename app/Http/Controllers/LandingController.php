@@ -77,10 +77,11 @@ class LandingController extends Controller
     {
         $searchQuery = $request->input('name');
 
-        $pengmases = pemas::join('users', 'pemas.user_id', '=', 'users.id')
+        $pengmases = Pemas::join('users', 'pemas.user_id', '=', 'users.id')
+            ->join('form_pemas', 'pemas.form_pemas_id', '=', 'form_pemas.id') // tambahkan join ke tabel formpemas
             ->where('pemas.status', 'Diterima')
             ->where(function ($query) use ($searchQuery) {
-                $query->where('pemas.name', 'like', '%' . $searchQuery . '%')
+                $query->where('form_pemas.nama_kegiatan', 'like', '%' . $searchQuery . '%') // ubah pemas.name menjadi formpemas.nama_kegiatan
                     ->orWhere('pemas.category', 'like', '%' . $searchQuery . '%')
                     ->orWhere('pemas.status_pemas', 'like', '%' . $searchQuery . '%')
                     ->orWhere('users.username', 'like', '%' . $searchQuery . '%')

@@ -414,7 +414,7 @@
             <div class="container mt-4">
                 <div class="container mt-4">
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('news') }}" class="btn"
+                        <a href="{{ route('pengmases') }}" class="btn"
                             style="background-color: #6f2da8; color: white;">Selengkapnya</a>
                     </div>
                 </div>

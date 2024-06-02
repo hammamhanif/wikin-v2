@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class PemasController extends Controller
 {
@@ -61,45 +62,59 @@ class PemasController extends Controller
     public function update(Request $request, $slug)
     {
         // Mengambil berita berdasarkan slug
-        $pemas = Pemas::where('slug', $slug)->first();
+        $pemas = Pemas::where('slug', $slug)->firstOrFail();
 
-        // Validasi request
+        // Validasi form
         $request->validate([
-            'location' => 'required|string|max:255', // Validasi location
-            'category' => 'required|string|max:255', // Validasi category
-            'name' => 'required|string|max:255', // Validasi category
-            'content' => 'required|string', // Validasi content
-            'status_pemas' => 'required|in:pengajuan,sedang berjalan,selesai,pencarian volunteer', // Validasi status_pemas
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi image
+            'name' => 'required|string|max:255',
+            'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
+            'location' => 'required|string', // Menambahkan validasi untuk lokasi
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
+            'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
         ]);
 
-        // Perbarui field dengan nilai baru
-        $pemas->location = $request->location;
-        $pemas->category = $request->category;
-        $pemas->name = $request->name;
-        $pemas->content = $request->content;
-        $pemas->status_pemas = $request->status_pemas;
+        // Perbarui properti pemas dengan data dari request
+        $pemas->name = $request->input('name');
+        $pemas->category = $request->input('category');
+        $pemas->location = $request->input('location');
+        $pemas->content = $request->input('content');
+        // Biarkan slug tetap seperti yang ada jika tidak berubah
+        if ($pemas->slug !== hash('sha256', $request->input('name'))) {
+            $pemas->slug = hash('sha256', $request->input('name'));
+        }
+        $pemas->status = 'Proses Verifikasi';
 
-        // Periksa apakah ada file gambar yang diunggah
+        // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
-            // Simpan file gambar dan dapatkan path
-            $imagePath = $request->file('image')->store('images', 'public');
-
             // Hapus gambar lama jika ada
             if ($pemas->image) {
-                Storage::disk('public')->delete($pemas->image);
+                Storage::disk('public')->delete('images/' . $pemas->image);
             }
-
-            // Perbarui field image dengan path baru
-            $pemas->image = $imagePath;
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('images', $imageName, 'public');
+            $pemas->image = $imageName;
         }
 
-        // Simpan perubahan ke database
+        // Proses upload LPJ jika ada
+        if ($request->hasFile('lpj')) {
+            // Hapus LPJ lama jika ada
+            if ($pemas->lpj) {
+                Storage::disk('public')->delete('lpj/' . $pemas->lpj);
+            }
+            $lpj = $request->file('lpj');
+            $lpjName = time() . '_' . $lpj->getClientOriginalName();
+            $lpjPath = $lpj->storeAs('lpj', $lpjName, 'public');
+            $pemas->lpj = $lpjName;
+        }
+
+        $pemas->user_id = auth()->user()->id;
         $pemas->save();
 
-        // Mengembalikan ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Data pemas berhasil diperbarui.');
+        return redirect()->route('pemas')->with('success', 'Data berhasil diperbarui! Silakan cek menu pengabdian.');
     }
+
     public function updateAdmin(Request $request, $slug)
     {
         // Mengambil berita berdasarkan slug
@@ -142,7 +157,8 @@ class PemasController extends Controller
     }
     public function updateForm(Request $request, $slug)
     {
-        $formPemas =  formPemas::where('slug', $slug)->first();
+        $formPemas = FormPemas::where('slug', $slug)->first();
+
         // Validasi input
         $validator = Validator::make($request->all(), [
             'noID' => 'nullable|string',
@@ -152,6 +168,7 @@ class PemasController extends Controller
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
             'category' => 'required|string',
             'content' => 'required|string',
+            'proposal' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk proposal
         ]);
 
         // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
@@ -175,6 +192,20 @@ class PemasController extends Controller
         $formPemas->category = $request->input('category');
         $formPemas->content = $request->input('content');
 
+        // Proses upload proposal jika ada
+        if ($request->hasFile('proposal')) {
+            // Hapus file proposal lama jika ada
+            if ($formPemas->proposal && Storage::disk('public')->exists('proposals/' . $formPemas->proposal)) {
+                Storage::disk('public')->delete('proposals/' . $formPemas->proposal);
+            }
+
+            // Unggah file proposal baru
+            $proposal = $request->file('proposal');
+            $proposalName = time() . '_' . $proposal->getClientOriginalName();
+            $proposalPath = $proposal->storeAs('proposals', $proposalName, 'public');
+            $formPemas->proposal = $proposalName;
+        }
+
         // Menyimpan perubahan ke basis data
         $formPemas->save();
 
@@ -183,26 +214,31 @@ class PemasController extends Controller
     }
 
 
+
     public function store(Request $request)
-    { // Validasi form
+    {
+        // Validasi form
         $request->validate([
-            'name' => 'required|string|max:255',
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'location' => 'required|string', // Menambahkan validasi untuk lokasi
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
+            'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
         ]);
 
         // Proses penyimpanan pemas
-        $pemas = new pemas();
-        $pemas->name = $request->input('name');
+        $pemas = new Pemas();
+        $pemas->form_pemas_id = $request->input('form_pemas_id');
         $pemas->category = $request->input('category');
         $pemas->status = $request->input('status');
         $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
-        $pemas->slug = hash('sha256', $request->input('name'));
-        $pemas->status = 'Proses Verifikasi';
 
+        // Menggunakan kombinasi location dan timestamp untuk membuat slug
+        $slug = hash('sha256', $request->input('location') . time());
+        $pemas->slug = $slug;
+
+        $pemas->status = 'Proses Verifikasi';
 
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
@@ -213,12 +249,20 @@ class PemasController extends Controller
             $pemas->image = $imageName;
         }
 
+        // Proses upload LPJ jika ada
+        if ($request->hasFile('lpj')) {
+            $lpj = $request->file('lpj');
+            $lpjName = time() . '_' . $lpj->getClientOriginalName();
+            $lpjPath = $lpj->storeAs('lpj', $lpjName, 'public');
+            $pemas->lpj = $lpjName;
+        }
+
         $pemas->user_id = auth()->user()->id;
         $pemas->save();
 
-
         return redirect()->route('pemas')->with('success', 'Berhasil Diajukan! silahkan cek menu pengabdian');
     }
+
 
     public function storeForm(Request $request)
     {
@@ -231,6 +275,7 @@ class PemasController extends Controller
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
             'category' => 'required|string',
             'content' => 'required|string',
+            'proposal' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk proposal
         ]);
 
         // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
@@ -242,7 +287,6 @@ class PemasController extends Controller
         $formPemas = new FormPemas();
 
         // Mengisi properti dari instansi dengan data dari request
-        $formPemas->name = auth()->user()->name;
         $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
         $formPemas->slug = hash('sha256', $request->input('nama_kegiatan'));
@@ -254,12 +298,21 @@ class PemasController extends Controller
         $formPemas->content = $request->input('content');
         $formPemas->status = 'Proses verifikasi'; // Menambahkan status default
 
+        // Proses upload proposal jika ada
+        if ($request->hasFile('proposal')) {
+            $proposal = $request->file('proposal');
+            $proposalName = time() . '_' . $proposal->getClientOriginalName();
+            $proposalPath = $proposal->storeAs('proposals', $proposalName, 'public');
+            $formPemas->proposal = $proposalName;
+        }
+
         // Menyimpan data ke basis data
         $formPemas->save();
 
         // Redirect ke halaman atau rute yang diinginkan dengan pesan sukses
         return redirect()->back()->with('success', 'Data kegiatan berhasil disimpan.');
     }
+
 
     public function detailpemas($slug)
     {
@@ -297,6 +350,11 @@ class PemasController extends Controller
         // Check if the record exists
         if (!$formPemas) {
             return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
+        }
+
+        // Hapus file proposal jika ada
+        if ($formPemas->proposal && Storage::disk('public')->exists('proposals/' . $formPemas->proposal)) {
+            Storage::disk('public')->delete('proposals/' . $formPemas->proposal);
         }
 
         // Delete the record

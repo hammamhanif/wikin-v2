@@ -79,9 +79,9 @@
                                                         class="btn btn-info" style="margin-right: 5px;">
                                                         Edit
                                                     </a>
-                                                    <a href="{{ route('regKomunitas', ['slug' => $community->slug]) }}"
-                                                        class="btn btn-outline-warning" style="margin-right: 5px;">
-                                                        <i class="bi bi-person-add"></i>
+                                                    <a href="{{ route('registrasiCommunities.editStatus', ['slug' => $community->slug]) }}"
+                                                        class="btn btn-outline-success" style="margin-right: 5px;">
+                                                        <i class="bi bi-people"></i>
                                                     </a>
                                                     <a href="{{ route('galeri.Admin', ['slug' => $community->slug]) }}"
                                                         class="btn btn-warning" style="margin-right: 5px;">

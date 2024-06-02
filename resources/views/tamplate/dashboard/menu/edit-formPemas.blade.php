@@ -102,6 +102,14 @@
                                             </div>
                                         </div>
                                         <div class="mb-3">
+                                            <div class="">
+                                                <label for="proposal" class="col-sm-5 col-form-label">Proposal</label>
+                                                <input class="form-control" type="file" name="proposal" id="proposal"
+                                                    accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                            </div>
+
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="category" class="form-label">Kategori</label>
                                             <select class="form-select" name="category" id="category">
                                                 <option value="Umum" @if ($pemas->category === 'Umum') selected @endif>

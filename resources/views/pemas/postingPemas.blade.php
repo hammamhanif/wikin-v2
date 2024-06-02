@@ -62,12 +62,15 @@
                                         @csrf
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <input type="text" class="form-control" name="name"
-                                                    id="name_penelitian" placeholder="Nama Kegiatan">
+                                                <label for="form_pemas_id" class="form-label">ID Pengajuan
+                                                    Pengabdian :</label>
+                                                <input type="text" class="form-control" name="form_pemas_id"
+                                                    id="form_pemas_id" placeholder=" Masukkan Id Pemas..">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <input type="text" class="form-control" name="location"
-                                                    id="name_penelitian" placeholder="Lokasi">
+                                                <label for="location" class="form-label">Lokasi :</label>
+                                                <input type="text" class="form-control" name="location" id="location"
+                                                    placeholder="Lokasi">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -92,10 +95,16 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="image" class="col-sm-5 col-form-label">Gambar </label>
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="lpj" class="col-sm-5 col-form-label">LPJ Kegiatan (apabila
+                                                    selesai)</label>
+                                                <input class="form-control" type="file" name="lpj" id="lpj"
+                                                    accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                             </div>
                                         </div>
 

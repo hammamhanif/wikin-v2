@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('registrasi_pemas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('pemas_id');
-            $table->string('judul');
-            $table->string('nama');
+            $table->unsignedBigInteger('form_pemas_id');
             $table->string('noID');
             $table->string('alamat');
             $table->enum('program_study', ['Elektronika Instrumentasi', 'Teknokimia Nuklir', 'Elektro Mekanika']);
@@ -27,10 +25,10 @@ return new class extends Migration
 
             // Membuat foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('pemas_id')->references('id')->on('pemas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('form_pemas_id')->references('id')->on('form_pemas')->onDelete('cascade')->onUpdate('cascade');
 
             // Membuat unique constraint untuk memastikan user hanya bisa mendaftarkan satu pemas sekali
-            $table->unique(['user_id', 'pemas_id']);
+            $table->unique(['user_id', 'form_pemas_id']);
         });
     }
 

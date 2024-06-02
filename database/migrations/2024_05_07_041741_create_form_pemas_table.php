@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('form_pemas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('name');
             $table->string('noID')->nullable();
             $table->string('nama_kegiatan');
             $table->string('location');
@@ -22,9 +21,9 @@ return new class extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->string('category');
-            $table->text('content');
+            $table->longText('content');
             $table->string('proposal')->nullable();
-            $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi'); // Kolom status 
+            $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

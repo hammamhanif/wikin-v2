@@ -16,8 +16,8 @@ class RegistrasiPemas extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function pemas()
+    public function formPemas()
     {
-        return $this->belongsTo(pemas::class);
+        return $this->belongsTo(FormPemas::class);
     }
 }

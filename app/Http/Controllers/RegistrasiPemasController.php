@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pemas;
+use App\Models\FormPemas;
 use Illuminate\Http\Request;
 use App\Models\RegistrasiPemas;
 
@@ -16,10 +17,10 @@ class RegistrasiPemasController extends Controller
     public function indexMember($slug)
     {
         // Dapatkan Pemas berdasarkan slug
-        $pemas = Pemas::where('slug', $slug)->firstOrFail();
+        $pemas = FormPemas::where('slug', $slug)->firstOrFail();
 
         // Dapatkan semua RegistrasiPemas yang memiliki pemas_id yang sama
-        $registrasiPemas = RegistrasiPemas::where('pemas_id', $pemas->id)->get();
+        $registrasiPemas = RegistrasiPemas::where('form_pemas_id', $pemas->id)->get();
 
         // Kembalikan view dengan data Pemas dan RegistrasiPemas
         return view('pemas.memberpemas', compact('pemas', 'registrasiPemas'));
@@ -44,10 +45,16 @@ class RegistrasiPemasController extends Controller
     }
     public function store(Request $request)
     {
+        // Check if the user has already submitted the form
+        $existingRegistration = RegistrasiPemas::where('user_id', auth()->user()->id)->exists();
+
+        if ($existingRegistration) {
+            // If the user has already submitted the form, return an error response
+            return redirect()->back()->withErrors(['error' => 'Anda sudah mengisi formulir ini sebelumnya.']);
+        }
         $request->validate([
             // 'user_id' => 'required|exists:users,id',
-            'pemas_id' => 'required|exists:pemas,id',
-            'nama' => 'required|string|max:255',
+            'form_pemas_id' => 'required|exists:pemas,id',
             'noID' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'program_study' => 'required|string|max:255',
@@ -57,9 +64,7 @@ class RegistrasiPemasController extends Controller
 
         $registrasiPemas = RegistrasiPemas::create([
             'user_id' => auth()->user()->id,
-            'pemas_id' => $request->pemas_id,
-            'judul' => $request->judul,
-            'nama' => $request->nama,
+            'form_pemas_id' => $request->form_pemas_id,
             'noID' => $request->noID,
             'alamat' => $request->alamat,
             'program_study' => $request->program_study,

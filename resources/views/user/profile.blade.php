@@ -23,8 +23,10 @@
                             <h3>{{ Auth::user()->name }}</h3>
                             <div class="social-links mt-2">
                                 <a href="" class="twitter"><i class="bi bi-twitter"></i></a>
-                                <a href="" class="facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="{{ Auth::user()->facebook_profile }}" class="facebook" target="_blank"><i
+                                        class="bi bi-facebook"></i></a>
+                                <a href="{{ Auth::user()->instagram_profile }}" class="instagram" target="_blank"><i
+                                        class="bi bi-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -126,6 +128,28 @@
                                                 <input name="name" type="text" class="form-control" id="name"
                                                     value="{{ Auth::user()->name }}">
                                                 @error('name')
+                                                    <span class="invalid-feedback">{{ htmlentities($message) }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="Job"
+                                                class="col-md-4 col-lg-3 col-form-label">Instagram</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="instagram_profile" type="text" class="form-control"
+                                                    id="job" value="{{ Auth::user()->instagram_profile }}">
+                                                @error('job')
+                                                    <span class="invalid-feedback">{{ htmlentities($message) }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="Job"
+                                                class="col-md-4 col-lg-3 col-form-label">Facebook</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="facebook_profile" type="text" class="form-control"
+                                                    id="job" value="{{ Auth::user()->facebook_profile }}">
+                                                @error('job')
                                                     <span class="invalid-feedback">{{ htmlentities($message) }}</span>
                                                 @enderror
                                             </div>

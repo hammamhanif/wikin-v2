@@ -2,7 +2,6 @@
 
 @section('dashboard')
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Pengajuan Pengabdian Masyarakat</h1>
             <nav>
@@ -82,6 +81,19 @@
                                                 <label for="lokasi" class="form-label">Lokasi</label>
                                                 <input type="text" class="form-control" name="location" id="lokasi"
                                                     placeholder="Lokasi..">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="">
+                                                <label for="proposal" class="col-sm-5 col-form-label">Proposal @if (Auth::user()->type == 'masyarakat')
+                                                        (Apabila ada)
+                                                    @else
+                                                    @endif
+                                                </label>
+                                                <input class="form-control" type="file" name="proposal" id="proposal"
+                                                    accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                                    @if (Auth::user()->type == 'masyarakat') @else
+                                                       required @endif>
                                             </div>
                                         </div>
                                         <div class="row mb-3">

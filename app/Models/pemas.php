@@ -18,13 +18,13 @@ class pemas extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function formPemas()
+    {
+        return $this->belongsTo(FormPemas::class);
+    }
 
     public function comments()
     {
         return $this->hasMany(CommentPemas::class);
-    }
-    public function registrasiPemas()
-    {
-        return $this->hasMany(RegistrasiPemas::class);
     }
 }

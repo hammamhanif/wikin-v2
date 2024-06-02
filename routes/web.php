@@ -11,6 +11,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\CommunitiesController;
+use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RegistrasiPemasController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -129,6 +130,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('community/{slug}', [CommunitiesController::class, 'edit'])->name('communities.edit');
     Route::put('/community/{slug}/update', [CommunitiesController::class, 'update'])->name('communities.update');
     Route::delete('/community/{id}', [CommunitiesController::class, 'delete'])->name('communities.delete');
+
+    Route::get('/download/lpj/{slug}', [FileDownloadController::class, 'downloadLpj'])->name('download.lpj');
+    Route::get('/download-proposal/{slug}', [FileDownloadController::class, 'downloadProposal'])->name('download.proposal');
 });
 
 Route::middleware(['IsAdmin', 'verified'])->group(function () {
