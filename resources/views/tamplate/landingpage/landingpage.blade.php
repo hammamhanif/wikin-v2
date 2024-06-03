@@ -86,7 +86,7 @@
                         <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#tab-1">
                             <i class="bi bi-newspaper color-cyan"></i>
                             <h4>Berita Informasi</h4>
-                            <p>12</p>
+                            <p>{{ $lot_news_count }}</p>
                         </a>
                     </li><!-- End Tab 1 Nav -->
 
@@ -95,7 +95,7 @@
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
                             <i class="bi bi-people color-red"></i>
                             <h4>Komunitas</h4>
-                            <p>13</p>
+                            <p>{{ $communities_count }}</p>
                         </a>
                     </li><!-- End Tab 4 Nav -->
 
@@ -103,7 +103,7 @@
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-6">
                             <i class="bi bi-house-heart color-orange"></i>
                             <h4 class="text-center">Pengabdian</h4>
-                            <p>16</p>
+                            <p>{{ $pemases_count }}</p>
                         </a>
                     </li><!-- End Tab 6 Nav -->
 

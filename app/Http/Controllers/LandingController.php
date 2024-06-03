@@ -19,7 +19,9 @@ class LandingController extends Controller
             $news->author = $news->user->username;
             return $news;
         });
-        $pemases = pemas::with('user')
+        $lot_news_count = $lot_news->count();
+
+        $pemases = Pemas::with('user')
             ->where('status', 'Diterima')
             ->orderByDesc('updated_at')
             ->get()
@@ -30,9 +32,24 @@ class LandingController extends Controller
                 $pemas->author = $pemas->user->username;
                 return $pemas;
             });
+        $pemases_count = $pemases->count();
+
+        $communities = Communities::with('user')
+            ->where('status', 'Active')
+            ->orderByDesc('updated_at')
+            ->get()
+            ->take(3)
+            ->map(function ($community) {
+                $community->created = $community->created_at->format('M jS Y');
+                $community->content = substr($community->content, 0, 200);
+                $community->author = $community->user->username;
+                return $community;
+            });
+        $communities_count = $communities->count();
+
         $landing = Landing::where('id', 1)->firstOrFail();
 
-        return view('tamplate.landingpage.landingpage', compact('lot_news', 'pemases', 'landing'),);
+        return view('tamplate.landingpage.landingpage', compact('lot_news', 'pemases', 'landing', 'lot_news_count', 'pemases_count', 'communities', 'communities_count'));
     }
 
 
@@ -53,7 +70,7 @@ class LandingController extends Controller
 
         $lot_news->getCollection()->transform(function ($news) {
             $news->created = $news->created_at->format('M jS Y');
-            $news->content = substr($news->content, 0, 200);
+            $news->content = substr($news->content, 0, 150);
             $news->total_comments = $news->comments->count(); // Mengambil total komentar
             return $news;
         });
@@ -95,7 +112,7 @@ class LandingController extends Controller
         $pengmases->getCollection()->transform(function ($pemas) {
             $pemas->created = $pemas->created_at->format('M jS Y');
             $pemas->total_comments = $pemas->comments->count();
-            $pemas->content = substr($pemas->content, 0, 200);
+            $pemas->content = substr($pemas->content, 0, 100);
             return $pemas;
         });
 
@@ -137,7 +154,7 @@ class LandingController extends Controller
 
         $communities->getCollection()->transform(function ($community) {
             $community->created = $community->created_at->format('M jS Y');
-            $community->content = substr($community->content, 0, 200);
+            $community->content = substr($community->content, 0, 150);
             return $community;
         });
 

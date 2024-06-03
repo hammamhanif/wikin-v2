@@ -92,7 +92,7 @@
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
                                                 <input type="text" class="form-control" name="name" id="judul"
                                                     placeholder="Nama Pengabdian Masyarakat.."
-                                                    value="{{ htmlentities($pemas->name) }}">
+                                                    value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pembuat</label>

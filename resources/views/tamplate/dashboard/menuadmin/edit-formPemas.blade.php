@@ -97,8 +97,8 @@
                                                 <label for="deskripsi" class="form-label">Nama Pengguna yang
                                                     mengajukan</label>
                                                 <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->name) }}" pemas
-                                                    readonly>
+                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->user->name) }}"
+                                                    pemas readonly>
                                             </div>
                                         </div>
                                         <div class="mb-3">

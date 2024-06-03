@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\User;
 use App\Models\pemas;
+use App\Models\FormPemas;
+use App\Models\Communities;
 use Illuminate\Http\Request;
+use App\Models\RegistrasiPemas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\RegistrasiCommunities;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+        $totalPemas = FormPemas::where('user_id', $user->id)->count();
+        $communities = RegistrasiCommunities::where('user_id', $user->id)->count();
+        $news = News::where('user_id', $user->id)->count();
+        $totalPemas2 = FormPemas::where('user_id', $user->id)->where('status', 'Diterima')->count();
+        $registrasi = RegistrasiPemas::where('user_id', $user->id)->where('status', 'Diterima')->count();
+        $memberPemas = $totalPemas2 + $registrasi;
         $pengmases = pemas::where('status_pemas', 'pencarian volunteer')->paginate(9);
-        return view('tamplate.dashboard.welcome', compact('pengmases'));
+        return view('tamplate.dashboard.welcome', compact('pengmases', 'totalPemas', 'memberPemas', 'communities', 'news'));
     }
 
     public function profile()

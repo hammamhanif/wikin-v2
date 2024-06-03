@@ -34,7 +34,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">{{ $community->name }}
                                                     </h5>
-                                                    <p class="card-text">{!! $community->content !!}</p>
+                                                    <p class="card-text">{!! $community->content !!}...</p>
 
                                                     <div style="display: flex; align-items: text-center;">
                                                         <a href="{{ route('regKomunitas', ['slug' => $community->slug]) }}"

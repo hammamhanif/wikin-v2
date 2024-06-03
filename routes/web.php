@@ -90,6 +90,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
     Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');
+    Route::post('/registrasiPemas-add', [RegistrasiPemasController::class, 'storeAuthor'])->name('storeAuthor.registrasiPemas');
 
     Route::get('/registrasi-pemas/user', [RegistrasiPemasController::class, 'getByUser'])->name('registrasi_pemas.user');
     Route::get('/memberPemas/{slug}', [RegistrasiPemasController::class, 'indexMember'])->name('memberPemas');

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\pemas;
 use App\Models\FormPemas;
 use Illuminate\Http\Request;
 use App\Models\RegistrasiPemas;
+use Illuminate\Validation\Rule;
 
 class RegistrasiPemasController extends Controller
 {
@@ -14,7 +16,9 @@ class RegistrasiPemasController extends Controller
         $pemas = pemas::where('slug', $slug)->firstOrFail();
         return view('pemas.registrasiPemas', compact('pemas'));
     }
-    public function indexMember($slug)
+
+
+    public function indexMember(Request $request, $slug)
     {
         // Dapatkan Pemas berdasarkan slug
         $pemas = FormPemas::where('slug', $slug)->firstOrFail();
@@ -22,9 +26,13 @@ class RegistrasiPemasController extends Controller
         // Dapatkan semua RegistrasiPemas yang memiliki pemas_id yang sama
         $registrasiPemas = RegistrasiPemas::where('form_pemas_id', $pemas->id)->get();
 
-        // Kembalikan view dengan data Pemas dan RegistrasiPemas
-        return view('pemas.memberpemas', compact('pemas', 'registrasiPemas'));
+        // Dapatkan semua pengguna
+        $users = User::all(); // Mengambil semua data pengguna
+
+        // Kembalikan view dengan data Pemas, RegistrasiPemas, dan pengguna
+        return view('pemas.memberpemas', compact('pemas', 'registrasiPemas', 'users'));
     }
+
     public function indexAdmin($slug)
     {
         // Dapatkan Pemas berdasarkan slug
@@ -71,6 +79,33 @@ class RegistrasiPemasController extends Controller
             'type' => $request->type,
             'motivasi' => $request->motivasi,
             'status' => 'Proses Verifikasi',
+        ]);
+        $registrasiPemas->save();
+        return  redirect()->back()->with('success', 'Berhasil mendaftar pengabdian masyarakat, silahkan cek menu anggota pengabdian');
+    }
+    public function storeAuthor(Request $request)
+    {
+
+
+        $request->validate([
+            // 'user_id' => 'required|exists:users,id',
+            'form_pemas_id' => 'required|exists:pemas,id',
+            'program_study' => 'required|string|max:255',
+            'type' => 'required|in:admin,dosen,mahasiswa',
+            'user_id' => Rule::unique('registrasi_pemas')->where(function ($query) use ($request) {
+                return $query->where('form_pemas_id', $request->form_pemas_id);
+            })
+        ]);
+
+        $registrasiPemas = RegistrasiPemas::create([
+            'form_pemas_id' => $request->form_pemas_id,
+            'user_id' => $request->user_id,
+            'noID' => $request->user_id,
+            'alamat' => 'Poltek Nuklir',
+            'program_study' => $request->program_study,
+            'type' => $request->type,
+            'motivasi' => 'rekan tambahan',
+            'status' => 'diterima',
         ]);
         $registrasiPemas->save();
         return  redirect()->back()->with('success', 'Berhasil mendaftar pengabdian masyarakat, silahkan cek menu anggota pengabdian');

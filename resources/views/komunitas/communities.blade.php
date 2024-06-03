@@ -11,7 +11,7 @@
                     <h2>Galeri Komunitas Nuklir</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
-                        <li>Komunitas</li>
+                        <li>Informasi</li>
                     </ol>
                 </div>
 
@@ -41,6 +41,7 @@
                                                 href="{{ route('detailpemas', $community->slug) }}">{{ $community->name }}</a>
                                         </h2>
 
+
                                         <div class="meta-top">
                                             <ul>
                                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
@@ -60,7 +61,7 @@
 
                                         <div class="content">
                                             <p>
-                                                {!! $community->content !!}
+                                                {!! $community->content !!}...
                                             </p>
                                         </div>
 
@@ -71,7 +72,7 @@
                                     </article>
                                 </div><!-- End post list item -->
                             @endforeach
-                        </div>
+                        </div><!-- End blog posts list -->
 
                         <div class="blog-pagination">
                             {{ $communities->links() }}
@@ -86,7 +87,7 @@
                             <div class="sidebar-item search-form">
                                 <h3 class="sidebar-title">Cari</h3>
                                 <form action="{{ route('communities') }}" method="GET" class="mt-3">
-                                    <input type="text" name="name" placeholder="Masukkan judul">
+                                    <input type="text" name="title" placeholder="Masukkan judul">
                                     <button type="submit"><i class="bi bi-search"></i></button>
                                 </form>
 
@@ -99,6 +100,7 @@
                                     <li><a href="{{ route('communities', ['name' => 'Industri']) }}">Indutri</a></li>
                                     <li><a href="{{ route('communities', ['name' => 'Pangan']) }}">Pangan</a></li>
                                     <li><a href="{{ route('communities', ['name' => 'Umum']) }}">Umum</a></li>
+                                </ul>
                             </div><!-- End sidebar tags-->
 
                         </div><!-- End Blog Sidebar -->

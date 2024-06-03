@@ -75,7 +75,7 @@
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pengguna</label>
                                                 <input type="text" class="form-control" name="name" id="name"
-                                                    placeholder="Deskripsi" value="{{ $user->name }}">
+                                                    placeholder="Deskripsi" value="{{ $user->name }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">

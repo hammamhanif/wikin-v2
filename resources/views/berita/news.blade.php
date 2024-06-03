@@ -59,7 +59,7 @@
 
                                         <div class="content">
                                             <p>
-                                                {{ $news->description }}
+                                                {!! $news->content !!}...
                                             </p>
                                         </div>
 

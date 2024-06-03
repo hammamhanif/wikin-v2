@@ -14,31 +14,84 @@
         </div><!-- End Page Title -->
         <section class="section">
             <div class="row">
+                <div class="col-12">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                        </div>
+                    @elseif(session('unsuccess'))
+                        <div class="alert alert-danger" role="alert">
+                            <strong class="font-bold">Unsuccess!</strong>
+                            <span class="block sm:inline">{{ session('unsuccess') }}</span>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            <ul class="list-disc pl-5">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ htmlentities($error) }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title ">Tambahkan Rekan di Pengabdian Masyarakat Anda!</h5>
+
+
+                            <!-- TinyMCE Editor -->
+                            <form action="{{ route('storeAuthor.registrasiPemas') }}" method="POST" id="memberForm">
+                                @csrf
+                                <p> Nama Kegiatan : {{ $pemas->nama_kegiatan }}</p>
+                                <input type="hidden" name="user_id" value="">
+                                <input type="hidden" id="user_type" name="type" value="">
+                                <input type="hidden" name="form_pemas_id" value="{{ $pemas->id }}">
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <select class="form-select" name="user_name" id="user_name">
+                                            <option value="" selected disabled>Pilih Rekan</option>
+                                            <!-- Opsi default -->
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}" data-type="{{ $user->type }}">
+                                                    {{ $user->name }} ({{ $user->type }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-3">
+                                    <label for="program_study" class="form-label">Program Studi</label>
+                                    <select class="form-select" id="program_study" name="program_study" required>
+                                        <option value="">Pilih Prodi</option>
+                                        <option value="Elektronika Instrumentasi">Elektronika Instrumentasi</option>
+                                        <option value="Teknokimia Nuklir">Teknokimia Nuklir</option>
+                                        <option value="Elektro Mekanika">Elektro Mekanika</option>
+                                    </select>
+                                </div>
+
+                                <!-- other form inputs -->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-primary" id="submitBtn">Tambahkan</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
                 <!-- List Data User -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
+
                         <div class="card-body">
+
                             <h5 class="card-title">Daftar pendaftar pengabdian masyarakat yang kamu buat</span></h5>
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    <strong class="font-bold">Success!</strong>
-                                    <span class="block sm:inline">{{ session('success') }}</span>
-                                </div>
-                            @elseif(session('unsuccess'))
-                                <div class="alert alert-danger" role="alert">
-                                    <strong class="font-bold">Unsuccess!</strong>
-                                    <span class="block sm:inline">{{ session('unsuccess') }}</span>
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger" role="alert">
-                                    <ul class="list-disc pl-5">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ htmlentities($error) }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                             </div>
                             <table class="table table-borderless datatable">
@@ -62,10 +115,12 @@
                                             </td>
                                             <td>{{ htmlentities($pemas->type) }}</td>
                                             @if ($pemas->status == 'Diterima')
-                                                <td><span class="badge bg-success">{{ htmlentities($pemas->status) }}</span>
+                                                <td><span
+                                                        class="badge bg-success">{{ htmlentities($pemas->status) }}</span>
                                                 </td>
                                             @elseif ($pemas->status == 'Proses verifikasi')
-                                                <td><span class="badge bg-warning">{{ htmlentities($pemas->status) }}</span>
+                                                <td><span
+                                                        class="badge bg-warning">{{ htmlentities($pemas->status) }}</span>
                                                 </td>
                                             @elseif ($pemas->status == 'Ditolak')
                                                 <td><span class="badge bg-danger">{{ htmlentities($pemas->status) }}</span>
@@ -193,6 +248,30 @@
         </section>
     </main><!-- End #main -->
     <!-- End Main Content -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user_name').change(function() {
+                var userId = $(this).val();
+                var userType = $(this).find('option:selected').data(
+                    'type'); // Mengambil nilai 'type' dari data pengguna yang dipilih
+
+                // Set nilai 'type' ke input hidden "type"
+                $('#user_type').val(userType);
+
+                $('input[name="user_id"]').val(userId);
+
+
+            });
+
+            // Handler untuk tombol submit
+            $('#submitBtn').click(function() {
+                $('#memberForm').submit(); // Submit form
+            });
+        });
+    </script>
+
     <script>
         function confirmDelete(userId) {
             Swal.fire({

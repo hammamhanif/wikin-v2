@@ -59,16 +59,12 @@
                                         @csrf
 
                                         <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                            <div class="">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" class="form-control" name="title" id="judul"
                                                     placeholder="Judul" value="{{ htmlentities($news->title) }}">
                                             </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Deskripsi</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($news->description) }}">
-                                            </div>
+
                                         </div>
 
                                         <div class="mb-3">

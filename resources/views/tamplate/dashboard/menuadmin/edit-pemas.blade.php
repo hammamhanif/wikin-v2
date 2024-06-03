@@ -91,13 +91,14 @@
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
                                                 <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul" value="{{ htmlentities($pemas->name) }}" readonly>
+                                                    placeholder="Judul"
+                                                    value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}" readonly>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pembuat</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->user->name) }}"
-                                                    pemas readonly>
+                                                <input type="text" class="form-control" name="name" id="deskripsi"
+                                                    placeholder="Nama Pembuat.."
+                                                    value="{{ htmlentities($pemas->formPemas->user->name) }}" readonly>
                                             </div>
                                         </div>
 

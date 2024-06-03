@@ -66,7 +66,6 @@ class PemasController extends Controller
 
         // Validasi form
         $request->validate([
-            'name' => 'required|string|max:255',
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'location' => 'required|string', // Menambahkan validasi untuk lokasi
             'content' => 'required|string',
@@ -75,15 +74,16 @@ class PemasController extends Controller
         ]);
 
         // Perbarui properti pemas dengan data dari request
-        $pemas->name = $request->input('name');
+
         $pemas->category = $request->input('category');
+        $pemas->status_pemas = $request->input('status_pemas');
         $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
         // Biarkan slug tetap seperti yang ada jika tidak berubah
         if ($pemas->slug !== hash('sha256', $request->input('name'))) {
             $pemas->slug = hash('sha256', $request->input('name'));
         }
-        $pemas->status = 'Proses Verifikasi';
+        $pemas->status = 'Diterima';
 
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
@@ -112,7 +112,7 @@ class PemasController extends Controller
         $pemas->user_id = auth()->user()->id;
         $pemas->save();
 
-        return redirect()->route('pemas')->with('success', 'Data berhasil diperbarui! Silakan cek menu pengabdian.');
+        return redirect()->back()->with('success', 'Data berhasil diperbarui! Silakan cek menu pengabdian.');
     }
 
     public function updateAdmin(Request $request, $slug)
@@ -182,7 +182,7 @@ class PemasController extends Controller
         }
 
         // Mengisi properti dari instansi dengan data dari request
-        $formPemas->name = auth()->user()->name;
+
         $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
         $formPemas->nama_kegiatan = $request->input('nama_kegiatan');

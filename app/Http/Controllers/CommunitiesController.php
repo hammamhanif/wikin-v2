@@ -23,6 +23,10 @@ class CommunitiesController extends Controller
     public function daftar()
     {
         $communities = Communities::where('status', 'active')->paginate(6);
+        $communities->getCollection()->transform(function ($community) {
+            $community->content = substr($community->content, 0, 100);
+            return $community;
+        });
 
         return view('tamplate.dashboard.menu.daftarKomunitas', compact('communities'));
     }
