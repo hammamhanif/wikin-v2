@@ -99,7 +99,9 @@
                                     <li><a href="{{ route('news', ['title' => 'Pangan']) }}">Pangan</a></li>
                                     <li><a href="{{ route('news', ['title' => 'Umum']) }}">Umum</a></li>
                             </div><!-- End sidebar tags-->
-
+                            <hr>
+                            <div><a class="btn btn-custom" href="{{ route('post.informasi') }}">Tulis Berita</a>
+                            </div>
                         </div><!-- End Blog Sidebar -->
 
                     </div>

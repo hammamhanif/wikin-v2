@@ -8,39 +8,81 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item">Menu Admin</li>
-                    <li class="breadcrumb-item active">Registrasi Komunitas</li>
+                    <li class="breadcrumb-item">Menu Komunitas</li>
+                    <li class="breadcrumb-item active">Data Anggota Komunitas</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
         <section class="section">
             <div class="row">
+                <div class="col-12">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                        </div>
+                    @elseif(session('unsuccess'))
+                        <div class="alert alert-danger" role="alert">
+                            <strong class="font-bold">Unsuccess!</strong>
+                            <span class="block sm:inline">{{ session('unsuccess') }}</span>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            <ul class="list-disc pl-5">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ htmlentities($error) }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title ">Tambahkan Rekan di Pengabdian Masyarakat Anda!</h5>
+
+
+                            <!-- TinyMCE Editor -->
+                            <form action="{{ route('storeAuthor.regKomunitas') }}" method="POST" id="memberForm">
+                                @csrf
+                                @method('POST   ')
+                                <p> Nama Kegiatan : </p>
+                                <input type="hidden" name="user_id" value="">
+                                <input type="hidden" name="name" value="">
+                                <input type="hidden" name="community_id" value="{{ $community->id }}">
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <select class="form-select" name="user_name" id="user_name">
+                                            <option value="" selected disabled>Pilih Rekan</option>
+                                            <!-- Opsi default -->
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}" data-type="{{ $user->type }}">
+                                                    {{ $user->name }}
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!-- other form inputs -->
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-primary" id="submitBtn">Tambahkan</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
                 <!-- List Data Registrasi Komunitas -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">Data Member Komunitas</h5>
+                            <h5 class="card-title">Data Anggota Komunitas</h5>
                             <p>{{ $community->name }}</p>
-                            @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    <strong class="font-bold">Success!</strong>
-                                    <span class="block sm:inline">{{ session('success') }}</span>
-                                </div>
-                            @elseif(session('unsuccess'))
-                                <div class="alert alert-danger" role="alert">
-                                    <strong class="font-bold">Unsuccess!</strong>
-                                    <span class="block sm:inline">{{ session('unsuccess') }}</span>
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger" role="alert">
-                                    <ul class="list-disc pl-5">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ htmlentities($error) }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                             </div>
                             <table class="table table-borderless datatable">
@@ -146,7 +188,8 @@
 
 
                                                                 <form id="delete-form-{{ $registrasi->id }}"
-                                                                    action="" method="POST" style="display: none;">
+                                                                    action="{{ route('registrasi_communities.destroy', ['id' => $registrasi->id]) }}"
+                                                                    method="POST" style="display: none;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                 </form>
@@ -166,6 +209,23 @@
         </section>
     </main><!-- End #main -->
     <!-- End Main Content -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#user_name').change(function() {
+                var userId = $(this).val();
+                var userName = $(this).find('option:selected').text();
+                $('input[name="user_id"]').val(userId);
+                $('input[name="name"]').val(userName);
+            });
+
+            // Handler untuk tombol submit
+            $('#submitBtn').click(function() {
+                $('#memberForm').submit();
+            });
+        });
+    </script>
     <script>
         function confirmDelete(registrasiId) {
             Swal.fire({
@@ -184,4 +244,5 @@
             });
         }
     </script>
+
 @endsection

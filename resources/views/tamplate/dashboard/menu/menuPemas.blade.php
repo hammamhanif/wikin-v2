@@ -38,7 +38,8 @@
                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
-                                <h5 class="card-title">Daftar Postingan Pengabdian Masyarakat</span></h5>
+                                <h5 class="card-title">Daftar Laporan dan Open Recruitment Pengabdian Masyarakat</span>
+                                </h5>
 
                                 <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                                 </div>

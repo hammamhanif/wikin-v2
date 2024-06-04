@@ -25,12 +25,8 @@
                         <!-- Reports -->
                         <div class="col-12">
 
-                            <div class="alert alert-warning" role="alert">
-                                <strong class="font-bold">Pastikan!</strong>
-                                <span class="block sm:inline">Setiap Isi pengaturan sudah sesuai yang diinginkan mulai dari
-                                    video halaman utama dan pertanyaan. Silahkan klik update jika ingin merubah video dan
-                                    data lainnya.</span>
-                            </div>
+
+
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Data tampilan halaman utama</h5>
@@ -59,6 +55,16 @@
 
                                     <!-- TinyMCE Editor -->
                                     @foreach ($landings as $landing)
+                                        <div class="alert alert-warning" role="alert">
+                                            <strong class="font-bold">Pastikan!</strong>
+                                            <span class="block sm:inline">Setiap Isi pengaturan sudah sesuai yang diinginkan
+                                                mulai dari
+                                                video halaman utama dan pertanyaan. Silahkan klik <a
+                                                    href="{{ route('menuHome.edit', ['id' => $landing->id]) }}">update</a>
+                                                jika ingin merubah video
+                                                dan
+                                                data lainnya.</span>
+                                        </div>
                                         <form role="form text-left" method="get" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row mb-3">
@@ -143,11 +149,6 @@
                                             <div class="modal-footer">
                                             </div>
                                         </form>
-
-                                        <div class="modal-footer text-center">
-                                            <a href="{{ route('menuHome.edit', ['id' => $landing->id]) }}"
-                                                class="btn btn-primary d-block mx-auto">Update Data</a>
-                                        </div>
                                     @endforeach
                                 </div>
                             </div>

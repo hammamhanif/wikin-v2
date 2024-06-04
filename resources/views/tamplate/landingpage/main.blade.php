@@ -68,11 +68,10 @@
                 </div>
 
                 <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/polteknuklir/" class="instagram"><i class="bi bi-instagram"
+                            target="_blank"></i></a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=polteknuklir@brin.go.id&su=Pertanyaan%20Wikin&body=Fitur%20Wikin"
+                        class="google-plus" target="_blank"><i class="bi bi-envelope-open"></i></a>
                 </div>
 
             </div>

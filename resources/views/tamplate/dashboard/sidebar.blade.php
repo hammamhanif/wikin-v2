@@ -35,12 +35,16 @@
                   <span>Pengajuan</span>
               </a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
-                  <i class="bi bi-file-earmark-post"></i>
-                  <span>Laporan dan Open Rec</span>
-              </a>
-          </li>
+          @if (Auth::check() &&
+                  (Auth::user()->type == 'admin' || Auth::user()->type == 'dosen' || Auth::user()->type == 'mahasiswa'))
+              <li class="nav-item">
+                  <a class="nav-link {{ Request::is('pemas') ? '' : 'collapsed' }}" href="{{ route('pemas') }}">
+                      <i class="bi bi-file-earmark-post"></i>
+                      <span>Laporan dan Open Rec</span>
+                  </a>
+              </li>
+          @endif
+
           <li class="nav-item">
               <a class="nav-link {{ Request::is('registrasi-pemas/*') ? '' : 'collapsed' }}"
                   href="{{ route('registrasi_pemas.user') }}">
@@ -126,12 +130,6 @@
                   <a class="nav-link {{ Request::is('contacts') ? '' : 'collapsed' }}" href="{{ route('contacts') }}">
                       <i class="bi bi-telephone-inbound"></i>
                       <span>Hubungi Admin</span>
-                  </a>
-              </li><!-- End Error 404 Page Nav -->
-              <li class="nav-item">
-                  <a class="nav-link collapsed" href="">
-                      <i class="bi bi-exclamation-triangle-fill"></i>
-                      <span>Laporan</span>
                   </a>
               </li><!-- End Error 404 Page Nav -->
           @endif

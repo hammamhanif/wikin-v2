@@ -105,7 +105,8 @@
                                     <li><a href="{{ route('pengmases', ['name' => 'Pangan']) }}">Pangan</a></li>
                                     <li><a href="{{ route('pengmases', ['name' => 'Umum']) }}">Umum</a></li>
                             </div><!-- End sidebar tags-->
-
+                            <hr>
+                            <div><a class="btn btn-custom" href="{{ route('requestpemas') }}">Ajukan Pengabdian</a></div>
                         </div><!-- End Blog Sidebar -->
 
                     </div>

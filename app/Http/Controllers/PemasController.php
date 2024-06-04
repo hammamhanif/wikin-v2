@@ -118,12 +118,18 @@ class PemasController extends Controller
     public function updateAdmin(Request $request, $slug)
     {
         // Mengambil berita berdasarkan slug
+        // Mengambil berita berdasarkan slug
         $pemas = pemas::where('slug', $slug)->first();
+
         // Validasi request
         $request->validate([
             'status' => 'required|in:Proses verifikasi,Diterima,Ditolak', // Validasi status
+            'user_id' => 'required|exists:users,id' // Validasi user_id, memastikan user_id ada di tabel users
         ]);
+
+        // Mengupdate status dan user_id
         $pemas->status = $request->status;
+        $pemas->user_id = $request->user_id;
         $pemas->save();
 
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
@@ -136,6 +142,7 @@ class PemasController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'status' => 'required|in:Proses verifikasi,Diterima,Ditolak',
+            'user_id' => 'required|exists:users,id' // Validasi user_id, memastikan user_id ada di tabel users
         ]);
 
         // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan kesalahan
@@ -147,6 +154,7 @@ class PemasController extends Controller
         if (!$formPemas) {
             return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
         }
+        $formPemas->user_id = $request->user_id;
         $formPemas->status = $request->status;
 
         // Menyimpan perubahan ke basis data

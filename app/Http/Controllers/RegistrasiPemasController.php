@@ -27,7 +27,10 @@ class RegistrasiPemasController extends Controller
         $registrasiPemas = RegistrasiPemas::where('form_pemas_id', $pemas->id)->get();
 
         // Dapatkan semua pengguna
-        $users = User::all(); // Mengambil semua data pengguna
+        $users = User::where('type', 'dosen')
+            ->orWhere('type', 'mahasiswa')
+            ->get();
+
 
         // Kembalikan view dengan data Pemas, RegistrasiPemas, dan pengguna
         return view('pemas.memberpemas', compact('pemas', 'registrasiPemas', 'users'));
@@ -39,7 +42,7 @@ class RegistrasiPemasController extends Controller
         $pemas = Pemas::where('slug', $slug)->firstOrFail();
 
         // Dapatkan semua RegistrasiPemas yang memiliki pemas_id yang sama
-        $registrasiPemas = RegistrasiPemas::where('pemas_id', $pemas->id)->get();
+        $registrasiPemas = RegistrasiPemas::where('form_pemas_id', $pemas->id)->get();
 
         // Kembalikan view dengan data Pemas dan RegistrasiPemas
         return view('tamplate.dashboard.menuadmin.memberpemas', compact('pemas', 'registrasiPemas'));
@@ -85,16 +88,16 @@ class RegistrasiPemasController extends Controller
     }
     public function storeAuthor(Request $request)
     {
-
-
         $request->validate([
-            // 'user_id' => 'required|exists:users,id',
             'form_pemas_id' => 'required|exists:pemas,id',
             'program_study' => 'required|string|max:255',
-            'type' => 'required|in:admin,dosen,mahasiswa',
-            'user_id' => Rule::unique('registrasi_pemas')->where(function ($query) use ($request) {
-                return $query->where('form_pemas_id', $request->form_pemas_id);
-            })
+            'type' => 'required|in:dosen,mahasiswa,admin',
+            'user_id' => [
+                'required',
+                Rule::unique('registrasi_pemas')->where(function ($query) use ($request) {
+                    return $query->where('form_pemas_id', $request->form_pemas_id);
+                }),
+            ],
         ]);
 
         $registrasiPemas = RegistrasiPemas::create([
@@ -107,8 +110,8 @@ class RegistrasiPemasController extends Controller
             'motivasi' => 'rekan tambahan',
             'status' => 'diterima',
         ]);
-        $registrasiPemas->save();
-        return  redirect()->back()->with('success', 'Berhasil mendaftar pengabdian masyarakat, silahkan cek menu anggota pengabdian');
+
+        return redirect()->back()->with('success', 'Berhasil mendaftar pengabdian masyarakat, silahkan cek menu anggota pengabdian');
     }
 
     public function update(Request $request, $id)

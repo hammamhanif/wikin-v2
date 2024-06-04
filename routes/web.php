@@ -111,7 +111,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/informasi/{slug}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/informasi/{slug}/update', [NewsController::class, 'update'])->name('news.update');
 
-    Route::post('/reports', [NewsController::class, 'Reportstore'])->name('report.store');
 
     Route::get('galeriAdmin/{slug}', [GalleriesController::class, 'indexAdmin'])->name('galeri.Admin');
     Route::get('galeri/{slug}', [GalleriesController::class, 'index'])->name('galeri.add');
@@ -119,6 +118,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/galeri/{id}', [GalleriesController::class, 'delete'])->name('galeri.delete');
 
     Route::post('/registrasi-communities', [RegistrasiCommunitiesController::class, 'store'])->name('store.regKomunitas');
+    Route::post('/registrasi-communities-author', [RegistrasiCommunitiesController::class, 'storeAuthor'])->name('storeAuthor.regKomunitas');
+    Route::delete('/registrasi-communities/{id}', [RegistrasiCommunitiesController::class, 'destroy'])->name('registrasi_communities.destroy');
     Route::get('/registrasi-communities/{slug}', [RegistrasiCommunitiesController::class, 'index'])->name('regKomunitas');
     Route::get('registrasi-communities/{slug}/edit-status', [RegistrasiCommunitiesController::class, 'editStatus'])->name('registrasiCommunities.editStatus');
     Route::put('registrasi-communities/{id}/update-status', [RegistrasiCommunitiesController::class, 'updateStatus'])->name('registrasiCommunities.updateStatus');

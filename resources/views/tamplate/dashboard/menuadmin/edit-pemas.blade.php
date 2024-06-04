@@ -28,13 +28,13 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Edit Postingan Pengabdian Masyarakat</h1>
+            <h1>Edit Laporan Pengabdian Masyarakat</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item ">Menu Admin</li>
                     <li class="breadcrumb-item ">Pengabdian Masyarakat</li>
-                    <li class="breadcrumb-item active">Edit Pengabdian Masyarakat</li>
+                    <li class="breadcrumb-item active">Edit Laporan Pengabdian Masyarakat</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -52,7 +52,7 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title ">Edit Pengabdian Masyarakat</h5>
+                                    <h5 class="card-title ">Edit Laporan dan Open Recruitment Pengabdian Masyarakat</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -95,10 +95,10 @@
                                                     value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}" readonly>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Nama Pembuat</label>
-                                                <input type="text" class="form-control" name="name" id="deskripsi"
-                                                    placeholder="Nama Pembuat.."
-                                                    value="{{ htmlentities($pemas->formPemas->user->name) }}" readonly>
+                                                <label for="judul" class="form-label">Status Kegiatan</label>
+                                                <input type="text" class="form-control" name="status_pemas"
+                                                    id="judul" placeholder="Status Kegiatan"
+                                                    value="{{ htmlentities($pemas->status_pemas) }}" readonly>
                                             </div>
                                         </div>
 
@@ -139,11 +139,21 @@
                                             </div>
 
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="judul" class="form-label">Status Kegiatan</label>
-                                            <input type="text" class="form-control" name="status_pemas" id="judul"
-                                                placeholder="Status Kegiatan"
-                                                value="{{ htmlentities($pemas->status_pemas) }}" readonly>
+                                        <div class=" row mb-3">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="user_id" class="form-label">ID Penanggung Jawab :</label>
+                                                <input type="text" class="form-control" name="user_id" id="user_id"
+                                                    placeholder="Ubah sesuai ID user.."
+                                                    value="{{ htmlentities($pemas->formPemas->user->id) }}">
+                                            </div>
+
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="deskripsi" class="form-label">Nama Pembuat</label>
+                                                <input type="text" class="form-control" name="name" id="deskripsi"
+                                                    placeholder="Nama Pembuat.."
+                                                    value="{{ htmlentities($pemas->formPemas->user->name) }}" readonly>
+                                            </div>
+
                                         </div>
                                         <div class="mb-3">
                                             <label for="news" class="col-form-label">Konten</label>

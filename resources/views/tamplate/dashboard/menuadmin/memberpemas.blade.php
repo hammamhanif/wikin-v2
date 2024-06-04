@@ -56,7 +56,7 @@
                                     @foreach ($registrasiPemas as $pemas)
                                         <tr>
                                             <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->nama) }}</td>
+                                            <td>{{ htmlentities($pemas->user->name) }}</td>
                                             <td><a href="#"
                                                     class="text-primary">{{ htmlentities($pemas->program_study) }}</a>
                                             </td>
@@ -96,7 +96,7 @@
                                                                             Pengabdian:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="name" name="name"
-                                                                            value="{{ htmlentities($pemas->judul) }}"
+                                                                            value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">
@@ -104,7 +104,7 @@
                                                                             class="col-form-label">Nama:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="name" name="name"
-                                                                            value="{{ htmlentities($pemas->nama) }}"
+                                                                            value="{{ htmlentities($pemas->user->name) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

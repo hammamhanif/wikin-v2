@@ -86,12 +86,17 @@
                                         method="post" enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
+                                        <div class="mb-3">
+                                            <p>Nama Pengabdian Masyarakat :
+                                                <strong>{{ htmlentities($pemas->nama_kegiatan) }}</strong>
+                                            </p>
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
-                                                <input type="text" class="form-control" name="nama_kegiatan"
-                                                    id="judul" placeholder="Nama Pengabdian Masyarakat.."
-                                                    value="{{ htmlentities($pemas->nama_kegiatan) }}">
+                                                <label for="user_id" class="form-label">ID Pengguna: </label>
+                                                <input type="text" class="form-control" name="user_id" id="user_id"
+                                                    placeholder="Masukkan ID pengguna yang diinginkan"
+                                                    value="{{ htmlentities($pemas->user->id) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pengguna yang

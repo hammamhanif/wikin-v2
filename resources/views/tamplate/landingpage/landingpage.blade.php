@@ -285,20 +285,14 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
+                                <img src="{{ asset('img/testimonials/testimonials-1.jpg') }}" class="testimonial-img"
                                     alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
+                                <h3>Bill Gates</h3>
+                                <h4>Pendiri Microsoft Corp.</h4>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat
-                                    minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore
-                                    labore illum veniam.
+                                    Energi nuklir, dalam hal catatan keselamatan secara keseluruhan, lebih baik dibandingkan
+                                    energi lainnya.
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -306,20 +300,15 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
+                                <img src="{{ asset('img/testimonials/testimonials-5.jpg') }}" class="testimonial-img"
                                     alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
+                                <h3>Ir. Djuanda Kartawidjaja</h3>
+                                <h4>Perdana Menteri Indonesia yang terkenal dengan Deklarasi Djuanda</h4>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster
-                                    veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam
-                                    culpa fore nisi cillum quid.
+                                    Energi nuklir adalah salah satu potensi besar yang dimiliki dunia. Indonesia harus
+                                    memanfaatkannya untuk tujuan damai dan kemakmuran bangsa, dengan tetap memperhatikan
+                                    keselamatan dan keamanan.
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>

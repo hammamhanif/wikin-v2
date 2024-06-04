@@ -23,8 +23,10 @@
                     <ul>
                         <li><a href="{{ route('news') }}">Forum</a></li>
                         <li><a href="{{ route('news', ['title' => 'Kesehatan']) }}">Kesehatan</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="{{ route('news', ['title' => 'Energi']) }}">Energi</a></li>
+                        <li><a href="{{ route('news', ['title' => 'Industri']) }}">Industri</a></li>
+                        <li><a href="{{ route('news', ['title' => 'Pangan']) }}">Pangan</a></li>
+
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="{{ route('contact') }}">Hubungi</a></li>

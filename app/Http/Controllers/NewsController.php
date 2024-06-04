@@ -169,23 +169,4 @@ class NewsController extends Controller
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
         return redirect()->route('informasi')->with('success', 'Berita berhasil diperbarui.');
     }
-
-    public function Reportstore(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'news_id' => 'required|exists:news,id',
-            'description' => 'required|string',
-        ]);
-
-        // Simpan laporan ke database
-        $report = new Report();
-        $report->news_id = $request->news_id;
-        $report->reported_by_user_id = auth()->id(); // User yang sedang login
-        $report->reported_user_id = News::findOrFail($request->news_id)->user_id;
-        $report->description = $request->input('description');
-        $report->save();
-
-        return redirect()->back()->with('success', 'Laporan berhasil disimpan.');
-    }
 }

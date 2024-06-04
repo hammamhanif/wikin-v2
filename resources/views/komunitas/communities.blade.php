@@ -102,7 +102,9 @@
                                     <li><a href="{{ route('communities', ['name' => 'Umum']) }}">Umum</a></li>
                                 </ul>
                             </div><!-- End sidebar tags-->
-
+                            <hr>
+                            <div><a class="btn btn-custom" href="{{ route('komunitas.daftar') }}">Gabung Komunitas</a>
+                            </div>
                         </div><!-- End Blog Sidebar -->
 
                     </div>

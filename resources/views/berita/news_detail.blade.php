@@ -38,7 +38,7 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Detail Informasi</h2>
+                    <h2>Detail Informasi (Berita)</h2>
                     <ol>
                         <li><a href="{{ route('home') }}">Utama</a></li>
                         <li>
@@ -83,46 +83,10 @@
                                 {!! html_entity_decode($news->content) !!}
                             </div><!-- End post content -->
 
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#reportModal">
-                                Laporkan
-                            </button>
 
-                            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Laporkan Informasi</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="{{ route('report.store') }}">
-                                                @method('POST')
-                                                @csrf
-                                                <input type="hidden" value="{{ $news->id }}" name="news_id">
-                                                <div class="form-group">
-                                                    <label for="asset_name">Nama Berita / Informasi</label>
-                                                    <input type="text" class="form-control" value="{{ $news->title }}"
-                                                        name="title" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="creator_name">Nama Penulis</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ $news->user->name }}" name="creator_name" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="description">Deskripsi</label>
-                                                    <textarea name="description" id="description" class="form-control" rows="4"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+
 
                         </article><!-- End blog post -->
 

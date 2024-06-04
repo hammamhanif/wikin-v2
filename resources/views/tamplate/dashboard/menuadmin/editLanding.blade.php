@@ -141,7 +141,7 @@
                                             <textarea class="form-control" id="answer5" name="answer5" placeholder="Masukkan jawaban jelas..">{{ $landing->answer5 }}</textarea>
                                         </div>
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
 

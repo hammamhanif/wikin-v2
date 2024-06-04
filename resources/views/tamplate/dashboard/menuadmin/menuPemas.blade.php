@@ -95,17 +95,11 @@
                                                         class="btn btn-info" style="margin-right: 5px;">
                                                         Edit
                                                     </a>
-                                                    <a href="{{ route('memberPemas.admin', ['slug' => $pemas->slug]) }}"
-                                                        class="btn btn-warning" style="margin-right: 5px;">
-                                                        <i class="bi bi-people"></i>
-                                                    </a>
-
                                                     <a href="{{ route('download.lpj', ['slug' => $pemas->slug]) }}"
                                                         class="btn btn-outline-success" style="margin-right: 5px;"
-                                                        title="Detail Pengabdian">
+                                                        title="Download LPJ">
                                                         <i class="bi bi-download"></i> LPJ
                                                     </a>
-
                                                     <form action="{{ route('communities.delete', ['id' => $pemas->id]) }}"
                                                         method="POST" class="delete-form" style="margin-right: 5px;">
                                                         @csrf
@@ -180,8 +174,13 @@
                                                         title="Download Proposal">
                                                         <i class="bi bi-download"></i>
                                                     </a>
+                                                    <a href="{{ route('memberPemas.admin', ['slug' => $pemas->slug]) }}"
+                                                        class="btn btn-warning" style="margin-right: 5px;"
+                                                        title="Detail Anggota">
+                                                        <i class="bi bi-people"></i>
+                                                    </a>
                                                     <a href="{{ route('formPemas.editAdmin', ['slug' => $pemas->slug]) }}"
-                                                        class="btn btn-info" style="margin-right: 5px;">
+                                                        class="btn btn-info" style="margin-right: 5px;" title="Edit">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
                                                     <form action="{{ route('formPemas.destroy', ['id' => $pemas->id]) }}"
