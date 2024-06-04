@@ -79,7 +79,7 @@ class PemasController extends Controller
         $pemas->status_pemas = $request->input('status_pemas');
         $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
-        // Biarkan slug tetap seperti yang ada jika tidak berubah
+
         if ($pemas->slug !== hash('sha256', $request->input('name'))) {
             $pemas->slug = hash('sha256', $request->input('name'));
         }

@@ -4,7 +4,9 @@
 @section('main')
     <section id="hero-fullscreen" class="hero-fullscreen d-flex align-items-center">
         <video autoplay muted loop id="video-background">
-            <source src="{{ asset('img/uranium.mp4') }}" type="video/mp4">
+            <source
+                src="{{ $landing->video ? asset('storage/videos/' . $landing->video) : asset('storage/videos/uranium.mp4') }}"
+                type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="container d-flex flex-column align-items-center position-relative" data-aos="zoom-out">
