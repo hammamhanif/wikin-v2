@@ -69,7 +69,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('community') || Request::is('community/*') ? '' : 'collapsed' }}"
+              <a class="nav-link {{ Request::is('community') ? '' : 'collapsed' }}"
                   href="{{ route('communities.create') }}">
                   <i class="bi bi-people-fill"></i>
                   <span>Pendaftaran Komunitas</span>
@@ -83,7 +83,8 @@
               </a>
           </li><!-- End Contact Page Nav -->
           <li class="nav-item">
-              <a class="nav-link {{ Request::is('komunitas') ? '' : 'collapsed' }}" href="{{ route('komunitas') }}">
+              <a class="nav-link {{ Request::is('komunitas') || Request::is('registrasi-communities/*') || Request::is('galeri/*') || Request::is('community/*') ? '' : 'collapsed' }}"
+                  href="{{ route('komunitas') }}">
                   <i class="bi bi-gear"></i>
                   <span>Menu Komunitas</span>
               </a>

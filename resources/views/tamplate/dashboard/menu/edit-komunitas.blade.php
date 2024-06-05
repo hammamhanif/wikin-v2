@@ -4,12 +4,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Edit Informasi</h1>
+            <h1>Edit Komunitas</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item ">Menu Berita</li>
-                    <li class="breadcrumb-item active">Detail</li>
+                    <li class="breadcrumb-item ">Menu Komunitas</li>
+                    <li class="breadcrumb-item active">Edit Komunitas</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->

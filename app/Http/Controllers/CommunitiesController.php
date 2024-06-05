@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\RegistrasiCommunities;
+use Illuminate\Support\Facades\Storage;
 
 class CommunitiesController extends Controller
 {
@@ -118,15 +119,18 @@ class CommunitiesController extends Controller
             return redirect()->back()->with('error', 'Komunitas tidak ditemukan.');
         }
 
+        // Validasi request
         $request->validate([
             'status' => [
                 'required',
-                Rule::in(['active', 'inactive', 'verifikasi']) // Hanya menerima nilai 'aktif' atau 'tidak aktif'
-            ]
+                Rule::in(['active', 'inactive', 'verifikasi']) // Hanya menerima nilai 'active', 'inactive', atau 'verifikasi'
+            ],
+            'user_id' => 'required|exists:users,id' // Validasi user_id harus ada di tabel users
         ]);
 
         // Update data komunitas
         $community->status = $request->status;
+        $community->user_id = $request->user_id;
 
         // Simpan perubahan
         $community->save();
@@ -134,6 +138,7 @@ class CommunitiesController extends Controller
         // Mengembalikan ke halaman sebelumnya dengan pesan sukses
         return redirect()->route('menuCommunity')->with('success', 'Status komunitas berhasil diperbarui.');
     }
+
     public function update(Request $request, $slug)
     {
         // Mengambil komunitas berdasarkan slug
@@ -154,33 +159,27 @@ class CommunitiesController extends Controller
             'name' => 'required|string|max:255',
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
-            'number' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'group' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144',
         ]);
 
         // Update data komunitas
         $community->name = $request->name;
         $community->category = $request->category;
         $community->content = $request->content;
-        if (substr($request->number, 0, 1) === '0') {
-            $community->number = '62' . substr($request->number, 1);
-        } else {
-            $community->number = $request->number;
-        }
+        $community->group = $request->group;
+
 
         // Periksa apakah ada file gambar yang diunggah
         if ($request->hasFile('image')) {
             // Menghapus gambar lama jika ada
             if ($community->image) {
-                $imagePath = public_path('images/community') . '/' . $community->image;
-                if (File::exists($imagePath)) {
-                    File::delete($imagePath);
-                }
+                Storage::delete('public/' . $community->image);
             }
 
             // Simpan gambar baru
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('images/community'), $imageName);
+            $request->image->storeAs('public', $imageName);
             $community->image = $imageName;
         }
 
@@ -193,19 +192,19 @@ class CommunitiesController extends Controller
 
     public function delete($id)
     {
+        // Mengambil komunitas berdasarkan ID
         $community = Communities::find($id);
 
+        // Periksa apakah komunitas ditemukan dan pengguna memiliki izin
         if (!$community || $community->user_id !== Auth::id()) {
             return redirect()->route('informasi')->with('error', 'Komunitas tidak ditemukan atau Anda tidak memiliki izin untuk menghapusnya.');
         }
 
-        // Menghapus gambar dari folder public/images jika ada
+        // Menghapus gambar dari storage jika ada
         if ($community->image) {
-            $imagePath = public_path('images/community') . '/' . $community->image;
-
-            // Hapus gambar hanya jika file tersebut ada
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
+            $imagePath = 'public/' . $community->image;
+            if (Storage::exists($imagePath)) {
+                Storage::delete($imagePath);
             }
         }
 

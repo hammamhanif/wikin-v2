@@ -28,12 +28,13 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Edit Informasi</h1>
+            <h1>Edit Komunitas Pengguna</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item ">Menu Berita</li>
-                    <li class="breadcrumb-item active">Detail</li>
+                    <li class="breadcrumb-item ">Menu Admin</li>
+                    <li class="breadcrumb-item ">Menu Komunitas</li>
+                    <li class="breadcrumb-item active">Edit Komunitas Pengguna</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -48,10 +49,16 @@
 
                         <!-- Reports -->
                         <div class="col-12">
+                            <div class="alert alert-warning" role="alert">
+                                <strong class="font-bold">Silahkan Update Data!</strong>
+                                <span class="block sm:inline"> Apabila ingin update penanggung jawab komunitas maka ubah
+                                    ID Penanggung jawab. Selain itu, silahkan ubah status apabila komunitas sudah
+                                    sesuai.</span>
+                            </div>
                             <div class="card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title ">Detail Komunitas Nuklir</h5>
+                                    <h5 class="card-title ">Detail Komunitas Nuklir Pengguna</h5>
                                     @if (Session::has('success'))
                                         <div class="alert alert-primary" role="alert">
                                             <strong class="font-bold">Success!</strong>
@@ -88,22 +95,28 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Nama Komunitas </label>
+                                                <label for="judul" class="form-label">Nama Komunitas :</label>
                                                 <input type="text" class="form-control" name="title" id="judul"
                                                     placeholder="Judul" value="{{ htmlentities($communities->name) }}"
                                                     readonly>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Penanggung Jawab</label>
+                                                <label for="deskripsi" class="form-label">Penanggung Jawab :</label>
                                                 <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi"
+                                                    placeholder="Masukkan Penanggung jawab"
                                                     value="{{ htmlentities($communities->user->name) }}" readonly>
                                             </div>
                                         </div>
 
+                                        <div class="mb-3">
+                                            <label for="deskripsi" class="form-label">ID Penanggung Jawab :</label>
+                                            <input type="text" class="form-control" name="user_id" id="user_id"
+                                                placeholder="Masukkan ID pengguna.."
+                                                value="{{ htmlentities($communities->user->id) }}">
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="category" class="form-label">Kategori</label>
+                                                <label for="category" class="form-label">Kategori :</label>
                                                 <select class="form-select" name="category" id="category">
                                                     <option value="Umum"
                                                         @if ($communities->category === 'Umum') selected @endif>
@@ -123,7 +136,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="status" class="form-label">Status</label>
+                                                <label for="status" class="form-label">Status :</label>
                                                 <select class="form-select" name="status" id="status">
                                                     <option value="verifikasi"
                                                         @if ($communities->status === 'verifikasi') selected @endif>
@@ -139,7 +152,7 @@
 
                                         </div>
                                         <div class="mb-3">
-                                            <label for="news" class="col-form-label">Konten</label>
+                                            <label for="news" class="col-form-label">Desikripsi :</label>
                                             <textarea class="form-control" id="news" name="content">{!! htmlentities($communities->content) !!}</textarea>
                                         </div>
                                         <div class="modal-footer">
