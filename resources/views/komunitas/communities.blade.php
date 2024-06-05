@@ -38,7 +38,7 @@
 
                                         <h2 class="title">
                                             <a
-                                                href="{{ route('detailpemas', $community->slug) }}">{{ $community->name }}</a>
+                                                href="{{ route('detailcommunity', $community->slug) }}">{{ $community->name }}</a>
                                         </h2>
 
 

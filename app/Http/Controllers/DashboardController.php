@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\pemas;
 use App\Models\FormPemas;
 use App\Models\Communities;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\RegistrasiPemas;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,9 @@ class DashboardController extends Controller
         $registrasi = RegistrasiPemas::where('user_id', $user->id)->where('status', 'Diterima')->count();
         $memberPemas = $totalPemas2 + $registrasi;
         $pengmases = pemas::where('status_pemas', 'pencarian volunteer')->paginate(9);
+        foreach ($pengmases as $pengmas) {
+            $pengmas->short_content = Str::limit($pengmas->content, 100);
+        }
         return view('tamplate.dashboard.welcome', compact('pengmases', 'totalPemas', 'memberPemas', 'communities', 'news'));
     }
 

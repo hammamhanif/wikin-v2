@@ -128,7 +128,7 @@
                                                                             class="col-form-label">Jabatan:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="email" name="email"
-                                                                            value="{{ htmlentities($pemas->type) }}"
+                                                                            value="{{ htmlentities($pemas->user->type) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

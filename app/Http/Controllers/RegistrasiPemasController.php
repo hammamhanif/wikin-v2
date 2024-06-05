@@ -69,7 +69,6 @@ class RegistrasiPemasController extends Controller
             'noID' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'program_study' => 'required|string|max:255',
-            'type' => 'required|in:dosen,mahasiswa',
             'motivasi' => 'required|string',
         ]);
 
@@ -79,7 +78,6 @@ class RegistrasiPemasController extends Controller
             'noID' => $request->noID,
             'alamat' => $request->alamat,
             'program_study' => $request->program_study,
-            'type' => $request->type,
             'motivasi' => $request->motivasi,
             'status' => 'Proses Verifikasi',
         ]);
@@ -91,7 +89,6 @@ class RegistrasiPemasController extends Controller
         $request->validate([
             'form_pemas_id' => 'required|exists:pemas,id',
             'program_study' => 'required|string|max:255',
-            'type' => 'required|in:dosen,mahasiswa,admin',
             'user_id' => [
                 'required',
                 Rule::unique('registrasi_pemas')->where(function ($query) use ($request) {
@@ -106,7 +103,6 @@ class RegistrasiPemasController extends Controller
             'noID' => $request->user_id,
             'alamat' => 'Poltek Nuklir',
             'program_study' => $request->program_study,
-            'type' => $request->type,
             'motivasi' => 'rekan tambahan',
             'status' => 'diterima',
         ]);

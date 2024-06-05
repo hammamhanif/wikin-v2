@@ -46,7 +46,6 @@
                                 @csrf
                                 <p> Nama Kegiatan : {{ $pemas->nama_kegiatan }}</p>
                                 <input type="hidden" name="user_id" value="">
-                                <input type="hidden" id="user_type" name="type" value="">
                                 <input type="hidden" name="form_pemas_id" value="{{ $pemas->id }}">
 
                                 <div class="row mb-3">
@@ -183,7 +182,7 @@
                                                                             class="col-form-label">Jabatan:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="email" name="email"
-                                                                            value="{{ htmlentities($pemas->type) }}"
+                                                                            value="{{ htmlentities($pemas->user->type) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

@@ -66,7 +66,7 @@
                             placeholder="Masukkan alamat anda.." required>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="program_study" class="form-label">Program Studi</label>
                         <select class="form-select" id="program_study" name="program_study" required>
                             <option value="">Pilih Prodi</option>
@@ -76,14 +76,6 @@
                         </select>
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="type" class="form-label">Jabatan</label>
-                        <select class="form-select" id="type" name="type" required>
-                            <option value="">Pilih Jabatan</option>
-                            <option value="dosen">Dosen</option>
-                            <option value="mahasiswa">Mahasiswa</option>
-                        </select>
-                    </div>
 
                     <div class="col-md-12">
                         <label for="motivasi" class="form-label">Motivasi</label>

@@ -214,7 +214,7 @@
                                                     style="width: 100%; height: 200px; object-fit: cover;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">{{ $pemas->name }}</h5>
-                                                    <p class="card-text">{!! $pemas->content !!}</p>
+                                                    <p class="card-text">{!! $pemas->short_content !!}</p>
 
                                                     <p class="card-text text-center">({{ $pemas->location }})</p>
 
