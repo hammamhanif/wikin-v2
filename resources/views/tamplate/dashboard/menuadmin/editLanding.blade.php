@@ -85,7 +85,19 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="email" class="form-label">Email</label>
+                                                <label for="location" class="form-label">Video Intro :</label>
+                                                <input type="text" class="form-control" name="youtube1" id="location"
+                                                    placeholder="masukkan link.." value="{{ $landing->youtube1 }}">
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="telp" class="form-label">Video Komunitas :</label>
+                                                <input type="text" class="form-control" name="youtube2" id="telp"
+                                                    placeholder="masukkan link..." value="{{ $landing->youtube2 }}">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                                <label for="email" class="form-label">Email :</label>
                                                 <input type="text" class="form-control" name="email" id="email"
                                                     placeholder="Email.." value="{{ $landing->email }}">
                                             </div>

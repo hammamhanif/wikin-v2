@@ -14,7 +14,7 @@
         <ul class="d-flex align-items-center">
 
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
@@ -87,7 +87,7 @@
 
                 </ul><!-- End Notification Dropdown Items -->
 
-            </li><!-- End Notification Nav -->
+            </li><!-- End Notification Nav --> --}}
 
 
             <li class="nav-item dropdown pe-3">
@@ -101,7 +101,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->name }}</h6>
-                        <span>{{ Auth::user()->job }}</span>
+                        <span>{{ Auth::user()->type }}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

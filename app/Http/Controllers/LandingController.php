@@ -98,11 +98,11 @@ class LandingController extends Controller
             ->join('form_pemas', 'pemas.form_pemas_id', '=', 'form_pemas.id') // tambahkan join ke tabel formpemas
             ->where('pemas.status', 'Diterima')
             ->where(function ($query) use ($searchQuery) {
-                $query->where('form_pemas.nama_kegiatan', 'like', '%' . $searchQuery . '%') // ubah pemas.name menjadi formpemas.nama_kegiatan
+                $query->where('form_pemas.name', 'like', '%' . $searchQuery . '%') // ubah pemas.name menjadi formpemas.name
                     ->orWhere('pemas.category', 'like', '%' . $searchQuery . '%')
                     ->orWhere('pemas.status_pemas', 'like', '%' . $searchQuery . '%')
                     ->orWhere('users.username', 'like', '%' . $searchQuery . '%')
-                    ->orWhere('pemas.location', 'like', '%' . $searchQuery . '%');
+                    ->orWhere('form_pemas.location', 'like', '%' . $searchQuery . '%');
             })
             ->orderByDesc('pemas.updated_at')
             ->select('pemas.*', 'users.username as author')
@@ -205,6 +205,8 @@ class LandingController extends Controller
             'answer4' => 'nullable|string',
             'question5' => 'nullable|string|max:255',
             'answer5' => 'nullable|string',
+            'youtube1' => 'nullable|string|max:255',
+            'youtube2' => 'nullable|string|max:255',
         ]);
 
         // Cari data landing berdasarkan ID

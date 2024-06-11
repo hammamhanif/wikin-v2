@@ -14,8 +14,8 @@
             <p class="text-white">Website Interaktif Komunitas Nuklir Indonesia.</p>
             <div class="d-flex">
                 <a href="#about" class="btn-get-started scrollto">Mulai</a>
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                    class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch
+                <a href="{{ $landing->youtube1 }}" class="glightbox btn-watch-video d-flex align-items-center"><i
+                        class="bi bi-play-circle"></i><span>Watch
                         Video</span></a>
             </div>
         </div>
@@ -122,7 +122,7 @@
 
                 <div class="row g-0">
                     <div class="col-lg-6 video-play position-relative">
-                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+                        <a href="{{ $landing->youtube2 }}" class="glightbox play-btn"></a>
                     </div>
                     <div class="col-lg-6">
                         <div class="content d-flex flex-column justify-content-center h-100">
@@ -390,7 +390,7 @@
                                     <span class="post-author"> / {{ $pemas->author }}</span>
                                     <span class="post-author"> / Status: ({{ $pemas->status_pemas }})</span>
                                 </div>
-                                <h3 class="post-title">{{ $pemas->name }} ({{ $pemas->location }})
+                                <h3 class="post-title">{{ $pemas->name }} ({{ $pemas->formPemas->location }})
                                 </h3>
                                 <p>{!! $pemas->content !!}</p>
                                 <a href="{{ route('detailpemas', $pemas->slug) }}"

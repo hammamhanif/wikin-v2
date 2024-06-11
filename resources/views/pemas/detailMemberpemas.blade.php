@@ -57,7 +57,7 @@
                                     @foreach ($registrasiPemas as $pemas)
                                         <tr>
                                             <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->formPemas->nama_kegiatan) }}</td>
+                                            <td>{{ htmlentities($pemas->formPemas->name) }}</td>
                                             <td><a href="#"
                                                     class="text-primary">{{ htmlentities($pemas->program_study) }}</a>
                                             </td>
@@ -96,7 +96,7 @@
                                                                             Pengabdian:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="name" name="name"
-                                                                            value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}"
+                                                                            value="{{ htmlentities($pemas->formPemas->name) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

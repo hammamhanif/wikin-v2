@@ -96,7 +96,7 @@
                                                                             Pengabdian:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="name" name="name"
-                                                                            value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}"
+                                                                            value="{{ htmlentities($pemas->formPemas->name) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

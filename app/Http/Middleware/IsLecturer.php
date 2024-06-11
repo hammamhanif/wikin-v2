@@ -16,7 +16,11 @@ class IsLecturer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->account_type === 'dosen') {
+        // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Periksa apakah user terautentikasi dan memiliki tipe tertentu
+        if ($user && in_array($user->type, ['admin', 'dosen', 'mahasiswa'])) {
             return $next($request);
         }
 

@@ -56,7 +56,7 @@
                                     @foreach ($pengmases as $pemas)
                                         <tr>
                                             <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->formPemas->nama_kegiatan) }}</td>
+                                            <td>{{ htmlentities($pemas->formPemas->name) }}</td>
                                             <td>{{ htmlentities($pemas->location) }}</td>
                                             <td><a href="#"
                                                     class="text-primary">{{ htmlentities($pemas->category) }}</a>
@@ -146,7 +146,7 @@
                                     @foreach ($formPengmases as $pemas)
                                         <tr>
                                             <th scope="row"><a href="">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->nama_kegiatan) }}</td>
+                                            <td>{{ htmlentities($pemas->name) }}</td>
                                             <td>{{ htmlentities($pemas->location) }}</td>
                                             <td><a href=""
                                                     class="text-primary">{{ htmlentities($pemas->user->name) }}</a>

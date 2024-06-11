@@ -88,7 +88,7 @@
                                         @csrf
                                         <div class="mb-3">
                                             <p>Nama Pengabdian Masyarakat :
-                                                <strong>{{ htmlentities($pemas->nama_kegiatan) }}</strong>
+                                                <strong>{{ htmlentities($pemas->name) }}</strong>
                                             </p>
                                         </div>
                                         <div class="row mb-3">

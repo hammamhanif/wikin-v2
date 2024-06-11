@@ -17,7 +17,11 @@ class PemasController extends Controller
 {
     public function index()
     {
-        return view('pemas.postingPemas');
+        $user = auth()->user();
+        $formPengmases = FormPemas::where('user_id', $user->id)
+            ->where('status', 'Diterima')
+            ->get();
+        return view('pemas.postingPemas', compact('formPengmases'));
     }
     public function request()
     {
@@ -67,7 +71,6 @@ class PemasController extends Controller
         // Validasi form
         $request->validate([
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
-            'location' => 'required|string', // Menambahkan validasi untuk lokasi
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
@@ -77,12 +80,12 @@ class PemasController extends Controller
 
         $pemas->category = $request->input('category');
         $pemas->status_pemas = $request->input('status_pemas');
-        $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
 
-        if ($pemas->slug !== hash('sha256', $request->input('name'))) {
-            $pemas->slug = hash('sha256', $request->input('name'));
+        if ($pemas->slug !== hash('sha256', $request->input('name') . time())) {
+            $pemas->slug = hash('sha256', $request->input('name') . time());
         }
+
         $pemas->status = 'Diterima';
 
         // Proses upload gambar jika ada
@@ -170,7 +173,7 @@ class PemasController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'noID' => 'nullable|string',
-            'nama_kegiatan' => 'required|string',
+            'name' => 'required|string',
             'location' => 'required|string',
             'start_time' => 'required|date',
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
@@ -193,7 +196,7 @@ class PemasController extends Controller
 
         $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
-        $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
+        $formPemas->name = $request->input('name');
         $formPemas->location = $request->input('location');
         $formPemas->start_time = $request->input('start_time');
         $formPemas->end_time = $request->input('end_time');
@@ -227,23 +230,23 @@ class PemasController extends Controller
     {
         // Validasi form
         $request->validate([
+            'form_pemas_id' => 'required|unique:pemas,form_pemas_id', // Unique validation
             'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
-            'location' => 'required|string', // Menambahkan validasi untuk lokasi
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
         ]);
-
+        $user = Auth::user();
         // Proses penyimpanan pemas
         $pemas = new Pemas();
+        $pemas->user_id = $user->id;
         $pemas->form_pemas_id = $request->input('form_pemas_id');
         $pemas->category = $request->input('category');
         $pemas->status = $request->input('status');
-        $pemas->location = $request->input('location');
         $pemas->content = $request->input('content');
 
         // Menggunakan kombinasi location dan timestamp untuk membuat slug
-        $slug = hash('sha256', $request->input('location') . time());
+        $slug = hash('sha256', $request->input('category') . time());
         $pemas->slug = $slug;
 
         $pemas->status = 'Proses Verifikasi';
@@ -277,7 +280,7 @@ class PemasController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'noID' => 'nullable|string',
-            'nama_kegiatan' => 'required|string',
+            'name' => 'required|string',
             'location' => 'required|string',
             'start_time' => 'required|date',
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
@@ -297,12 +300,14 @@ class PemasController extends Controller
         // Mengisi properti dari instansi dengan data dari request
         $formPemas->user_id = auth()->user()->id;
         $formPemas->noID = $request->input('noID');
-        $formPemas->slug = hash('sha256', $request->input('nama_kegiatan'));
-        $formPemas->nama_kegiatan = $request->input('nama_kegiatan');
+
+        $formPemas->name = $request->input('name');
         $formPemas->location = $request->input('location');
         $formPemas->start_time = $request->input('start_time');
         $formPemas->end_time = $request->input('end_time');
         $formPemas->category = $request->input('category');
+        $slug = hash('sha256', $request->input('name') . time());
+        $formPemas->slug = $slug;
         $formPemas->content = $request->input('content');
         $formPemas->status = 'Proses verifikasi'; // Menambahkan status default
 

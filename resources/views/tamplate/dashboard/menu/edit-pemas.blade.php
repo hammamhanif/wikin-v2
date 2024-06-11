@@ -92,7 +92,7 @@
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
                                                 <input type="text" class="form-control" name="name" id="judul"
                                                     placeholder="Nama Pengabdian Masyarakat.."
-                                                    value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}">
+                                                    value="{{ htmlentities($pemas->formPemas->name) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pembuat</label>
@@ -158,8 +158,8 @@
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Lokasi</label>
                                                 <input type="text" class="form-control" name="location" id="judul"
-                                                    placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->location) }}">
+                                                    placeholder="nama lokasi..."
+                                                    value="{{ htmlentities($pemas->formPemas->location) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Status </label>

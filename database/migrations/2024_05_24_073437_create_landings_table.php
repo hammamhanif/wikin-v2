@@ -29,6 +29,8 @@ return new class extends Migration
             $table->text('answer4')->nullable(); // Kolom untuk jawaban pertanyaan 4
             $table->string('question5')->nullable(); // Kolom untuk pertanyaan 5
             $table->text('answer5')->nullable(); // Kolom untuk jawaban pertanyaan 5
+            $table->text('youtube1')->nullable(); // Kolom untuk jawaban pertanyaan 5
+            $table->text('youtube2')->nullable(); // Kolom untuk jawaban pertanyaan 5
         });
     }
 

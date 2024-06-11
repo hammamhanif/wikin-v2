@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('noID')->nullable();
-            $table->string('nama_kegiatan');
+            $table->string('name');
             $table->string('location');
             $table->string('slug')->unique();
             $table->dateTime('start_time');

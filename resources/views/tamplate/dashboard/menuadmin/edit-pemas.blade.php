@@ -91,8 +91,8 @@
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
                                                 <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul"
-                                                    value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}" readonly>
+                                                    placeholder="Judul" value="{{ htmlentities($pemas->formPemas->name) }}"
+                                                    readonly>
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Status Kegiatan</label>
@@ -159,7 +159,7 @@
                                             <label for="news" class="col-form-label">Konten</label>
                                             <textarea class="form-control" id="news" name="content">{!! htmlentities($pemas->content) !!}</textarea>
                                         </div>
-                                        <div class="modal-footer justify-content-center">
+                                        <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-outline-primary"
                                                 id="submitBtn">Ubah</button>
                                         </div>

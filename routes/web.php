@@ -42,8 +42,6 @@ Route::get('/captcha', [AuthController::class], 'getCaptcha')->name('captcha');
 
 Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name('galeri');
 
-
-
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login')->middleware('guest');
     Route::post('login', 'loginPost')->name('login.post');
@@ -53,8 +51,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('sign-in-google', 'google')->middleware('guest')->name('user.login.google');
     Route::get('auth/google/callback', 'handleProviderCallback')->name('user.google.callback');
 });
-
-
 Route::get('/email/verify', function () {
     return view('auth.processAuth');
 })->middleware('auth')->name('verification.notice');
@@ -64,10 +60,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'main'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetToken'])->middleware('guest')->name('password.update');
+Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-
-
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
@@ -77,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/pemasSetting/{id}', [PemasController::class, 'destroy'])->name('pemas.destroy');
     Route::delete('/formPemas/{id}', [PemasController::class, 'destroyForm'])->name('formPemas.destroy');
 
-    Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
+
     Route::get('pemasSetting', [PemasController::class, 'create'])->name('pemasSetting');
 
     Route::get('/pemasSetting/{slug}', [PemasController::class, 'edit'])->name('pemas.edit');
@@ -88,17 +87,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/formPemas/{slug}', [PemasController::class, 'editForm'])->name('formPemas.edit');
     Route::put('/formPemas/{slug}/update', [PemasController::class, 'updateForm'])->name('formPemas.update');
 
-    Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
-    Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');
-    Route::post('/registrasiPemas-add', [RegistrasiPemasController::class, 'storeAuthor'])->name('storeAuthor.registrasiPemas');
-
     Route::get('/registrasi-pemas/user', [RegistrasiPemasController::class, 'getByUser'])->name('registrasi_pemas.user');
     Route::get('/memberPemas/{slug}', [RegistrasiPemasController::class, 'indexMember'])->name('memberPemas');
     Route::put('/memberPemas/{id}/update', [RegistrasiPemasController::class, 'update'])->name('memberPemas.update');
     Route::delete('/memberPemas/{id}', [RegistrasiPemasController::class, 'destroy'])->name('memberPemas.delete');
     Route::delete('/registrasi-pemas/{id}', [RegistrasiPemasController::class, 'destroyUser'])->name('registrasi_pemas.delete');
-
-
 
     Route::post('pemas/store', [PemasController::class, 'store'])->name('pemas.store');
     Route::get('requestpemas', [PemasController::class, 'request'])->name('requestpemas');
@@ -136,7 +129,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/download/lpj/{slug}', [FileDownloadController::class, 'downloadLpj'])->name('download.lpj');
     Route::get('/download-proposal/{slug}', [FileDownloadController::class, 'downloadProposal'])->name('download.proposal');
 });
+Route::middleware(['IsLecturer', 'verified'])->group(function () {
 
+    Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
+    Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
+    Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');
+    Route::post('/registrasiPemas-add', [RegistrasiPemasController::class, 'storeAuthor'])->name('storeAuthor.registrasiPemas');
+});
 Route::middleware(['IsAdmin', 'verified'])->group(function () {
     Route::get('menuHome', [LandingController::class, 'menu'])->name('menuHome');
     Route::get('menuHome/{id}', [LandingController::class, 'menuUpdate'])->name('menuHome.edit');
@@ -160,13 +159,6 @@ Route::middleware(['IsAdmin', 'verified'])->group(function () {
     Route::put('userdate/{id}/update', [UserController::class, 'update'])->whereNumber('id')->name('userdate.update');
     Route::delete('userdate/{id}/delete', [UserController::class, 'destroy'])->whereNumber('id')->name('userdate.delete');
 });
-Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
-
-Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'main'])->middleware('guest')->name('password.reset');
-Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetToken'])->middleware('guest')->name('password.update');
-
-Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 
 Route::controller(ContactController::class)->group(function () {
     Route::get('contact',  'create')->name('contact');

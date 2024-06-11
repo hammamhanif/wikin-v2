@@ -89,9 +89,9 @@
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
-                                                <input type="text" class="form-control" name="nama_kegiatan"
-                                                    id="judul" placeholder="Nama Pengabdian Masyarakat.."
-                                                    value="{{ htmlentities($pemas->nama_kegiatan) }}">
+                                                <input type="text" class="form-control" name="name" id="judul"
+                                                    placeholder="Nama Pengabdian Masyarakat.."
+                                                    value="{{ htmlentities($pemas->name) }}">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="deskripsi" class="form-label">Nama Pengguna yang

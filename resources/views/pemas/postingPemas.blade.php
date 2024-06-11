@@ -54,23 +54,20 @@
                                             </ul>
                                         </div>
                                     @endif
-
-                                    <!-- TinyMCE Editor -->
                                     <form role="form text-left" action="{{ route('pemas.store') }}" method="post"
                                         enctype="multipart/form-data">
                                         @method('POST')
                                         @csrf
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="form_pemas_id" class="form-label">ID Pengajuan
-                                                    Pengabdian :</label>
-                                                <input type="text" class="form-control" name="form_pemas_id"
-                                                    id="form_pemas_id" placeholder=" Masukkan Id Pemas..">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="location" class="form-label">Lokasi :</label>
-                                                <input type="text" class="form-control" name="location" id="location"
-                                                    placeholder="Lokasi">
+                                        <input type="hidden" name="form_pemas_id" value="">
+                                        <div class="mb-3">
+                                            <div class="">
+                                                <label for="form_pemas" class="form-label">Nama Pemas:</label>
+                                                <select class="form-control" id="form_pemas" style="width: 100%;">
+                                                    <option value="">Pilih Form Pemas</option>
+                                                    @foreach ($formPengmases as $form)
+                                                        <option value="{{ $form->id }}">{{ $form->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -107,13 +104,12 @@
                                                     accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                             </div>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="news" class="col-form-label">Isi</label>
                                             <textarea class="form-control" id="news" name="content"></textarea>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
+                                            <button type="submit" class="btn btn-primary" id="submitBtn">Kirimkan</button>
                                         </div>
                                     </form>
                                 </div>
@@ -125,16 +121,24 @@
 
                     <!-- Right side columns -->
                     <div class="col-lg-4">
-
-
-
-
                     </div><!-- End Right side columns -->
 
                 </div>
         </section>
 
     </main><!-- End #main -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#form_pemas').change(function() {
+                var formPemasId = $(this).val();
+                $('input[name="form_pemas_id"]').val(formPemasId);
+            });
 
-
+            // Handler untuk tombol submit
+            $('#submitBtn').click(function() {
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
 @endsection

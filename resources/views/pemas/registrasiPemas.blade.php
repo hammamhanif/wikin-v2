@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         <label for="judul" class="form-label">Nama Pengabdian Masyarakat</label>
                         <input type="text" class="form-control" id="judul" name="judul"
-                            value="{{ $pemas->formPemas->nama_kegiatan }}" readonly>
+                            value="{{ $pemas->formPemas->name }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label for="alamat" class="form-label">Alamat</label>
@@ -83,8 +83,8 @@
                             placeholder="Tuliskan motivasi anda mengapa ingin mengikuti program pengabdian masyarakat ini.."></textarea>
                     </div>
 
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="button" class="btn btn-custom" onclick="submitForm()">Daftar</button>
                     </div>
                 </div>
             </form>

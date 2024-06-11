@@ -56,7 +56,7 @@
 
                                     <!-- TinyMCE Editor -->
                                     <form role="form text-left" action="{{ route('requestpemas.store') }}" method="post"
-                                        enctype="multipart/form-data">
+                                        enctype="multipart/form-data" id="requestForm">
                                         @method('POST')
                                         @csrf
                                         <div class="row mb-3">
@@ -74,8 +74,8 @@
                                         <div class="row mb-3">
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="kegiatan" class="form-label">Nama Kegiatan</label>
-                                                <input type="text" class="form-control" name="nama_kegiatan"
-                                                    id="kegiatan" placeholder="Nama Kegiatan..">
+                                                <input type="text" class="form-control" name="name" id="kegiatan"
+                                                    placeholder="Nama Kegiatan..">
                                             </div>
                                             <div class="col-sm-6 col-xs-12 mt-3">
                                                 <label for="lokasi" class="form-label">Lokasi</label>
@@ -85,15 +85,16 @@
                                         </div>
                                         <div class="mb-3">
                                             <div class="">
-                                                <label for="proposal" class="col-sm-5 col-form-label">Proposal @if (Auth::user()->type == 'masyarakat')
+                                                <label for="proposal" class="col-sm-5 col-form-label">Proposal
+                                                    @if (Auth::user()->type == 'masyarakat')
                                                         (Apabila ada)
                                                     @else
+                                                        (Wajib Diisi)
                                                     @endif
                                                 </label>
                                                 <input class="form-control" type="file" name="proposal" id="proposal"
                                                     accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                                    @if (Auth::user()->type == 'masyarakat') @else
-                                                       required @endif>
+                                                    @if (Auth::user()->type == 'mahasiswa' || Auth::user()->type == 'dosen') @else required @endif>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -108,7 +109,6 @@
                                                     id="waktuSelesai">
                                             </div>
                                         </div>
-
                                         <div class="row mb-3">
                                             <div class="col-sm-12 col-xs-12 mt-3">
                                                 <label for="category" class="form-label">Kategori</label>
@@ -125,10 +125,12 @@
                                             <label for="pemas" class="col-form-label">Deskripsi Kegiatan</label>
                                             <textarea class="form-control" id="pemas" name="content" placeholder="Masukkan deskrispsi secara jelas.."></textarea>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Kirimkan</button>
+                                        <div class="justify-content-center d-flex">
+                                            <button type="button" class="btn btn-outline-primary btn-lg"
+                                                onclick="confirmSubmission()">Kirimkan</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
 
@@ -149,5 +151,21 @@
 
     </main><!-- End #main -->
 
-
+    <script>
+        function confirmSubmission() {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang diisikan sudah benar?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Kirimkan!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('requestForm').submit();
+                }
+            })
+        }
+    </script>
 @endsection

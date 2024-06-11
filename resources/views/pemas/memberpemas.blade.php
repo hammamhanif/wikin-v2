@@ -44,7 +44,7 @@
                             <!-- TinyMCE Editor -->
                             <form action="{{ route('storeAuthor.registrasiPemas') }}" method="POST" id="memberForm">
                                 @csrf
-                                <p> Nama Kegiatan : {{ $pemas->nama_kegiatan }}</p>
+                                <p> Nama Kegiatan : {{ $pemas->name }}</p>
                                 <input type="hidden" name="user_id" value="">
                                 <input type="hidden" name="form_pemas_id" value="{{ $pemas->id }}">
 
@@ -150,7 +150,7 @@
                                                                             Pengabdian:</label>
                                                                         <input type="text" class="form-control"
                                                                             id="name" name="name"
-                                                                            value="{{ htmlentities($pemas->formPemas->nama_kegiatan) }}"
+                                                                            value="{{ htmlentities($pemas->formPemas->name) }}"
                                                                             readonly>
                                                                     </div>
                                                                     <div class="mb-3">

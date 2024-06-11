@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="{{ asset('img/logo.png') }}" rel="icon">
+    <link href="{{ asset('img/logo.png') }}" rel="apple-touch-icon">
     <title>Wikin | Website Interaktif Komunitas Nuklir Indonesia</title>
 </head>
 
@@ -110,7 +112,7 @@
                             <a href="{{ route('user.login.google') }}" class="btn btn-lg btn-light w-100 fs-6"
                                 role="button">
                                 <img src="{{ asset('images/google.png') }}" style="width:20px" class="me-2">
-                                <small>Sign In with Google</small>
+                                <small>Daftar dengan Google</small>
                             </a>
 
                         </div>

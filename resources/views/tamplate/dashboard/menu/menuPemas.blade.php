@@ -59,7 +59,7 @@
                                         @foreach ($pengmases as $pemas)
                                             <tr>
                                                 <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
-                                                <td>{{ htmlentities($pemas->formPemas->nama_kegiatan) }}</td>
+                                                <td>{{ htmlentities($pemas->formPemas->name) }}</td>
                                                 <td>{{ htmlentities($pemas->location) }}</td>
                                                 <td><a href="#"
                                                         class="text-primary">{{ htmlentities($pemas->category) }}</a>
@@ -154,7 +154,7 @@
                                     @foreach ($formPengmases as $pemas)
                                         <tr>
                                             <th scope="row"><a href="">{{ $loop->iteration }}</a></th>
-                                            <td>{{ htmlentities($pemas->nama_kegiatan) }}</td>
+                                            <td>{{ htmlentities($pemas->name) }}</td>
                                             <td>{{ htmlentities($pemas->location) }}</td>
                                             <td><a href="" class="text-primary">{{ htmlentities($pemas->id) }}</a>
                                             </td>
@@ -182,7 +182,7 @@
                                                         <i class="bi bi-person-add"></i>
                                                     </a>
                                                     <a href="{{ route('formPemas.edit', ['slug' => $pemas->slug]) }}"
-                                                        class="btn btn-info" style="margin-right: 5px;"
+                                                        class="btn btn-outline-info" style="margin-right: 5px;"
                                                         title="Detail Pengabdian">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
