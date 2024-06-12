@@ -71,23 +71,13 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                            <div class="">
                                                 <label for="status" class="form-label">Status</label>
                                                 <select class="form-select" name="status_pemas" id="status">
                                                     <option value="pengajuan">Pengajuan</option>
                                                     <option value="pencarian volunteer">Pencarian Volunteer</option>
                                                     <option value="selesai">Selesai</option>
                                                     <option value="sedang berjalan">Sedang berjalan</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" name="category" id="category">
-                                                    <option value="Umum">Umum</option>
-                                                    <option value="Kesehatan">Kesehatan</option>
-                                                    <option value="Energi">Energi</option>
-                                                    <option value="Industri">Industri</option>
-                                                    <option value="Pangan">Pangan</option>
                                                 </select>
                                             </div>
                                         </div>

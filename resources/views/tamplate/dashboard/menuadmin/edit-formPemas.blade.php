@@ -33,7 +33,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Edit Postingan Pengabdian Masyarakat</h1>
+            <h1>Edit Pengajuan Pengabdian Masyarakat</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -90,20 +90,27 @@
                                             <p>Nama Pengabdian Masyarakat :
                                                 <strong>{{ htmlentities($pemas->name) }}</strong>
                                             </p>
+                                            <p>Lokasi :
+                                                <strong>{{ htmlentities($pemas->location) }}</strong>
+                                            </p>
+                                            <p>Kategori :
+                                                <strong>{{ htmlentities($pemas->category) }}</strong>
+                                            </p>
+                                            <p>Waktu :
+                                                <strong>{{ htmlentities($pemas->start_time) }}
+                                                    s.d {{ htmlentities($pemas->end_time) }}</strong>
+                                            </p>
+                                            <p>Pengguna yang mengajukan :
+                                                <strong>{{ htmlentities($pemas->user->name) }}
+                                                    ({{ htmlentities($pemas->noID) }})</strong>
+                                            </p>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                            <div class="">
                                                 <label for="user_id" class="form-label">ID Pengguna: </label>
                                                 <input type="text" class="form-control" name="user_id" id="user_id"
                                                     placeholder="Masukkan ID pengguna yang diinginkan"
                                                     value="{{ htmlentities($pemas->user->id) }}">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Nama Pengguna yang
-                                                    mengajukan</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->user->name) }}"
-                                                    pemas readonly>
                                             </div>
                                         </div>
                                         <div class="mb-3">
@@ -118,38 +125,6 @@
                                                     Ditolak</option>
                                             </select>
 
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control" name="location" id="judul"
-                                                    placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->location) }}">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Kategori</label>
-                                                <input type="text" class="form-control" name="category" id="judul"
-                                                    placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->category) }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="waktuMulai" class="form-label">Waktu Mulai</label>
-                                                <input type="datetime-local" class="form-control" name="start_time"
-                                                    id="waktuMulai" value="{{ htmlentities($pemas->start_time) }}">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="waktuSelesai" class="form-label">Waktu Selesai</label>
-                                                <input type="datetime-local" class="form-control" name="end_time"
-                                                    id="waktuSelesai" value="{{ htmlentities($pemas->end_time) }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="judul" class="form-label">Nomor NIK/NIM/NIP </label>
-                                            <input type="text" class="form-control" name="noID" id="judul"
-                                                placeholder="Nomor ID " value="{{ htmlentities($pemas->noID) }}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="pemas" class="col-form-label">Konten</label>

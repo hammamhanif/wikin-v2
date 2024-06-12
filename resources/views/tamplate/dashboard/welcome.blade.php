@@ -216,7 +216,8 @@
                                                     <h5 class="card-title text-center">{{ $pemas->name }}</h5>
                                                     <p class="card-text">{!! $pemas->short_content !!}</p>
 
-                                                    <p class="card-text text-center">({{ $pemas->location }})</p>
+                                                    <p class="card-text text-center">({{ $pemas->formPemas->location }})
+                                                    </p>
 
                                                     <div class="d-flex justify-content-around">
                                                         <a href="{{ route('registrasiPemas', ['slug' => $pemas->slug]) }}"

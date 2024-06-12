@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->string('category');
+            $table->enum('category', ['Umum', 'Kesehatan', 'Energi', 'Industri', 'Pangan']);
             $table->longText('content');
             $table->string('proposal')->nullable();
             $table->enum('status', ['Proses verifikasi', 'Diterima', 'Ditolak'])->default('Proses Verifikasi');

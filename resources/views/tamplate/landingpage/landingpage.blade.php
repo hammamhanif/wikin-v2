@@ -390,7 +390,7 @@
                                     <span class="post-author"> / {{ $pemas->author }}</span>
                                     <span class="post-author"> / Status: ({{ $pemas->status_pemas }})</span>
                                 </div>
-                                <h3 class="post-title">{{ $pemas->name }} ({{ $pemas->formPemas->location }})
+                                <h3 class="post-title">{{ $pemas->formPemas->name }} ({{ $pemas->formPemas->location }})
                                 </h3>
                                 <p>{!! $pemas->content !!}</p>
                                 <a href="{{ route('detailpemas', $pemas->slug) }}"

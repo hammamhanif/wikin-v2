@@ -87,43 +87,37 @@
                                                     alt="Gambar Berita">
                                             @endif
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
-                                                <input type="text" class="form-control" name="title" id="judul"
-                                                    placeholder="Judul" value="{{ htmlentities($pemas->formPemas->name) }}"
-                                                    readonly>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Status Kegiatan</label>
-                                                <input type="text" class="form-control" name="status_pemas"
-                                                    id="judul" placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->status_pemas) }}" readonly>
+                                        <div class="row mb-3 mt-3">
+                                            <div class="">
+                                                <p>Nama Pengabdian Masyarakat :
+                                                    <strong>{{ htmlentities($pemas->formPemas->name) }}</strong>
+                                                </p>
+                                                <p>Lokasi :
+                                                    <strong>{{ htmlentities($pemas->formPemas->location) }}</strong>
+                                                </p>
+                                                <p>Kategori :
+                                                    <strong>{{ htmlentities($pemas->formPemas->category) }}</strong>
+                                                </p>
+                                                <p>Status Kegiatan :
+                                                    <strong>{{ htmlentities($pemas->status_pemas) }}</strong>
+                                                </p>
+                                                <p>Pengguna yang mengajukan :
+                                                    <strong>{{ htmlentities($pemas->user->name) }}
+                                                        ({{ htmlentities($pemas->formPemas->noID) }})</strong>
+                                                </p>
                                             </div>
                                         </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" name="category" id="category">
-                                                    <option value="Umum"
-                                                        @if ($pemas->category === 'Umum') selected @endif>
-                                                        Umum</option>
-                                                    <option value="Kesehatan"
-                                                        @if ($pemas->category === 'Kesehatan') selected @endif>
-                                                        Kesehatan</option>
-                                                    <option value="Energi"
-                                                        @if ($pemas->category === 'Energi') selected @endif>
-                                                        Energi</option>
-                                                    <option value="Industri"
-                                                        @if ($pemas->category === 'Industri') selected @endif>
-                                                        Industri</option>
-                                                    <option value="Pangan"
-                                                        @if ($pemas->category === 'Pangan') selected @endif>
-                                                        Pangan</option>
-                                                </select>
+                                        <div class=" row mb-3">
+                                            <div class="">
+                                                <label for="user_id" class="form-label">ID Penanggung Jawab :</label>
+                                                <input type="text" class="form-control" name="user_id" id="user_id"
+                                                    placeholder="Ubah sesuai ID user.."
+                                                    value="{{ htmlentities($pemas->formPemas->user->id) }}">
                                             </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
+
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="">
                                                 <label for="status" class="form-label">Status</label>
                                                 <select class="form-select" name="status" id="status">
                                                     <option value="Proses verifikasi"
@@ -136,22 +130,6 @@
                                                         @if ($pemas->status === 'Ditolak') selected @endif>
                                                         Ditolak</option>
                                                 </select>
-                                            </div>
-
-                                        </div>
-                                        <div class=" row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="user_id" class="form-label">ID Penanggung Jawab :</label>
-                                                <input type="text" class="form-control" name="user_id" id="user_id"
-                                                    placeholder="Ubah sesuai ID user.."
-                                                    value="{{ htmlentities($pemas->formPemas->user->id) }}">
-                                            </div>
-
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Nama Pembuat</label>
-                                                <input type="text" class="form-control" name="name" id="deskripsi"
-                                                    placeholder="Nama Pembuat.."
-                                                    value="{{ htmlentities($pemas->formPemas->user->name) }}" readonly>
                                             </div>
 
                                         </div>

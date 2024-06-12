@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('form_pemas_id');
-            $table->enum('category', ['Umum', 'Kesehatan', 'Energi', 'Industri', 'Pangan']);
             $table->longText('content');
             $table->string('slug')->unique();
             $table->string('image')->nullable();

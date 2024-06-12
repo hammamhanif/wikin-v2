@@ -66,25 +66,18 @@ class PemasController extends Controller
     public function update(Request $request, $slug)
     {
         // Mengambil berita berdasarkan slug
-        $pemas = Pemas::where('slug', $slug)->firstOrFail();
+        $pemas = pemas::where('slug', $slug)->firstOrFail();
 
         // Validasi form
         $request->validate([
-            'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
         ]);
 
         // Perbarui properti pemas dengan data dari request
-
-        $pemas->category = $request->input('category');
         $pemas->status_pemas = $request->input('status_pemas');
         $pemas->content = $request->input('content');
-
-        if ($pemas->slug !== hash('sha256', $request->input('name') . time())) {
-            $pemas->slug = hash('sha256', $request->input('name') . time());
-        }
 
         $pemas->status = 'Diterima';
 
@@ -120,7 +113,6 @@ class PemasController extends Controller
 
     public function updateAdmin(Request $request, $slug)
     {
-        // Mengambil berita berdasarkan slug
         // Mengambil berita berdasarkan slug
         $pemas = pemas::where('slug', $slug)->first();
 
@@ -177,7 +169,7 @@ class PemasController extends Controller
             'location' => 'required|string',
             'start_time' => 'required|date',
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
-            'category' => 'required|string',
+            'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
             'proposal' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk proposal
         ]);
@@ -231,7 +223,6 @@ class PemasController extends Controller
         // Validasi form
         $request->validate([
             'form_pemas_id' => 'required|unique:pemas,form_pemas_id', // Unique validation
-            'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:6144', // Tambahkan validasi untuk tipe gambar dan ukuran maksimum
             'lpj' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk LPJ
@@ -241,7 +232,6 @@ class PemasController extends Controller
         $pemas = new Pemas();
         $pemas->user_id = $user->id;
         $pemas->form_pemas_id = $request->input('form_pemas_id');
-        $pemas->category = $request->input('category');
         $pemas->status = $request->input('status');
         $pemas->content = $request->input('content');
 
@@ -284,7 +274,7 @@ class PemasController extends Controller
             'location' => 'required|string',
             'start_time' => 'required|date',
             'end_time' => ['required', 'date', 'after_or_equal:start_time'],
-            'category' => 'required|string',
+            'category' => 'required|in:Umum,Kesehatan,Energi,Industri,Pangan',
             'content' => 'required|string',
             'proposal' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Validasi untuk proposal
         ]);

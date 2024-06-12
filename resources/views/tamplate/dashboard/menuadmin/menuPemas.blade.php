@@ -57,9 +57,9 @@
                                         <tr>
                                             <th scope="row"><a href="#">{{ $loop->iteration }}</a></th>
                                             <td>{{ htmlentities($pemas->formPemas->name) }}</td>
-                                            <td>{{ htmlentities($pemas->location) }}</td>
+                                            <td>{{ htmlentities($pemas->formPemas->location) }}</td>
                                             <td><a href="#"
-                                                    class="text-primary">{{ htmlentities($pemas->category) }}</a>
+                                                    class="text-primary">{{ htmlentities($pemas->formPemas->category) }}</a>
                                             </td>
                                             @if ($pemas->status == 'Diterima')
                                                 <td><span class="badge bg-success">{{ htmlentities($pemas->status) }}</span>

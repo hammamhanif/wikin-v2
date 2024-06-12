@@ -87,18 +87,12 @@
                                                     alt="Gambar Berita">
                                             @endif
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
+                                        <div class="mb-3">
+                                            <div class="">
                                                 <label for="judul" class="form-label">Nama Pengabdian Masyarakat </label>
                                                 <input type="text" class="form-control" name="name" id="judul"
                                                     placeholder="Nama Pengabdian Masyarakat.."
                                                     value="{{ htmlentities($pemas->formPemas->name) }}">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="deskripsi" class="form-label">Nama Pembuat</label>
-                                                <input type="text" class="form-control" name="description" id="deskripsi"
-                                                    placeholder="Deskripsi" value="{{ htmlentities($pemas->user->name) }}"
-                                                    pemas readonly>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -115,28 +109,8 @@
 
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" name="category" id="category">
-                                                    <option value="Umum"
-                                                        @if ($pemas->category === 'Umum') selected @endif>
-                                                        Umum</option>
-                                                    <option value="Kesehatan"
-                                                        @if ($pemas->category === 'Kesehatan') selected @endif>
-                                                        Kesehatan</option>
-                                                    <option value="Energi"
-                                                        @if ($pemas->category === 'Energi') selected @endif>
-                                                        Energi</option>
-                                                    <option value="Industri"
-                                                        @if ($pemas->category === 'Industri') selected @endif>
-                                                        Industri</option>
-                                                    <option value="Pangan"
-                                                        @if ($pemas->category === 'Pangan') selected @endif>
-                                                        Pangan</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="status" class="form-label">Status Kegiatan</label>
+                                            <div class="">
+                                                <label for="status" class="form-label">Status Kegiatan :</label>
                                                 <select class="form-select" name="status_pemas" id="status">
                                                     <option value="pengajuan"
                                                         @if ($pemas->status_pemas === 'Proses verifikasi') selected @endif>
@@ -154,18 +128,12 @@
                                             </div>
 
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control" name="location" id="judul"
-                                                    placeholder="nama lokasi..."
-                                                    value="{{ htmlentities($pemas->formPemas->location) }}">
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12 mt-3">
-                                                <label for="judul" class="form-label">Status </label>
+                                        <div class="mb-3">
+                                            <div class="">
+                                                <label for="judul" class="form-label">Status admin : </label>
                                                 <input type="text" class="form-control" name="status" id="judul"
-                                                    placeholder="Status Kegiatan"
-                                                    value="{{ htmlentities($pemas->status) }}" readonly>
+                                                    placeholder="Status Kegiatan" value="{{ htmlentities($pemas->status) }}"
+                                                    readonly>
                                             </div>
                                         </div>
                                         <div class="mb-3">

@@ -99,7 +99,7 @@ class LandingController extends Controller
             ->where('pemas.status', 'Diterima')
             ->where(function ($query) use ($searchQuery) {
                 $query->where('form_pemas.name', 'like', '%' . $searchQuery . '%') // ubah pemas.name menjadi formpemas.name
-                    ->orWhere('pemas.category', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('form_pemas.category', 'like', '%' . $searchQuery . '%')
                     ->orWhere('pemas.status_pemas', 'like', '%' . $searchQuery . '%')
                     ->orWhere('users.username', 'like', '%' . $searchQuery . '%')
                     ->orWhere('form_pemas.location', 'like', '%' . $searchQuery . '%');

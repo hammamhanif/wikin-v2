@@ -73,19 +73,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('profile/{id}/update', [DashboardController::class, 'update_profile'])->whereNumber('id')->name('profile.update');
     Route::post('profile/{id}/resetpass', [DashboardController::class, 'updatepassword'])->whereNumber('id')->name('password.update');
 
-    Route::delete('/pemasSetting/{id}', [PemasController::class, 'destroy'])->name('pemas.destroy');
-    Route::delete('/formPemas/{id}', [PemasController::class, 'destroyForm'])->name('formPemas.destroy');
-
-
     Route::get('pemasSetting', [PemasController::class, 'create'])->name('pemasSetting');
-
     Route::get('/pemasSetting/{slug}', [PemasController::class, 'edit'])->name('pemas.edit');
     Route::put('/pemasSetting/{slug}/update', [PemasController::class, 'update'])->name('pemas.update');
+    Route::delete('/pemasSetting/{id}', [PemasController::class, 'destroy'])->name('pemas.destroy');
 
     Route::get('/formPemas/admin/{slug}', [PemasController::class, 'editFormAdmin'])->name('formPemas.editAdmin');
     Route::put('/formPemas/admin/{slug}/update', [PemasController::class, 'updateFormAdmin'])->name('formPemas.updateAdmin');
     Route::get('/formPemas/{slug}', [PemasController::class, 'editForm'])->name('formPemas.edit');
     Route::put('/formPemas/{slug}/update', [PemasController::class, 'updateForm'])->name('formPemas.update');
+    Route::delete('/formPemas/{id}', [PemasController::class, 'destroyForm'])->name('formPemas.destroy');
 
     Route::get('/registrasi-pemas/user', [RegistrasiPemasController::class, 'getByUser'])->name('registrasi_pemas.user');
     Route::get('/memberPemas/{slug}', [RegistrasiPemasController::class, 'indexMember'])->name('memberPemas');
