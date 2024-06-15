@@ -77,7 +77,7 @@ class CommunitiesController extends Controller
             'content' => 'required|string',
             // Tidak memvalidasi slug karena akan dihasilkan secara otomatis
             'group' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5096',
         ]);
 
         // Mengunggah gambar jika ada

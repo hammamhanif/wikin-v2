@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Notifications\ResetPassword;
 
@@ -19,6 +20,11 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function index()
+    {
+        $user = Auth::user();
+        return view('auth.type', compact('user'));
+    }
     public function login()
     {
         return view('auth.login');
@@ -53,11 +59,9 @@ class AuthController extends Controller
         }
 
         Auth::login($user, true);
-        return redirect(route('dashboard'));
+        return redirect(route('type'));
     }
 
-
-    // login post
 
     public function loginPost(Request $request)
     {
@@ -191,9 +195,26 @@ class AuthController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|in:admin,dosen,mahasiswa,masyarakat', // Validate type
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Update type field
+        if ($request->filled('type')) {
+            $user->type = $request->type;
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->withSuccess("Selamat Datang di Dashboard Wikin.");
     }
 
     /**

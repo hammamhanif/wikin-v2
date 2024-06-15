@@ -42,7 +42,7 @@
             <div class="col-md-6 right-box">
                 <div class="header-text mb-4">
                     <h2>Selamat Datang!</h2>
-                    <p>Untuk memiliki akun silahkan daftar.</p>
+                    <p>Masukkan peran yang diinginkan.</p>
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-danger" role="alert">
@@ -53,27 +53,10 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('register.post') }}" method="post">
-                    @method('POST')
+                <form action="{{ route('type.update', $user->id) }}" method="post">
+                    @method('PUT')
                     @csrf
                     <div class="row align-items-center">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Nama lengkap" name="name" required>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Username" name="username" required>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg bg-light fs-6" name="email"
-                                placeholder="Email address" required>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Password" name="password" required>
-                        </div>
-
                         <label for="type">Pilih Peran:</label>
                         <div class="input-group mb-1 mt-3">
                             <select class="form-select" name="type" id="type">
@@ -83,22 +66,9 @@
                                 <option value="masyarakat">Masyarakat</option>
                             </select>
                         </div>
-                        <div class="input-group mb-3">
-                            <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 custom-btn">Daftar</button>
-                        </div>
-                        <div class="input-group mb-3">
-                            <a href="{{ route('user.login.google') }}" class="btn btn-lg btn-light w-100 fs-6"
-                                role="button">
-                                <img src="{{ asset('images/google.png') }}" style="width:20px" class="me-2">
-                                <small>Daftar dengan Google</small>
-                            </a>
-                        </div>
-                        <div class="row">
-                            <small>Sudah Punya Akun? <a href="{{ route('login') }}">Log In</a></small>
-                        </div>
-                        <div class="row">
-                            <a href="{{ route('home') }}">Kembali</a>
-                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 custom-btn">Daftar</button>
                     </div>
                 </form>
 

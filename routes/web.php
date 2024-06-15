@@ -32,14 +32,11 @@ Route::get('/', [LandingController::class, 'index'])->name('home');
 
 Route::get('news', [LandingController::class, 'details'])->name('news');
 Route::get('/news_detail/{slug}', [LandingController::class, 'detail'])->name('detail');
-
 Route::get('pengmases', [LandingController::class, 'detailspemas'])->name('pengmases');
 Route::get('/pengmases/{slug}', [LandingController::class, 'detailpemas'])->name('detailpemas');
-
 Route::get('communities', [LandingController::class, 'detailscommunities'])->name('communities');
 Route::get('/communities/{slug}', [LandingController::class, 'detailcommunity'])->name('detailcommunity');
 Route::get('/captcha', [AuthController::class], 'getCaptcha')->name('captcha');
-
 Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name('galeri');
 
 Route::controller(AuthController::class)->group(function () {
@@ -57,9 +54,9 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'main'])->middleware('guest')->name('password.reset');
@@ -126,8 +123,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/download/lpj/{slug}', [FileDownloadController::class, 'downloadLpj'])->name('download.lpj');
     Route::get('/download-proposal/{slug}', [FileDownloadController::class, 'downloadProposal'])->name('download.proposal');
 });
-Route::middleware(['IsLecturer', 'verified'])->group(function () {
 
+Route::middleware(['citizen', 'verified'])->group(function () {
+    Route::get('/type', [AuthController::class, 'index'])->name('type');
+    Route::put('/type/{id}/update', [AuthController::class, 'update'])->name('type.update');
+});
+
+Route::middleware(['user', 'verified'])->group(function () {
     Route::get('pemas', [PemasController::class, 'index'])->name('pemas');
     Route::get('/registrasiPemas/{slug}', [RegistrasiPemasController::class, 'index'])->name('registrasiPemas');
     Route::post('/registrasiPemas', [RegistrasiPemasController::class, 'store'])->name('store.registrasiPemas');

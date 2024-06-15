@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsStudent
+class user
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,13 @@ class IsStudent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === 'mahasiswa') {
+        // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Periksa apakah user terautentikasi dan memiliki tipe tertentu
+        if ($user && in_array($user->type, ['admin', 'dosen', 'mahasiswa'])) {
             return $next($request);
         }
-
         return redirect()->route('dashboard');
     }
 }

@@ -20,9 +20,8 @@
                             <img src="{{ Auth::user()->image ?? asset('img/Avatar_Profile.png') }}" alt="Profile"
                                 class="rounded-circle">
                             <h2>{{ Auth::user()->username }}</h2>
-                            <h3>{{ Auth::user()->name }}</h3>
+                            <h3>{{ Auth::user()->type }}</h3>
                             <div class="social-links mt-2">
-                                <a href="" class="twitter"><i class="bi bi-twitter"></i></a>
                                 <a href="{{ Auth::user()->facebook_profile }}" class="facebook" target="_blank"><i
                                         class="bi bi-facebook"></i></a>
                                 <a href="{{ Auth::user()->instagram_profile }}" class="instagram" target="_blank"><i
@@ -42,11 +41,11 @@
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
-                                        Profile</button>
+                                        Profil</button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab"
-                                        data-bs-target="#profile-change-password">Change Password</button>
+                                        data-bs-target="#profile-change-password">Ubah Password</button>
                                 </li>
                             </ul>
                             <div class="tab-content pt-2">
@@ -73,15 +72,15 @@
                                     @endif
                                     <h5 class="card-title">Profile Details</h5>
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                                        <div class="col-lg-3 col-md-4 label ">Nama Lengkap</div>
                                         <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Job</div>
+                                        <div class="col-lg-3 col-md-4 label">Pekerjaan / Jabatan</div>
                                         <div class="col-lg-9 col-md-8">{{ Auth::user()->job }}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Phone</div>
+                                        <div class="col-lg-3 col-md-4 label">No.HP</div>
                                         <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
                                     </div>
 
@@ -97,8 +96,8 @@
                                         @method('PUT')
                                         @csrf
                                         <div class="row mb-3">
-                                            <label for="image" class="col-md-4 col-lg-3 col-form-label">Profile
-                                                Image</label>
+                                            <label for="image" class="col-md-4 col-lg-3 col-form-label">Gambar
+                                                Profil</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
@@ -155,7 +154,8 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Pekerjaan
+                                                /Jabatan</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="job" type="text" class="form-control" id="job"
                                                     value="{{ Auth::user()->job }}">
@@ -165,8 +165,7 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="Phone"
-                                                class="col-md-4 col-lg-3 col-form-label">Handphone</label>
+                                            <label for="Phone" class="col-md-4 col-lg-3 col-form-label">No. HP</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="phone" type="text" class="form-control" id="phone"
                                                     value="{{ Auth::user()->phone }}">

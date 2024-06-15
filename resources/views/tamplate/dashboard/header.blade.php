@@ -134,7 +134,7 @@
                     <form action="{{ route('logout') }}" class="d-flex justify-content-center" method="post">
                         @csrf
                         <button type="submit" class="btn btn-outline-primary mt-3 mb-3 ">
-                            Sign Out
+                            Keluar
                         </button>
                     </form>
 

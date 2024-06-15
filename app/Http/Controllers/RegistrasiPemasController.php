@@ -8,6 +8,7 @@ use App\Models\FormPemas;
 use Illuminate\Http\Request;
 use App\Models\RegistrasiPemas;
 use Illuminate\Validation\Rule;
+use Livewire\Features\SupportFormObjects\Form;
 
 class RegistrasiPemasController extends Controller
 {
@@ -39,7 +40,7 @@ class RegistrasiPemasController extends Controller
     public function indexAdmin($slug)
     {
         // Dapatkan Pemas berdasarkan slug
-        $pemas = Pemas::where('slug', $slug)->firstOrFail();
+        $pemas = FormPemas::where('slug', $slug)->firstOrFail();
 
         // Dapatkan semua RegistrasiPemas yang memiliki pemas_id yang sama
         $registrasiPemas = RegistrasiPemas::where('form_pemas_id', $pemas->id)->get();

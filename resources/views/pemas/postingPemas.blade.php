@@ -63,7 +63,7 @@
                                             <div class="">
                                                 <label for="form_pemas" class="form-label">Nama Pemas:</label>
                                                 <select class="form-control" id="form_pemas" style="width: 100%;">
-                                                    <option value="">Pilih Form Pemas</option>
+                                                    <option value="">Pilih Kegiatan Pemas</option>
                                                     @foreach ($formPengmases as $form)
                                                         <option value="{{ $form->id }}">{{ $form->name }}</option>
                                                     @endforeach
