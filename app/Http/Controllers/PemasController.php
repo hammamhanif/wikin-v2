@@ -79,8 +79,6 @@ class PemasController extends Controller
         $pemas->status_pemas = $request->input('status_pemas');
         $pemas->content = $request->input('content');
 
-        $pemas->status = 'Diterima';
-
         // Proses upload gambar jika ada
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada

@@ -15,8 +15,7 @@
             <div class="d-flex">
                 <a href="#about" class="btn-get-started scrollto">Mulai</a>
                 <a href="{{ $landing->youtube1 }}" class="glightbox btn-watch-video d-flex align-items-center"><i
-                        class="bi bi-play-circle"></i><span>Watch
-                        Video</span></a>
+                        class="bi bi-play-circle"></i><span>Tonton Video</span></a>
             </div>
         </div>
     </section>

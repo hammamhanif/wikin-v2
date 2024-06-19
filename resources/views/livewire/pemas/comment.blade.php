@@ -105,9 +105,11 @@
                             </p>
                             <div>
                                 @auth
-                                    @if ($comment2->user_id == Auth::user()->id)
+                                    @if ($comment2->user_id == Auth::user()->id || Auth::user()->type == 'admin')
                                         <button class="btn btn-outline-warning"
                                             wire:click="selectEdit({{ $comment2->id }})">Edit</button>
+                                    @endif
+                                    @if ($comment2->user_id == Auth::user()->id || Auth::user()->type == 'admin')
                                         <button class="btn btn-outline-danger"
                                             wire:click="delete({{ $comment2->id }})">Hapus</button>
                                     @endif

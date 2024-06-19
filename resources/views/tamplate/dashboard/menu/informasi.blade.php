@@ -70,7 +70,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center;">
                                                     <a href="{{ route('news.edit', ['slug' => $new->slug]) }}"
-                                                        class="btn btn-info" style="margin-right: 5px;">
+                                                        class="btn btn-info" style="margin-right: 5px;" title="Edit Berita">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>
 

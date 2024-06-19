@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-12">
-                                                <label for="image" class="col-sm-5 col-form-label">Gambar()</label>
+                                                <label for="image" class="col-sm-5 col-form-label">Gambar</label>
                                                 <input class="form-control" type="file" name="image" id="image"
                                                     accept="image/*">
                                             </div>

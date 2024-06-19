@@ -4,11 +4,11 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <li class="breadcrumb-item active">Profil</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -37,7 +37,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Overview</button>
+                                        data-bs-target="#profile-overview">Keseluruhan</button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
@@ -70,7 +70,7 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <h5 class="card-title">Profile Details</h5>
+                                    <h5 class="card-title">Detail Profile</h5>
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Nama Lengkap</div>
                                         <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>

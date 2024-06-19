@@ -20,10 +20,12 @@
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
-
-
                         <!-- Reports -->
                         <div class="col-12">
+                            <div class="alert alert-warning" role="alert">
+                                <strong class="font-bold">Cek Menu Berita !</strong>
+                                <span class="block sm:inline">Apabila berita berhasil diposting</span>
+                            </div>
                             <div class="card">
 
                                 <div class="card-body">

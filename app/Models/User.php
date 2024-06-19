@@ -50,16 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(pemas::class);
     }
 
-    public function reports()
-    {
-        return $this->hasMany(Report::class, 'reported_by_user_id');
-    }
-
-    public function reportedNews()
-    {
-        return $this->hasManyThrough(News::class, Report::class, 'reported_by_user_id', 'id', 'id', 'news_id');
-    }
-
     public function communities()
     {
         return $this->hasMany(Communities::class);

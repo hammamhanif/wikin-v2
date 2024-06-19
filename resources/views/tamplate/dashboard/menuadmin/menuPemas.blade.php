@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Postingan Pemas</span></h5>
+                            <h5 class="card-title">Daftar Laporan dan Open Recruitment Pemas</span></h5>
                             @if (session('success'))
                                 <div class="alert alert-success" role="alert">
                                     <strong class="font-bold">Success!</strong>

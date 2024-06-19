@@ -94,7 +94,7 @@
                                                 </label>
                                                 <input class="form-control" type="file" name="proposal" id="proposal"
                                                     accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                                    @if (Auth::user()->type == 'mahasiswa' || Auth::user()->type == 'dosen') @else required @endif>
+                                                    @if (Auth::user()->type == 'mahasiswa' || Auth::user()->type == 'dosen') required @endif>
                                             </div>
                                         </div>
                                         <div class="row mb-3">

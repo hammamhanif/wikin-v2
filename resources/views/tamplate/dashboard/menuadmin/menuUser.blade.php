@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">Data User</span></h5>
+                            <h5 class="card-title">Data Pengguna</span></h5>
                             @if (session('success'))
                                 <div class="alert alert-success" role="alert">
                                     <strong class="font-bold">Success!</strong>

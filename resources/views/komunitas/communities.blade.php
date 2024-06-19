@@ -87,7 +87,7 @@
                             <div class="sidebar-item search-form">
                                 <h3 class="sidebar-title">Cari</h3>
                                 <form action="{{ route('communities') }}" method="GET" class="mt-3">
-                                    <input type="text" name="title" placeholder="Masukkan judul">
+                                    <input type="text" name="title" placeholder="Masukkan nama komunitas..">
                                     <button type="submit"><i class="bi bi-search"></i></button>
                                 </form>
 
@@ -99,6 +99,7 @@
                                     <li><a href="{{ route('communities', ['name' => 'Kesehatan']) }}">Kesehatan</a></li>
                                     <li><a href="{{ route('communities', ['name' => 'Industri']) }}">Indutri</a></li>
                                     <li><a href="{{ route('communities', ['name' => 'Pangan']) }}">Pangan</a></li>
+                                    <li><a href="{{ route('communities', ['name' => 'Energi']) }}">Energi</a></li>
                                     <li><a href="{{ route('communities', ['name' => 'Umum']) }}">Umum</a></li>
                                 </ul>
                             </div><!-- End sidebar tags-->

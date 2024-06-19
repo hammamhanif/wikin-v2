@@ -80,9 +80,11 @@
                             <div class="content">
                                 {!! html_entity_decode($pemas->content) !!}
                             </div><!-- End post content -->
-                            <a class="btn btn-custom  justify-content-center"
-                                href="{{ route('registrasiPemas', ['slug' => $pemas->slug]) }}" role="button">Daftar
-                                anggota</a>
+                            @if ($pemas->status_pemas == 'pencarian volunteer')
+                                <a class="btn btn-custom justify-content-center"
+                                    href="{{ route('registrasiPemas', ['slug' => $pemas->slug]) }}" role="button">Daftar
+                                    anggota</a>
+                            @endif
 
                         </article><!-- End blog post -->
 

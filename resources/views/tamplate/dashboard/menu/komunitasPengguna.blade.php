@@ -2,11 +2,12 @@
 @section('dashboard')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Daftar Komunitas</h1>
+            <h1>Daftar Komunitas Kamu</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Menu Komunitas</li>
+                    <li class="breadcrumb-item ">Menu Komunitas</li>
+                    <li class="breadcrumb-item active">Komunitas Kamu</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -16,7 +17,7 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">Semua Komunitas yang terdaftar</span></h5>
+                            <h5 class="card-title">Semua Komunitas yang kamu daftar</span></h5>
                             @if (session('success'))
                                 <div class="alert alert-success" role="alert">
                                     <strong class="font-bold">Success!</strong>
@@ -47,7 +48,7 @@
                                         <th scope="col">Nama PJ</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Kategori</th>
-                                        <th scope="col">Aksi</th>
+                                        <th scope="col">Grup Chat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
