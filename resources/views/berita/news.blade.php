@@ -32,12 +32,13 @@
                                     <article class="d-flex flex-column">
 
                                         <div class="post-img">
-                                            <img src="{{ asset('images/' . $news->image) }}" alt=""
-                                                class="img-fluid">
+                                            <img src="{{ !empty($news->image) ? asset('images/' . $news->image) : asset('img/bg-logo.png') }}"
+                                                class="img-fluid" alt="">
+
                                         </div>
 
                                         <h2 class="title">
-                                            <a href="blog-details.html">{{ $news->title }}</a>
+                                            <a href="{{ route('detail', $news->slug) }}">{{ $news->title }}</a>
                                         </h2>
                                         <div>
                                             Kategori: ({{ $news->category }})

@@ -29,8 +29,9 @@
                                     <div class="row row-cols-2 row-cols-lg-4 justify-content-center">
                                         @foreach ($communities as $community)
                                             <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                                <img src="{{ asset('storage/' . $community->image) }}" class="card-img-top"
-                                                    alt="...">
+                                                <img src="{{ !empty($community->image) ? asset('storage/' . $community->image) : asset('img/bg-logo.png') }}"
+                                                    class="card-img-top" alt="...">
+
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">{{ $community->name }}
                                                     </h5>

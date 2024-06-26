@@ -65,7 +65,7 @@
               <a class="nav-link  {{ Request::is('komunitas/daftar') ? '' : 'collapsed' }}"
                   href="{{ route('komunitas.daftar') }}">
                   <i class="bi bi-person-video2"></i>
-                  <span>Daftar Komunitas Wikin</span>
+                  <span>Komunitas Wikin</span>
               </a>
           </li>
           <li class="nav-item">

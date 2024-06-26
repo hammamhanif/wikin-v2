@@ -201,9 +201,10 @@
                                     <div class="row row-cols-2 row-cols-lg-4 justify-content-center">
                                         @foreach ($pengmases as $pemas)
                                             <div class="card col " style="width: 18rem; margin-right: 10px;">
-                                                <img src="{{ asset('storage/images/' . $pemas->image) }}"
-                                                    class="card-img-top" alt="..."
+                                                <img src="{{ $pemas->image ? asset('storage/images/' . $pemas->image) : asset('img/bg-logo.png') }}"
+                                                    class="card-img-top" alt="gambar informasi"
                                                     style="width: 100%; height: 200px; object-fit: cover;">
+
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center">{{ $pemas->formPemas->name }}</h5>
                                                     <p class="card-text">{!! $pemas->short_content !!}</p>

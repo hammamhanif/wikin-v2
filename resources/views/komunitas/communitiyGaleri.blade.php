@@ -7,13 +7,9 @@
 
             <div class="section-header">
                 <h2>Galeri <strong>Komunitas {{ $community->name }}</strong></h2>
-                <p>Komunitas-komunitas nuklir di indonesia yang bergerak di berbagai bidang. untuk bergabung dan melihat
-                    detail silahkan klik komunitas.</p>
-                {{-- <form class="input-group mt-3">
-                    <input type="text" class="form-control"
-                        placeholder="Masukkan Nama Komunitas Nuklir (pangan, kesehatan, industri)" aria-label="Search for...">
-                    <button class="btn btn-custom" type="submit">Cari</button>
-                </form> --}}
+                <p>Galeri Komunitas nuklir di indonesia yang bergerak di berbagai bidang. berisikan segala kegiatan
+                    komunitas yang bersifat positif dan edukatif.</p>
+
             </div>
 
 

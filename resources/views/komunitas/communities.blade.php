@@ -32,8 +32,8 @@
                                     <article class="d-flex flex-column">
 
                                         <div class="post-img">
-                                            <img src="{{ asset('storage/' . $community->image) }}" alt=""
-                                                class="img-fluid">
+                                            <img src="{{ !empty($community->image) ? asset('storage/' . $community->image) : asset('img/bg-logo.png') }}"
+                                                alt="" class="img-fluid">
                                         </div>
 
                                         <h2 class="title">

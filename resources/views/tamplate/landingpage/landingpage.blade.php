@@ -336,8 +336,10 @@
                     @foreach ($lot_news as $news)
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="post-box">
-                                <div class="post-img"><img src="{{ asset('images/' . $news->image) }}" class="img-fluid"
-                                        alt="">
+                                <div class="post-img"><img
+                                        src="{{ !empty($news->image) ? asset('images/' . $news->image) : asset('img/bg-logo.png') }}"
+                                        class="img-fluid" alt="">
+
                                 </div>
                                 <div class="meta">
                                     <span class="post-date">{{ $news->created }}</span>
@@ -381,8 +383,10 @@
                     @foreach ($pemases as $pemas)
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="post-box">
-                                <div class="post-img"><img src="{{ asset('storage/images/' . $pemas->image) }}"
+                                <div class="post-img"><img
+                                        src="{{ !empty($pemas->image) ? asset('storage/images/' . $pemas->image) : asset('img/bg-logo.png') }}"
                                         class="img-fluid" alt="">
+
                                 </div>
                                 <div class="meta">
                                     <span class="post-date">{{ $pemas->created }}</span>

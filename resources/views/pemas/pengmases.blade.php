@@ -32,8 +32,9 @@
                                     <article class="d-flex flex-column">
 
                                         <div class="post-img">
-                                            <img src="{{ asset('storage/images/' . $pemas->image) }}" alt=""
-                                                class="img-fluid">
+                                            <img src="{{ !empty($pemas->image) ? asset('storage/images/' . $pemas->image) : asset('img/bg-logo.png') }}"
+                                                alt="" class="img-fluid">
+
                                         </div>
 
                                         <h2 class="title">
