@@ -41,7 +41,7 @@ Route::get('/galery/{slug}', [GalleriesController::class, 'indexLanding'])->name
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login')->middleware('guest');
-    Route::post('login', 'loginPost')->name('login.post');
+    Route::post('login', 'loginPost')->name('login.post')->middleware('throttle:login');
     Route::post('logout', 'logout')->name('logout');
     Route::get('register', 'register')->name('register')->middleware('guest');
     Route::post('register', 'registerPost')->name('register.post');
