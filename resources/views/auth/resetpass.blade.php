@@ -72,7 +72,7 @@
                         </div>
                     @endif
                 </div>
-                <form action="{{ route('password.update') }}" method="post">
+                <form action="{{ route('password.update2') }}" method="post">
                     @method('POST')
                     @csrf
                     <div class="row align-items-center">
